@@ -1,4 +1,6 @@
-﻿namespace SalesOrder.Api.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SalesOrder.Api.Entities
 {
     public class OrderWindowSubElement
     {
@@ -13,5 +15,14 @@
         public int CreatedBy { get; set; }
         public DateTime UpdatedDate { get; set; }
         public int UpdatedBy { get; set; }
+
+
+        [ForeignKey("OrderWindowId")]
+        public OrderWindow OrderWindow { get; set; }
+
+
+        [ForeignKey("SubElementId")]
+        public SubElement SubElement { get; set; }
+
     }
 }

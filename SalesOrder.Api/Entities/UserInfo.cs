@@ -5,7 +5,7 @@ namespace SalesOrder.Api.Entities
     public class UserInfo
     {
         public int Id { get; set; }
-        public string UserName { get; set; }
+        public string UserId { get; set; }
         public string Password { get; set; }
         public string JobRole { get; set; }
         public string DeaprtmentName { get; set; }

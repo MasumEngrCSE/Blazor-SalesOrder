@@ -1,4 +1,6 @@
-﻿namespace SalesOrder.Api.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SalesOrder.Api.Entities
 {
     public class OrderMaster
     {
@@ -13,5 +15,8 @@
         public int CreatedBy { get; set; }
         public DateTime UpdatedDate { get; set; }
         public int UpdatedBy { get; set; }
+
+        [ForeignKey("StateId")]
+        public SateInfo SateInfo { get; set; }
     }
 }
