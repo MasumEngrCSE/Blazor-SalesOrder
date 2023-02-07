@@ -18,7 +18,7 @@ namespace SalesOrder.Api.Data
 
         public DbSet<SubElement> subElements { get; set; }
         public DbSet<Window> windows { get; set; }
-        public DbSet<SateInfo> sateInfo { get; set; }
+        public DbSet<StateInfo> stateInfo { get; set; }
         public DbSet<UserInfo> users { get; set; }
         public DbSet<OrderMaster> orderMasters { get; set; }
 

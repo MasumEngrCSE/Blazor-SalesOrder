@@ -2,7 +2,7 @@
 
 namespace SalesOrder.Api.Entities
 {
-    public class SateInfo
+    public class StateInfo
     {
         public int Id { get; set; }
 

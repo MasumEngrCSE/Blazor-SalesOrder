@@ -17,6 +17,6 @@ namespace SalesOrder.Api.Entities
         public int UpdatedBy { get; set; }
 
         [ForeignKey("StateId")]
-        public SateInfo SateInfo { get; set; }
+        public StateInfo StateInfo { get; set; }
     }
 }
