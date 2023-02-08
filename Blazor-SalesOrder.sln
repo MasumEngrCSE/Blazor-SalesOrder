@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesOrder.Web", "SalesOrde
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesOrder.Api", "SalesOrder.Api\SalesOrder.Api.csproj", "{822181C5-C8A0-4F60-B6D6-CC76B21087E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesOrder.Models", "SalesOrder.Models\SalesOrder.Models.csproj", "{9440B43F-139C-404D-9A5B-420B60E2B0AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesOrder.Models", "SalesOrder.Models\SalesOrder.Models.csproj", "{9440B43F-139C-404D-9A5B-420B60E2B0AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

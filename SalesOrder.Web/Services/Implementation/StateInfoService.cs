@@ -1,5 +1,6 @@
 ﻿using SalesOrder.Models.Dtos;
 using SalesOrder.Web.Services.Interface;
+using System.Net.Http.Json;
 
 namespace SalesOrder.Web.Services.Implementation
 {
@@ -12,9 +13,23 @@ namespace SalesOrder.Web.Services.Implementation
             this.httpClient = httpClient;
         }
 
-        public Task<IEnumerable<StateInfoDto>> GetStates()
+        public async Task<IEnumerable<StateInfoDto>> GetStates()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var stateDataList = await this.httpClient.GetFromJsonAsync<IEnumerable<StateInfoDto>>("api/StateInfo");
+
+                return stateDataList;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+
+
+           // throw new NotImplementedException();
         }
     }
 }
