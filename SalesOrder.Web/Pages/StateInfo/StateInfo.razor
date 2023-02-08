@@ -12,9 +12,28 @@ else
     <h3 class="mb-5">State Info</h3>
     if (stateInfos.Count() > 0)
     {
+        <table class="table table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+
+
+        <tbody>
         @foreach (var itm in stateInfos)
         {
-            <div class="row">
+            <tr>
+                <td>@itm.Id</td>
+                <td>@itm.Name</td>
+                <td>
+                    @itm.Description
+                </td>
+            </tr>
+
+@*            <div class="row">
 
                 <div class="col-2">
                     @itm.Id
@@ -28,10 +47,14 @@ else
                     @itm.Description
                 </div>
 
-            </div>
+            </div>*@
 
 
         }
+
+            </tbody>
+        </table>
+    
     }
 }
 

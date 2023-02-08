@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 using SalesOrder.Api.Data;
 using SalesOrder.Api.Repositories.Implementations;
 using SalesOrder.Api.Repositories.Interfaces;
@@ -26,6 +27,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(policy=>policy.WithOrigins
+("http://localhost:7033", "https://localhost:7033")
+.AllowAnyMethod()
+.WithHeaders(HeaderNames.ContentType)
+);
 
 app.UseHttpsRedirection();
 

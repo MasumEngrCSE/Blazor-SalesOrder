@@ -3,9 +3,9 @@ using SalesOrder.Api.Entities;
 
 namespace SalesOrder.Api.Data
 {
-    public class SalesOrderDBContext:DbContext
+    public class SalesOrderDBContext : DbContext
     {
-        public SalesOrderDBContext(DbContextOptions<SalesOrderDBContext> options):base(options)
+        public SalesOrderDBContext(DbContextOptions<SalesOrderDBContext> options) : base(options)
         {
 
         }
@@ -14,6 +14,27 @@ namespace SalesOrder.Api.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+
+            #region state
+
+            modelBuilder.Entity<StateInfo>().HasData(new StateInfo
+                {
+                Id = 1,
+                    Name = "NY",
+                    Description = "New York",
+                    CreatedDate = DateTime.Now
+                });
+
+            modelBuilder.Entity<StateInfo>().HasData(new StateInfo
+                {
+                Id=2,
+                    Name = "CA",
+                    Description = "California",
+                    CreatedDate = DateTime.Now
+                });
+
+            #endregion
         }
 
         public DbSet<SubElement> subElements { get; set; }
