@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SalesOrder.Api.Data;
+using SalesOrder.Api.Repositories.Implementations;
+using SalesOrder.Api.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextPool<SalesOrderDBContext>
     (option=>option.UseSqlServer(builder.Configuration
     .GetConnectionString("SDDbCon")));
+
+builder.Services.AddScoped<ISateInfoRepository, SateInfoRepository>();
 
 
 var app = builder.Build();

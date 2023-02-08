@@ -2,6 +2,8 @@
 using SalesOrder.Api.Data;
 using SalesOrder.Api.Entities;
 using SalesOrder.Api.Repositories.Interfaces;
+using SalesOrder.Models.Dtos;
+using System.Collections.Generic;
 
 namespace SalesOrder.Api.Repositories.Implementations
 {
@@ -37,9 +39,27 @@ namespace SalesOrder.Api.Repositories.Implementations
             }
         }
 
-        public Task<IEnumerable<StateInfo>> GetStates()
+        public async Task<IEnumerable<StateInfoDto>> GetStates()
         {
-            throw new NotImplementedException();
+            
+            try
+            {
+                var data =await(from p in  this._DBContext.stateInfo
+                          select new StateInfoDto
+                          {
+                              Id=p.Id,
+                              Name=p.Name,
+                              Description=p.Description,
+                          }).ToListAsync();
+
+
+                return data;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public Task<StateInfo> UpdateState(StateInfo stateInfo)
