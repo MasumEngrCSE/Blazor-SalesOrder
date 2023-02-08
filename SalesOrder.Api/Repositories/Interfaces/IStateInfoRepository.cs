@@ -3,7 +3,7 @@ using SalesOrder.Models.Dtos;
 
 namespace SalesOrder.Api.Repositories.Interfaces
 {
-    public interface ISateInfoRepository
+    public interface IStateInfoRepository
     {
         Task<IEnumerable<StateInfoDto>> GetStates();
         Task<StateInfo> GetState(int Id);

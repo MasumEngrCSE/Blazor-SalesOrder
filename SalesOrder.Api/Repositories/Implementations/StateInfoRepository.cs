@@ -7,10 +7,10 @@ using System.Collections.Generic;
 
 namespace SalesOrder.Api.Repositories.Implementations
 {
-    public class SateInfoRepository : ISateInfoRepository
+    public class StateInfoRepository : IStateInfoRepository
     {
         private readonly SalesOrderDBContext _DBContext;
-        public SateInfoRepository(SalesOrderDBContext salesOrderDBContext)
+        public StateInfoRepository(SalesOrderDBContext salesOrderDBContext)
         {
             _DBContext = salesOrderDBContext;
         }

@@ -9,9 +9,9 @@ namespace SalesOrder.Api.Controllers
     [ApiController]
     public class StateInfoController : ControllerBase
     {
-        private readonly ISateInfoRepository sateInfoRepository;
+        private readonly IStateInfoRepository sateInfoRepository;
 
-        public StateInfoController(ISateInfoRepository sateInfoRepository)
+        public StateInfoController(IStateInfoRepository sateInfoRepository)
         {
             this.sateInfoRepository = sateInfoRepository;
         }

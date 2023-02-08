@@ -15,7 +15,7 @@ builder.Services.AddDbContextPool<SalesOrderDBContext>
     (option=>option.UseSqlServer(builder.Configuration
     .GetConnectionString("SDDbCon")));
 
-builder.Services.AddScoped<ISateInfoRepository, SateInfoRepository>();
+builder.Services.AddScoped<IStateInfoRepository, StateInfoRepository>();
 
 
 var app = builder.Build();
