@@ -1,8 +1,39 @@
-﻿@page "/StateInfo/"
+﻿@page "/StateInfo/StateInfo"
 @inherits StateInfoBase
 
-<h3>State Info</h3>
 
-@code {
 
+@if (stateInfos == null)
+{
+    <h3>Loading State ...</h3>
 }
+else
+{
+    <h3 class="mb-5">State Info</h3>
+    if (stateInfos.Count() > 0)
+    {
+        @foreach (var itm in stateInfos)
+        {
+            <div class="row">
+
+                <div class="col-2">
+                    @itm.Id
+                </div>
+
+                <div class="col-4">
+                    @itm.Name
+                </div>
+
+                <div class="col-4">
+                    @itm.Description
+                </div>
+
+            </div>
+
+
+        }
+    }
+}
+
+
+
