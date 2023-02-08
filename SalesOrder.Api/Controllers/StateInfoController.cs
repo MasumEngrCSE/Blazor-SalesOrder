@@ -23,7 +23,7 @@ namespace SalesOrder.Api.Controllers
             {
                 var dataList = await this.sateInfoRepository.GetStates();
 
-                if (dataList == null)
+                if (dataList == null || dataList.Count()==0)
                     return NotFound();
                 else
                     return Ok(dataList);
