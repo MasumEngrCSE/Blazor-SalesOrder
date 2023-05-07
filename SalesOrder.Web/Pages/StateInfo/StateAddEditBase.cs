@@ -27,6 +27,9 @@ namespace SalesOrder.Web.Pages.StateInfo
         {
             //stateInfos = await stateInfoService.GetStates();
             //return base.OnInitializedAsync();
+
+            if (stateId == 0)
+                stateInfoModel = new StateInfoDto();
         }
 
 
