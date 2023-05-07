@@ -1,24 +1,25 @@
 ﻿@page "/StateInfo/StateInfo"
 @inherits StateInfoBase
 
-<h3 class="mb-5">State Info</h3>
+@if (!AddEditShowed)
+{
+    <h3 class="mb-5">State Info</h3>
+}
+
 
 @if (stateInfos == null)
 {
     <h3>Loading State ...</h3>
 }
-<div class="row">
-    <button type="button" onclick="@showAddEdit" class="btn btn-primary" style="width:fit-content;text-align:right">Add State</button>
-</div>
 
-
-@if (AddEditShowed)
-{
-    <StateAddEdit stateId="@selectedStateId"></StateAddEdit>
-}
 
 @if (stateInfos != null && !AddEditShowed)
 {
+    @*State List*@
+
+    <div class="row">
+        <button type="button" onclick="@showAddEdit" class="btn btn-primary" style="width:fit-content;text-align:right">Add State</button>
+    </div>
     
     if (stateInfos.Count() > 0)
     {
@@ -51,4 +52,10 @@
 }
 
 
+@if (AddEditShowed)
+{
+    @*State Add/Edit*@
+
+    <StateAddEdit stateId="@selectedStateId"></StateAddEdit>
+}
 

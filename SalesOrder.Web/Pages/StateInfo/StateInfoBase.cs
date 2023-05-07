@@ -23,7 +23,7 @@ namespace SalesOrder.Web.Pages.StateInfo
         }
 
 
-        public void showAddEdit()
+        public void  showAddEdit()
         {
             AddEditShowed=true;
             selectedStateId = 0;
