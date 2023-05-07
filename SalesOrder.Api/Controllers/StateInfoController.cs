@@ -35,10 +35,68 @@ namespace SalesOrder.Api.Controllers
                 //throw;
             }
         }
-    
 
 
-    
-    
+
+        [HttpPost]
+        [Route("addState")]
+        public async Task<ActionResult<StateInfoDto>> AddState(StateInfoDto stateInfo)
+        {
+            try
+            {
+                StateInfoDto objState = await this.sateInfoRepository.AddState(stateInfo);
+                if (objState == null)
+                    return NotFound();
+                else
+                    return Ok(objState);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error Add State");
+                //throw;
+            }
+        }
+
+        [HttpPost]
+        [Route("updateState")]
+        public async Task<ActionResult<StateInfoDto>> UpdateState(StateInfoDto stateInfo)
+        {
+            try
+            {
+                StateInfoDto objState = await this.sateInfoRepository.UpdateState(stateInfo);
+                if (objState == null)
+                    return NotFound();
+                else
+                    return Ok(objState);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error Add State");
+                //throw;
+            }
+        }
+
+
+        [HttpPost]
+        [Route("deleteState")]
+        public async Task<ActionResult<bool>> DeleteState(int Id)
+        {
+            try
+            {
+                bool isSuccess = await this.sateInfoRepository.DeleteState(Id);
+                if (isSuccess == null)
+                    return NotFound();
+                else
+                    return Ok(isSuccess);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error Add State");
+                //throw;
+            }
+        }
+
+
+
     }
 }

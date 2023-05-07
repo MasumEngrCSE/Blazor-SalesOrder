@@ -14,21 +14,29 @@ namespace SalesOrder.Api.Repositories.Implementations
         {
             _DBContext = salesOrderDBContext;
         }
-        public Task<StateInfo> AddState(StateInfo stateInfo)
+        public Task<StateInfoDto> AddState(StateInfoDto stateInfo)
         {
             throw new NotImplementedException();
         }
 
-        public Task<StateInfo> DeleteState(int Id)
+        public async Task<bool> DeleteState(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<StateInfo> GetState(int Id)
+        public async Task<StateInfoDto> GetState(int Id)
         {
             try
             {
-                var data =await _DBContext.stateInfo.FirstOrDefaultAsync(p => p.Id == Id);
+                //var data =await _DBContext.stateInfo.FirstOrDefaultAsync(p => p.Id == Id);
+
+                var data = await (from p in this._DBContext.stateInfo.Where(p => p.Id == Id)
+                                  select new StateInfoDto
+                                  {
+                                      Id = p.Id,
+                                      Name = p.Name,
+                                      Description = p.Description,
+                                  }).FirstOrDefaultAsync();
 
                 return data;
             }
@@ -62,7 +70,7 @@ namespace SalesOrder.Api.Repositories.Implementations
             }
         }
 
-        public Task<StateInfo> UpdateState(StateInfo stateInfo)
+        public Task<StateInfoDto> UpdateState(StateInfoDto stateInfo)
         {
             throw new NotImplementedException();
         }

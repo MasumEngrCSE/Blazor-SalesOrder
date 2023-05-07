@@ -6,10 +6,9 @@ namespace SalesOrder.Api.Repositories.Interfaces
     public interface IStateInfoRepository
     {
         Task<IEnumerable<StateInfoDto>> GetStates();
-        Task<StateInfo> GetState(int Id);
-        Task<StateInfo> AddState(StateInfo stateInfo);
-        Task<StateInfo> UpdateState(StateInfo stateInfo);
-        Task<StateInfo> DeleteState(int Id);
-
+        Task<StateInfoDto> GetState(int Id);
+        Task<StateInfoDto> AddState(StateInfoDto stateInfo);
+        Task<StateInfoDto> UpdateState(StateInfoDto stateInfo);
+        Task<bool> DeleteState(int Id);
     }
 }

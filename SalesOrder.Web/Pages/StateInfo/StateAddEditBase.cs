@@ -11,6 +11,12 @@ namespace SalesOrder.Web.Pages.StateInfo
 
         public IEnumerable<StateInfoDto> stateInfos { get; set; }
 
+        [Parameter]
+        public StateInfoDto stateInfoModel { get; set; } = default!;
+
+        [Parameter]
+        public EventCallback ValidSubmit { get; set; } = default!;
+
 
 
         [Parameter]
@@ -34,6 +40,21 @@ namespace SalesOrder.Web.Pages.StateInfo
         {
             FromChildCloseAction(true);
         }
+
+        public void SateAddEdit()
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
 
     }
 }
