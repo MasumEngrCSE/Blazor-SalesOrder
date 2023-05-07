@@ -17,14 +17,14 @@ namespace SalesOrder.Web.Services.Implementation
         {
             try
             {
-                var stateDataList = await this.httpClient.GetFromJsonAsync<IEnumerable<StateInfoDto>>("api/StateInfo");
+                var stateDataList = await this.httpClient.GetFromJsonAsync<IEnumerable<StateInfoDto>>("api/StateInfo/getStateInfo");
 
                 return stateDataList;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             
 

@@ -17,6 +17,7 @@ namespace SalesOrder.Api.Controllers
         }
 
         [HttpGet]
+        [Route("getStateInfo")]
         public async Task<ActionResult<IEnumerable<StateInfoDto>>> GetStateInfo()
         {
             try
