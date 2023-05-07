@@ -6,6 +6,11 @@ namespace SalesOrder.Web.Pages.StateInfo
 {
     public class StateInfoBase:ComponentBase
     {
+        private bool IsAddEditShowed=false;
+        public bool AddEditShowed { get { return IsAddEditShowed; } set { IsAddEditShowed = value; } }
+
+        public int selectedStateId;
+
         [Inject]
         public IStateInfoService stateInfoService { get; set; }
 
@@ -15,6 +20,14 @@ namespace SalesOrder.Web.Pages.StateInfo
         {
             stateInfos = await stateInfoService.GetStates();
             //return base.OnInitializedAsync();
+        }
+
+
+        public void showAddEdit()
+        {
+            AddEditShowed=true;
+            selectedStateId = 0;
+           // FromChild("Value From Child:" + DateTime.Now);
         }
     }
 }

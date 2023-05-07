@@ -8,11 +8,16 @@
     <h3>Loading State ...</h3>
 }
 <div class="row">
-    <button type="button" class="btn btn-primary" style="width:fit-content;text-align:right">Add State</button>
+    <button type="button" onclick="@showAddEdit" class="btn btn-primary" style="width:fit-content;text-align:right">Add State</button>
 </div>
 
 
-@if (stateInfos != null)
+@if (AddEditShowed)
+{
+    <StateAddEdit stateId="@selectedStateId"></StateAddEdit>
+}
+
+@if (stateInfos != null && !AddEditShowed)
 {
     
     if (stateInfos.Count() > 0)

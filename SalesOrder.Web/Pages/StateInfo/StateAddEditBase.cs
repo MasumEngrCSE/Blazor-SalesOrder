@@ -11,9 +11,15 @@ namespace SalesOrder.Web.Pages.StateInfo
 
         public IEnumerable<StateInfoDto> stateInfos { get; set; }
 
+
+
+        [Parameter]
+        public int stateId { get; set; } 
+
+
         protected override async Task OnInitializedAsync()
         {
-            stateInfos = await stateInfoService.GetStates();
+            //stateInfos = await stateInfoService.GetStates();
             //return base.OnInitializedAsync();
         }
     }

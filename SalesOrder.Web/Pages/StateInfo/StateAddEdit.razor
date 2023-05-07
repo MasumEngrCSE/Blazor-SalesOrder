@@ -1,5 +1,12 @@
 ﻿@page "/StateInfo/StateAddEdit"
 @inherits StateAddEditBase
-<h3 class="mb-5">State Add</h3>
+
+@if (stateId > 0)
+{
+    <h3 class="mb-5">State update</h3>
+}
+else{
+    <h3 class="mb-5">State Add</h3>
+}
 
 
