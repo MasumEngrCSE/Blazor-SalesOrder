@@ -14,9 +14,33 @@ namespace SalesOrder.Api.Repositories.Implementations
         {
             _DBContext = salesOrderDBContext;
         }
-        public Task<StateInfoDto> AddState(StateInfoDto stateInfo)
+        public async Task<StateInfoDto> AddState(StateInfoDto stateInfo)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
+            try
+            {
+                var obj = new StateInfo();
+                //obj.Id = stateInfo.Id;
+                obj.Name = stateInfo.Name;
+                obj.Description = stateInfo.Description;
+                obj.CreatedDate = DateTime.Now;
+                obj.CreatedBy=stateInfo.CreatedBy;
+
+                this._DBContext.AddAsync(obj);
+                this._DBContext.SaveChangesAsync();
+
+                stateInfo.Id = obj.Id;
+                stateInfo.CreatedDate=obj.CreatedDate;
+
+                return stateInfo;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
         }
 
         public async Task<bool> DeleteState(int Id)
