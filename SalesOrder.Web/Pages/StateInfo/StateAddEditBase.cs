@@ -44,16 +44,23 @@ namespace SalesOrder.Web.Pages.StateInfo
             FromChildCloseAction(true);
         }
 
-        public void SateAddEdit()
+        public  async Task SateAddEdit()
         {
             try
             {
-
+                if(stateId > 0)
+                {
+                    stateInfoModel = await stateInfoService.UpdateState(stateInfoModel);
+                }
+                else
+                {
+                    stateInfoModel = await stateInfoService.AddState(stateInfoModel);
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
 
