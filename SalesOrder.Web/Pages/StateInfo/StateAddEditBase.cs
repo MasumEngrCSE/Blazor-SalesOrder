@@ -22,5 +22,18 @@ namespace SalesOrder.Web.Pages.StateInfo
             //stateInfos = await stateInfoService.GetStates();
             //return base.OnInitializedAsync();
         }
+
+
+        [Parameter]
+        public Action<bool> FromChildCloseAction { get; set; }
+
+
+
+
+        public void closePage()
+        {
+            FromChildCloseAction(true);
+        }
+
     }
 }

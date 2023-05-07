@@ -1,13 +1,21 @@
 ﻿@page "/StateInfo/StateAddEdit"
 @inherits StateAddEditBase
 
-@if (stateId > 0)
+@*@if (stateId > 0)
 {
     <h3 class="mb-5">State update</h3>
 }
 else{
     <h3 class="mb-5">State Add</h3>
-}
+}*@
+
+<h3 class="mb-5">@(stateId > 0 ? "State Update" : "State Add")</h3>
+
+
+<button type="button" onclick="@closePage" class="btn btn-primary" style="width:fit-content;text-align:right">
+    Close
+</button>
+
 <button type="button"  class="btn btn-primary" style="width:fit-content;text-align:right">
     @(stateId > 0 ? "Update" : "Add State")
 </button>

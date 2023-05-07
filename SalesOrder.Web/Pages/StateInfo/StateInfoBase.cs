@@ -29,5 +29,14 @@ namespace SalesOrder.Web.Pages.StateInfo
             selectedStateId = 0;
            // FromChild("Value From Child:" + DateTime.Now);
         }
+
+
+        public void showSalesInfo(bool isCloseSalesInfo)
+        {
+            AddEditShowed = !isCloseSalesInfo;
+            selectedStateId = 0;
+            StateHasChanged();
+        }
+
     }
 }
