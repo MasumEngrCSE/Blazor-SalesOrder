@@ -1,5 +1,9 @@
 ﻿@page "/StateInfo/StateAddEdit"
+@page "/StateInfo/StateAddEdit/{stateId:int}"
 @inherits StateAddEditBase
+@*@inject HttpClient http
+@inject NavigationManager uriHelper
+@inject IJSRuntime js*@
 
 @*@if (stateId > 0)
 {

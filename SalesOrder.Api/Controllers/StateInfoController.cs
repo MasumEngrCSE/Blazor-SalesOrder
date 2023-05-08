@@ -37,6 +37,27 @@ namespace SalesOrder.Api.Controllers
         }
 
 
+        [HttpGet]
+        [Route("getState/{Id}")]
+        public async Task<ActionResult<StateInfoDto>> GetState(int Id)
+        {
+            try
+            {
+                var data = await this.sateInfoRepository.GetState(Id);
+
+                if (data == null)
+                    return NotFound();
+                else
+                    return Ok(data);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error Retrive data");
+                //throw;
+            }
+        }
+
+
 
         [HttpPost]
         [Route("addState")]

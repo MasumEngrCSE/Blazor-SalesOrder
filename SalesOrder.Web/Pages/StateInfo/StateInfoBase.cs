@@ -30,12 +30,27 @@ namespace SalesOrder.Web.Pages.StateInfo
            // FromChild("Value From Child:" + DateTime.Now);
         }
 
+        public void showStateEdit(int Id)
+        {
+            AddEditShowed = true;
+            selectedStateId = Id;
+            // FromChild("Value From Child:" + DateTime.Now);
+        }
+
 
         public void showSalesInfo(bool isCloseSalesInfo)
         {
             AddEditShowed = !isCloseSalesInfo;
             selectedStateId = 0;
+            //stateInfos = await stateInfoService.GetStates();
+            //showData();
             StateHasChanged();
+        }
+
+
+        private async Task showData()
+        {
+            stateInfos = await stateInfoService.GetStates();
         }
 
     }

@@ -60,6 +60,8 @@ namespace SalesOrder.Api.Repositories.Implementations
                                       Id = p.Id,
                                       Name = p.Name,
                                       Description = p.Description,
+                                      CreatedBy = p.CreatedBy,
+                                      CreatedDate = p.CreatedDate
                                   }).FirstOrDefaultAsync();
 
                 return data;
@@ -94,9 +96,33 @@ namespace SalesOrder.Api.Repositories.Implementations
             }
         }
 
-        public Task<StateInfoDto> UpdateState(StateInfoDto stateInfo)
+        public async Task<StateInfoDto> UpdateState(StateInfoDto stateInfo)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var obj =await this._DBContext.stateInfo.FirstOrDefaultAsync(p=>p.Id==stateInfo.Id);
+
+                
+                //obj.Id = stateInfo.Id;
+                obj.Name = stateInfo.Name;
+                obj.Description = stateInfo.Description;
+                obj.CreatedDate = DateTime.Now;
+                obj.CreatedBy = stateInfo.CreatedBy;
+
+                //this._DBContext.AddAsync(obj);
+                this._DBContext.SaveChangesAsync();
+
+                //stateInfo.Id = obj.Id;
+                //stateInfo.CreatedDate = obj.CreatedDate;
+
+                return stateInfo;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
         }
     }
 }

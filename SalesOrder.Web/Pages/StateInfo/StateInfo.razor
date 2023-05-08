@@ -29,6 +29,7 @@
                     <th scope="col">Id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Details</th>
+                    <th></th>
                 </tr>
             </thead>
 
@@ -42,6 +43,15 @@
                 <td>
                     @itm.Description
                 </td>
+
+                        <td>
+@*                            <a href='/StateInfo/StateAddEdit/@itm.Id' class="btn btn-outline-dark" role="button">
+                                Edit
+                            </a>*@
+                            <button class="btn btn-outline-dark" @onclick="@(() => showStateEdit(@itm.Id))">Edit</button>
+                            @*<button type="button" onclick="@showAddEdit" class="btn btn-outline-dark" role="button">Edit</button>*@
+                        </td>
+
             </tr>
         }
 

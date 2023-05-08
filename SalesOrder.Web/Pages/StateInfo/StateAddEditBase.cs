@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using SalesOrder.Models.Dtos;
 using SalesOrder.Web.Services.Interface;
 
@@ -7,9 +8,9 @@ namespace SalesOrder.Web.Pages.StateInfo
     public class StateAddEditBase : ComponentBase
     {
         [Inject]
-        public IStateInfoService stateInfoService { get; set; }
+        public IStateInfoService stateInfoService { get; set; } = default!;
 
-        public IEnumerable<StateInfoDto> stateInfos { get; set; }
+        public IEnumerable<StateInfoDto> stateInfos { get; set; } = default!;
 
         [Parameter]
         public StateInfoDto stateInfoModel { get; set; } = default!;
@@ -20,21 +21,26 @@ namespace SalesOrder.Web.Pages.StateInfo
 
 
         [Parameter]
-        public int stateId { get; set; } 
+        public int stateId { get; set; }
+
+        [Parameter]
+        public Action<bool> FromChildCloseAction { get; set; } = default!;
+
+
+
 
 
         protected override async Task OnInitializedAsync()
         {
             //stateInfos = await stateInfoService.GetStates();
             //return base.OnInitializedAsync();
-
-            if (stateId == 0)
-                stateInfoModel = new StateInfoDto();
+            stateInfoModel = new StateInfoDto();
+            if (stateId > 0)
+                stateInfoModel = await stateInfoService.GetState(stateId);
         }
 
 
-        [Parameter]
-        public Action<bool> FromChildCloseAction { get; set; }
+
 
 
 
@@ -44,13 +50,18 @@ namespace SalesOrder.Web.Pages.StateInfo
             FromChildCloseAction(true);
         }
 
-        public  async Task SateAddEdit()
+        public async Task SateAddEdit()
         {
             try
             {
-                if(stateId > 0)
+                if (stateId > 0)
                 {
                     stateInfoModel = await stateInfoService.UpdateState(stateInfoModel);
+
+                    //await js.InvokeVoidAsync("alert", $"Updated Successfully!");
+
+                    
+
                 }
                 else
                 {
