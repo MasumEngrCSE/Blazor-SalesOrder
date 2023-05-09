@@ -70,3 +70,10 @@
         ></StateAddEdit>
 }
 
+
+<BlazorModal ShowModal=@showModal>
+    <Body>
+        <StateAddEdit stateId="@selectedStateId" FromChildCloseAction="@showSalesInfo"></StateAddEdit>
+    </Body>
+</BlazorModal>
+

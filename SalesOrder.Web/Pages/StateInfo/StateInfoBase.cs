@@ -6,6 +6,7 @@ namespace SalesOrder.Web.Pages.StateInfo
 {
     public class StateInfoBase:ComponentBase
     {
+        public bool showModal = false;
         private bool IsAddEditShowed=false;
         public bool AddEditShowed { get { return IsAddEditShowed; } set { IsAddEditShowed = value; } }
 
@@ -25,15 +26,21 @@ namespace SalesOrder.Web.Pages.StateInfo
 
         public void  showAddEdit()
         {
-            AddEditShowed=true;
+            //AddEditShowed=true;
             selectedStateId = 0;
-           // FromChild("Value From Child:" + DateTime.Now);
+            showModal = true;
+
+
+            // FromChild("Value From Child:" + DateTime.Now);
         }
 
         public void showStateEdit(int Id)
         {
-            AddEditShowed = true;
+            //AddEditShowed = true;
             selectedStateId = Id;
+            showModal = true;
+
+
             // FromChild("Value From Child:" + DateTime.Now);
         }
 

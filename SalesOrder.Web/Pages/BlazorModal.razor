@@ -1,0 +1,67 @@
+﻿@if (ShowModal)
+{
+    <div class="modal fade show" id="myModal" style="display:block" aria-modal="true" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">@(Title != null ? Title : "Confirm Action") </h4>
+                    <button type="button" class="close" @onclick="@ModalCancel">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    @if (Body is not null)
+                    {
+                        @Body
+                    }
+                    @*<p>This is the modal content!</p>*@
+
+                    @*                    <AlertTest></AlertTest>*@
+
+
+                </div>
+
+                <!-- Modal footer -->
+@*                <div class="modal-footer">
+                    <button type="button" class="btn" @onclick="@ModalCancel">Cancel</button>
+                    <button type="button" class="btn btn-danger" @onclick=@ModalOk>Delete</button>
+                </div>*@
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+}
+<hr />
+
+@code {
+    [Parameter]
+    public string? Title { get; set; } = default;
+
+
+    [Parameter]
+    public RenderFragment? Body { get; set; } = default;
+
+
+    //[Parameter]
+    //public RenderFragment? Footer { get; set; } = default;
+
+    [Parameter]
+    public bool ShowModal { get; set; } = default;
+
+
+    //bool showModal = false;
+
+    void ModalShow() => ShowModal = true;
+    void ModalCancel() => ShowModal = false;
+    void ModalOk()
+    {
+        //Console.WriteLine("Modal ok");
+        ShowModal = false;
+    }
+}
