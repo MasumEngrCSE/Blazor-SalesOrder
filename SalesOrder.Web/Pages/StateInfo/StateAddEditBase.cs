@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
+//using Microsoft.JSInterop;
 using SalesOrder.Models.Dtos;
 using SalesOrder.Web.Services.Interface;
 
@@ -24,7 +24,7 @@ namespace SalesOrder.Web.Pages.StateInfo
         public int stateId { get; set; }
 
         [Parameter]
-        public Action<bool> FromChildCloseAction { get; set; } = default!;
+        public Action<IEnumerable<StateInfoDto>> FromChildCloseAction { get; set; } = default!;
 
 
 
@@ -45,9 +45,11 @@ namespace SalesOrder.Web.Pages.StateInfo
 
 
 
-        public void closePage()
+        public async Task closePage()
         {
-            FromChildCloseAction(true);
+
+           var stateInfos = await stateInfoService.GetStates();
+            FromChildCloseAction(stateInfos);
         }
 
         public async Task SateAddEdit()
@@ -57,16 +59,17 @@ namespace SalesOrder.Web.Pages.StateInfo
                 if (stateId > 0)
                 {
                     stateInfoModel = await stateInfoService.UpdateState(stateInfoModel);
+                    await closePage();
 
+                    //await JsRuntime.InvokeVoidAsync("alert", "Warning!");
                     //await js.InvokeVoidAsync("alert", $"Updated Successfully!");
-
-                    
-
                 }
                 else
                 {
                     stateInfoModel = await stateInfoService.AddState(stateInfoModel);
+                    await closePage();
                 }
+               
             }
             catch (Exception ex)
             {

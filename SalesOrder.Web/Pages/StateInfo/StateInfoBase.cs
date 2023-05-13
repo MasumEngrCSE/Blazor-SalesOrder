@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using SalesOrder.Models.Dtos;
 using SalesOrder.Web.Services.Interface;
 
@@ -11,6 +12,8 @@ namespace SalesOrder.Web.Pages.StateInfo
         public bool AddEditShowed { get { return IsAddEditShowed; } set { IsAddEditShowed = value; } }
 
         public int selectedStateId;
+
+        public string? testName="";
 
         [Inject]
         public IStateInfoService stateInfoService { get; set; }
@@ -45,12 +48,17 @@ namespace SalesOrder.Web.Pages.StateInfo
         }
 
 
-        public void showSalesInfo(bool isCloseSalesInfo)
+        public void showSalesInfo(IEnumerable<StateInfoDto> stateInfosData)
         {
-            AddEditShowed = !isCloseSalesInfo;
+            //bool isCloseSalesInfo
+            //AddEditShowed = !isCloseSalesInfo;
+            AddEditShowed = false;
             selectedStateId = 0;
             //stateInfos = await stateInfoService.GetStates();
-            //showData();
+            stateInfos = stateInfosData;
+            // showData();
+            showModal = false;
+           
             StateHasChanged();
         }
 

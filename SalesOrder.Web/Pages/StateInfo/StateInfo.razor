@@ -1,5 +1,6 @@
 ﻿@page "/StateInfo/StateInfo"
 @inherits StateInfoBase
+@inject IJSRuntime JsRuntime
 
 @if (!AddEditShowed)
 {
@@ -16,10 +17,17 @@
 @if (stateInfos != null && !AddEditShowed)
 {
     @*State List*@
-
     <div class="row">
         <button type="button" onclick="@showAddEdit" class="btn btn-primary" style="width:fit-content;text-align:right">Add State</button>
     </div>
+
+    <div class="row mb-2">
+        <label class="col-2" for="name">Name:</label>
+        @*<Input class="form-control col-6" @bind="testName" />*@
+            <input class="form-control col-6" @bind="testName" />
+
+    </div>
+
     
     if (stateInfos.Count() > 0)
     {
