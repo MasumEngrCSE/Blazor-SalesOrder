@@ -1,14 +1,16 @@
 ﻿@page "/Order/OrderAddEdit"
 
-<h3>SalesOrderAddEdit</h3>
+@*<h3>SalesOrderAddEdit</h3>*@
 @inherits SalesOrderAddEditBase
 
 
 <div>
-
+    <fieldset>
+    <legend>Order</legend>
     <EditForm Model="@salesOrderModel" OnValidSubmit="@ValidSubmit">
         <DataAnnotationsValidator />
         <fieldset>
+            
             <div class="row mb-2">
                 <label class="col-4" for="name">Order Name:</label>
                 <InputText class="form-control col-6" @bind-Value="@salesOrderModel.OrderTitle" />
@@ -44,4 +46,11 @@
 
     </EditForm>
 
+    </fieldset>
+
 </div>
+
+<div>
+    <SalesOrderWindowInfo></SalesOrderWindowInfo>
+</div>
+                        

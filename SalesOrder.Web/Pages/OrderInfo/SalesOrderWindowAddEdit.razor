@@ -1,0 +1,11 @@
+﻿@using SalesOrder.Models.Dtos
+<h3>SalesOrderWindowAddEdit</h3>
+
+@code {
+    [Parameter]
+    public int selectedId { get; set; }
+
+
+    [Parameter]
+    public Action<IEnumerable<SalesOrderDto>> FromChildCloseAction { get; set; } = default!;
+}

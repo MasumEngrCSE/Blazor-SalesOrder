@@ -59,11 +59,10 @@
     }
 }
 
-<BlazorModal ShowModal=@showModal>
+<BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle">
     <Body>
-        <SalesOrderAddEdit selectedId="@selectedId" FromChildCloseAction="@closeAction"></SalesOrderAddEdit>
-        
-
+        <SalesOrderAddEdit  selectedId="@selectedId" FromChildCloseAction="@closeAction"></SalesOrderAddEdit>
+       
     </Body>
 </BlazorModal>
 

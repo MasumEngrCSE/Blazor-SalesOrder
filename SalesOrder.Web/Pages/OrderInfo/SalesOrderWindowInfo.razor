@@ -1,0 +1,100 @@
+﻿@using SalesOrder.Models.Dtos
+<h3>Sales Order Window</h3>
+
+
+@if (!AddEditShowed)
+{
+    @*State List*@
+    <div class="row">
+        <button type="button" onclick="@showAdd" class="btn btn-primary" style="width:fit-content;text-align:right">Add Window</button>
+    </div>
+
+
+    if (orderWindows.Count() > 0)
+    {
+        <table class="table table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">State</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+                @foreach (var itm in orderWindows)
+                {
+                    <tr>
+                        <td>@itm.Id</td>
+                        <td>@itm.OrderTitle</td>
+                        <td>
+                            @itm.StateName
+                        </td>
+
+                        <td>
+                            <button class="btn btn-outline-dark" @onclick="@(() => showEdit(@itm.Id))">Edit</button>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    }
+
+
+}
+
+<BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle">
+    <Body>
+        @*<Sa selectedId="@selectedId" FromChildCloseAction="@closeAction"></Sa>*@
+        <SalesOrderWindowAddEdit selectedId="@selectedId" FromChildCloseAction="@closeAction"></SalesOrderWindowAddEdit>
+    </Body>
+</BlazorModal>
+
+
+@code {
+    public IEnumerable<SalesOrderDto> orderWindows { get; set; }
+    public bool showModal = false;
+    private bool IsAddEditShowed = false;
+    public bool AddEditShowed { get { return IsAddEditShowed; } set { IsAddEditShowed = value; } }
+    public int selectedId = 0;
+    public string AddEditTitle { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        orderWindows = new List<SalesOrderDto>();
+    }
+
+
+    public void showAdd()
+    {
+        AddEditTitle = "Add Sales Order Window";
+        selectedId = 0;
+        showModal = true;
+
+    }
+
+    public void showEdit(int Id)
+    {
+        AddEditTitle = "Edit Sales Order Window";
+        selectedId = Id;
+        showModal = true;
+    }
+
+    public void closeAction(IEnumerable<SalesOrderDto> orderWindowData)
+    {
+        AddEditShowed = false;
+        selectedId = 0;
+        orderWindows = orderWindowData;
+        showModal = false;
+
+        StateHasChanged();
+    }
+
+}

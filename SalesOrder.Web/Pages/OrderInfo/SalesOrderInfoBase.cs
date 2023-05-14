@@ -12,6 +12,8 @@ namespace SalesOrder.Web.Pages.OrderInfo
         public int selectedId=0;
         public bool AddEditShowed { get { return IsAddEditShowed; } set { IsAddEditShowed = value; } }
 
+        public string  AddEditTitle { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
             //salesOrders = await stateInfoService.GetStates();
@@ -20,6 +22,7 @@ namespace SalesOrder.Web.Pages.OrderInfo
 
         public void showAdd()
         {
+            AddEditTitle = "Add Sales Order";
             selectedId = 0;
             showModal = true;
 
@@ -27,6 +30,7 @@ namespace SalesOrder.Web.Pages.OrderInfo
 
         public void showEdit(int Id)
         {
+            AddEditTitle = "Edit Sales Order";
             selectedId = Id;
             showModal = true;
         }
