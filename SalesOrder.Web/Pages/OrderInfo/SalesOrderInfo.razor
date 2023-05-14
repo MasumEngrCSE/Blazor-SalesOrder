@@ -2,10 +2,70 @@
 @inherits SalesOrderInfoBase
 <h3>Sales Order</h3>
 
+@*@if (!AddEditShowed)
+{
+    <h3 class="mb-5">Sales Order</h3>
+}*@
 
 
+@*@if (salesOrders == null)
+{
+    <h3>Loading State ...</h3>
+}*@
 
-@*@code {
 
+@if (!AddEditShowed)
+{
+    @*State List*@
+    <div class="row">
+        <button type="button" onclick="@showAdd" class="btn btn-primary" style="width:fit-content;text-align:right">Add Order</button>
+    </div>
+
+
+    if (salesOrders.Count() > 0)
+    {
+        <table class="table table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">State</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+                @foreach (var itm in salesOrders)
+                {
+                    <tr>
+                        <td>@itm.Id</td>
+                        <td>@itm.OrderTitle</td>
+                        <td>
+                            @itm.StateName
+                        </td>
+
+                        <td>
+                         <button class="btn btn-outline-dark" @onclick="@(() => showEdit(@itm.Id))">Edit</button>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    }
 }
-*@
+
+<BlazorModal ShowModal=@showModal>
+    <Body>
+        <SalesOrderAddEdit selectedId="@selectedId" FromChildCloseAction="@closeAction"></SalesOrderAddEdit>
+        
+
+    </Body>
+</BlazorModal>
+
+
+

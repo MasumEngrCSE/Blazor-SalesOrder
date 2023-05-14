@@ -13,7 +13,6 @@ namespace SalesOrder.Web.Pages.StateInfo
 
         public int selectedStateId;
 
-        public string? testName="";
 
         [Inject]
         public IStateInfoService stateInfoService { get; set; }

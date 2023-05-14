@@ -1,0 +1,41 @@
+﻿@page "/Order/OrderAddEdit"
+
+<h3>SalesOrderAddEdit</h3>
+@inherits SalesOrderAddEditBase
+
+
+<div>
+
+    <EditForm Model="@salesOrderModel" OnValidSubmit="@ValidSubmit">
+        <DataAnnotationsValidator />
+        <fieldset>
+            <div class="row mb-2">
+                <label class="col-4" for="name">Order Name:</label>
+                <InputText class="form-control col-6" @bind-Value="@salesOrderModel.OrderTitle" />
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-4" for="name">State:</label>
+                <InputSelect class="form-select" @bind-Value="salesOrderModel.StateId">
+                    @if (salesOrderModel.StateId is null)
+                    {
+                        <option selected value="">None</option>
+                    }
+
+                    @foreach (var stateInfo in stateInfos)
+                    {
+                        <option value="@stateInfo.Id">@stateInfo.Name (ID: @stateInfo.Id)</option>
+                    }
+
+                    @if (salesOrderModel.StateId is not null)
+                    {
+                        <option value="">None</option>
+                    }
+                </InputSelect>
+            </div>
+
+        </fieldset>
+
+    </EditForm>
+
+</div>
