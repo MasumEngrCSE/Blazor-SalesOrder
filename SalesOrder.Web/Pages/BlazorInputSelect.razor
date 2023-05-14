@@ -1,0 +1,32 @@
+﻿@*<h3>BlazorInputSelect</h3>*@
+
+<InputSelect class="form-select" @bind-Value="selectedId">
+@*    @if (salesOrderModel.StateId is null)
+    {
+        <option selected value="">None</option>
+    }
+
+    @if (stateInfos == null)
+    {
+        <option value="">Loading State ...</option>
+    }
+    else
+    {
+        @foreach (var stateInfo in stateInfos)
+        {
+            <option value="@stateInfo.Id">@stateInfo.Name (ID: @stateInfo.Id)</option>
+        }
+    }
+    @if (salesOrderModel.StateId is not null)
+    {
+        <option value="">None</option>
+    }*@
+</InputSelect>
+
+
+@code {
+
+    [Parameter]
+    public int selectedId { get; set; }
+
+}
