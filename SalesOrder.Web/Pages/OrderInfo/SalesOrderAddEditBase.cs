@@ -27,7 +27,7 @@ namespace SalesOrder.Web.Pages.OrderInfo
         protected override async Task OnInitializedAsync()
         {
             salesOrderModel=new SalesOrderDto();
-            stateInfos=new List<StateInfoDto>();
+            //stateInfos=new List<StateInfoDto>();
             stateInfos = await stateInfoService.GetStates();
             //if (stateId > 0)
             //    stateInfoModel = await stateInfoService.GetState(stateId);
