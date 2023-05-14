@@ -1,8 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SalesOrder.Api.Entities
+namespace SalesOrder.Models.Dtos
 {
-    public class OrderMaster
+    public class SalesOrderDto
     {
         public int Id { get; set; }
         public string CustomCode { get; set; }
@@ -16,7 +20,5 @@ namespace SalesOrder.Api.Entities
         public DateTime? UpdatedDate { get; set; }
         public int? UpdatedBy { get; set; }
 
-        [ForeignKey("StateId")]
-        public StateInfo StateInfo { get; set; }
     }
 }
