@@ -9,11 +9,16 @@
             <fieldset>
 
                 <div class="row mb-2">
-                    <label class="col-4" for="name">Order Name:</label>
-                    <InputText class="form-control col-6" @bind-Value="@orderWindowModel.OrderTitle" />
+                    <label class="col-4" for="name">Window Name:</label>
+                    <InputText class="form-control col-6" @bind-Value="@orderWindowModel.WindowTitle" />
                 </div>
 
-        
+                <div class="row mb-2">
+                    <label class="col-4" for="name">Window Name:</label>
+                    <InputNumber class="form-control col-6" @bind-Value="@orderWindowModel.Qty" />
+                </div>
+
+
 
             </fieldset>
 
@@ -36,4 +41,11 @@
 
     //[Parameter]
     public EventCallback ValidSubmit { get; set; } = default!;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        orderWindows = new List<SalesOrderDto>();
+        orderWindowModel = new SalesOrderDto();
+    }
 }
