@@ -11,9 +11,13 @@ namespace SalesOrder.Models.Dtos
         public int Id { get; set; }
         public string CustomCode { get; set; }
         public string OrderTitle { get; set; }
+
         public DateTime OrderDate { get; set; }
         public int? StateId { get; set; }
         public string? StateName { get; set; }
+        public string WindowTitle { get; set; }
+        public int Qty { get; set; }
+        public int TotalSubElement { get; set; }
         public string Remarks { get; set; }
 
         public DateTime? CreatedDate { get; set; }
