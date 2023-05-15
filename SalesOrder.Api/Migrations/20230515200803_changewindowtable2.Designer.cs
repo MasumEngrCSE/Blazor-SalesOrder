@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SalesOrder.Api.Data;
 
@@ -11,9 +12,11 @@ using SalesOrder.Api.Data;
 namespace SalesOrder.Api.Migrations
 {
     [DbContext(typeof(SalesOrderDBContext))]
-    partial class SalesOrderDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230515200803_changewindowtable2")]
+    partial class changewindowtable2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

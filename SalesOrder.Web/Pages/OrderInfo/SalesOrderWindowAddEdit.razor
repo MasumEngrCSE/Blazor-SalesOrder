@@ -1,5 +1,27 @@
 ﻿@using SalesOrder.Models.Dtos
-<h3>SalesOrderWindowAddEdit</h3>
+@*<h3>SalesOrderWindowAddEdit</h3>*@
+
+<div>
+    <fieldset>
+        <legend>Order Window</legend>
+        <EditForm Model="@orderWindowModel" OnValidSubmit="@ValidSubmit">
+            <DataAnnotationsValidator />
+            <fieldset>
+
+                <div class="row mb-2">
+                    <label class="col-4" for="name">Order Name:</label>
+                    <InputText class="form-control col-6" @bind-Value="@orderWindowModel.OrderTitle" />
+                </div>
+
+        
+
+            </fieldset>
+
+        </EditForm>
+
+    </fieldset>
+
+</div>
 
 @code {
     [Parameter]
@@ -8,4 +30,10 @@
 
     [Parameter]
     public Action<IEnumerable<SalesOrderDto>> FromChildCloseAction { get; set; } = default!;
+
+    public IEnumerable<SalesOrderDto> orderWindows { get; set; }
+    public SalesOrderDto orderWindowModel { get; set; } = default!;
+
+    //[Parameter]
+    public EventCallback ValidSubmit { get; set; } = default!;
 }

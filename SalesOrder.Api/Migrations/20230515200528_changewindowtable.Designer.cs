@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SalesOrder.Api.Data;
 
@@ -11,9 +12,11 @@ using SalesOrder.Api.Data;
 namespace SalesOrder.Api.Migrations
 {
     [DbContext(typeof(SalesOrderDBContext))]
-    partial class SalesOrderDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230515200528_changewindowtable")]
+    partial class changewindowtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,6 +98,9 @@ namespace SalesOrder.Api.Migrations
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("WindowId")
+                        .HasColumnType("int");
 
                     b.Property<string>("WindowTitle")
                         .IsRequired()
@@ -185,14 +191,14 @@ namespace SalesOrder.Api.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 16, 2, 8, 2, 973, DateTimeKind.Local).AddTicks(7283),
+                            CreatedDate = new DateTime(2023, 5, 16, 2, 5, 28, 551, DateTimeKind.Local).AddTicks(2636),
                             Description = "New York",
                             Name = "NY"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 16, 2, 8, 2, 973, DateTimeKind.Local).AddTicks(7362),
+                            CreatedDate = new DateTime(2023, 5, 16, 2, 5, 28, 551, DateTimeKind.Local).AddTicks(2671),
                             Description = "California",
                             Name = "CA"
                         });

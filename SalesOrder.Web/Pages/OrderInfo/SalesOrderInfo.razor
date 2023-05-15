@@ -59,8 +59,9 @@
     }
 }
 
-<BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle">
-    <Body>
+
+<BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle" modal_minWidth="900px" modal_minHeight="700px" >
+    <Body >
         <SalesOrderAddEdit  selectedId="@selectedId" FromChildCloseAction="@closeAction"></SalesOrderAddEdit>
        
     </Body>

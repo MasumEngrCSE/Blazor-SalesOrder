@@ -49,7 +49,7 @@
 
 }
 
-<BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle">
+<BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle" modal_minWidth="600px">
     <Body>
         @*<Sa selectedId="@selectedId" FromChildCloseAction="@closeAction"></Sa>*@
         <SalesOrderWindowAddEdit selectedId="@selectedId" FromChildCloseAction="@closeAction"></SalesOrderWindowAddEdit>

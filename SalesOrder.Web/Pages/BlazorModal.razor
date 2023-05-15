@@ -1,9 +1,9 @@
 ﻿@if (ShowModal)
 {
     <div class="modal fade show" id="myModal" style="display:block;" aria-modal="true" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog" style="min-width:@modal_minWidth;min-height:@modal_minHeight;">
             <div class="modal-content">
-
+                `
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">@(PageTitle != null ? PageTitle : "Confirm Action") </h4>
@@ -46,6 +46,12 @@
 
     [Parameter]
     public RenderFragment? Body { get; set; } = default;
+
+    [Parameter]
+    public string modal_minWidth { get; set; } = default;
+
+    [Parameter]
+    public string modal_minHeight { get; set; } = default;
 
 
     //[Parameter]

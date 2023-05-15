@@ -11,10 +11,10 @@ namespace SalesOrder.Api.Entities
         public int Width { get; set; }
         public int Height { get; set; }
 
-        public DateTime CreatedDate { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime UpdatedDate { get; set; }
-        public int UpdatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public int? CreatedBy { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public int? UpdatedBy { get; set; }
 
 
         [ForeignKey("OrderWindowId")]
