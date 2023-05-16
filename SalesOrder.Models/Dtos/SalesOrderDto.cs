@@ -18,7 +18,8 @@ namespace SalesOrder.Models.Dtos
         public string WindowTitle { get; set; }
         public int WindowQty { get; set; }
         public int TotalSubElement { get; set; }
-        public int SubElementType { get; set; }
+        public int SubElement { get; set; }
+        public string SubElementType { get; set; }
         public int SubElementWidth { get; set; }
         public int SubElementHeight { get; set; }
 

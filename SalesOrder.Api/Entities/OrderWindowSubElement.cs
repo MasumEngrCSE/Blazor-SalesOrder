@@ -6,7 +6,8 @@ namespace SalesOrder.Api.Entities
     {
         public int Id { get; set; }
         public int OrderWindowId { get; set; }
-        public int SubElementId { get; set; }
+        public int SubElement { get; set; }
+        public string SubElementType { get; set; }
 
         public int Width { get; set; }
         public int Height { get; set; }
@@ -21,8 +22,8 @@ namespace SalesOrder.Api.Entities
         public OrderWindow OrderWindow { get; set; }
 
 
-        [ForeignKey("SubElementId")]
-        public SubElement SubElement { get; set; }
+        //[ForeignKey("SubElementId")]
+        //public SubElementType SubElement { get; set; }
 
     }
 }

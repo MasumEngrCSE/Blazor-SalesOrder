@@ -6,57 +6,58 @@
 
 <div>
     <fieldset>
-    @*<legend>Order</legend>*@
-    <EditForm Model="@salesOrderModel" OnValidSubmit="@ValidSubmit">
-        <DataAnnotationsValidator />
-        <fieldset>
-            
-            <div class="row mb-2">
-                <label class="col-4" for="name">Order Name:</label>
-                <InputText class="form-control col-6" @bind-Value="@salesOrderModel.OrderTitle" />
-            </div>
+        @*<legend>Order</legend>*@
+        <EditForm Model="@salesOrderModel" OnValidSubmit="@ValidSubmit">
+            <DataAnnotationsValidator />
+            <fieldset>
+                <div class="row">
+                    <div class="col-6">
+                        <label class="col-4" for="name">Order Name:</label>
+                        <InputText class="form-control col-6" @bind-Value="@salesOrderModel.OrderTitle" />
+                    </div>
 
-            <div class="row mb-2">
-                <label class="col-4" for="name">State:</label>
-                <InputSelect class="form-select" @bind-Value="salesOrderModel.StateId">
-                    @if (salesOrderModel.StateId is null)
-                    {
-                        <option selected value="">None</option>
-                    }
+                    <div class="col-6">
+                        <label class="col-4" for="name">State:</label>
+                        <InputSelect class="form-select" @bind-Value="salesOrderModel.StateId">
+                            @if (salesOrderModel.StateId is null)
+                            {
+                                <option selected value="">None</option>
+                            }
 
-                    @if (stateInfos == null)
-                    {
-                        <option value="">Loading State ...</option>
-                    }
-                    else
-                    {
-                        @foreach (var stateInfo in stateInfos)
-                        {
-                            <option value="@stateInfo.Id">@stateInfo.Name (ID: @stateInfo.Id)</option>
-                        }
-                    }
-                    @if (salesOrderModel.StateId is not null)
-                    {
-                        <option value="">None</option>
-                    }
-                </InputSelect>
-            </div>
+                            @if (stateInfos == null)
+                            {
+                                <option value="">Loading State ...</option>
+                            }
+                            else
+                            {
+                                @foreach (var stateInfo in stateInfos)
+                                {
+                                    <option value="@stateInfo.Id">@stateInfo.Name (ID: @stateInfo.Id)</option>
+                                }
+                            }
+                            @if (salesOrderModel.StateId is not null)
+                            {
+                                <option value="">None</option>
+                            }
+                        </InputSelect>
+                    </div>
 
-        </fieldset>
+                </div>
 
-    </EditForm>
+            </fieldset>
+
+        </EditForm>
 
     </fieldset>
 
 </div>
 
 <div class="row">
-    <div class="col-4">
+    <div class="col-12">
         <SalesOrderWindowInfo></SalesOrderWindowInfo>
     </div>
-    <div class="col-8">
+    <div class="col-12">
         <WindowSubElement></WindowSubElement>
     </div>
-    
+
 </div>
-                        

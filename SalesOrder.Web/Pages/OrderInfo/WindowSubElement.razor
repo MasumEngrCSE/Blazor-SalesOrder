@@ -14,9 +14,10 @@
         <table class="table table-striped">
             <thead class="thead-light">
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">State</th>
+                    <th scope="col">Element</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Width</th>
+                    <th scope="col">Height</th>
                     <th></th>
                 </tr>
             </thead>
@@ -26,10 +27,13 @@
                 @foreach (var itm in orderWindows)
                 {
                     <tr>
-                        <td>@itm.Id</td>
-                        <td>@itm.OrderTitle</td>
+                        <td>@itm.SubElement</td>
+                        <td>@itm.SubElementType</td>
                         <td>
-                            @itm.StateName
+                            @itm.SubElementWidth
+                        </td>
+                        <td>
+                            @itm.SubElementHeight
                         </td>
 
                         <td>
@@ -66,7 +70,9 @@
 
     protected override async Task OnInitializedAsync()
     {
-        orderWindows = new List<SalesOrderDto>();
+        orderWindows = new List<SalesOrderDto>() 
+                                    { new SalesOrderDto{OrderTitle="" } };
+
     }
 
 

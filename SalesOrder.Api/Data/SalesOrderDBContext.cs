@@ -37,7 +37,7 @@ namespace SalesOrder.Api.Data
             #endregion
         }
 
-        public DbSet<SubElement> subElements { get; set; }
+        public DbSet<SubElementType> subElements { get; set; }
         public DbSet<Window> windows { get; set; }
         public DbSet<StateInfo> stateInfo { get; set; }
         public DbSet<UserInfo> users { get; set; }

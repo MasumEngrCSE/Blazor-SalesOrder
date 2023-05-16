@@ -73,7 +73,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        orderWindows = new List<SalesOrderDto>();
+        orderWindows = new List<SalesOrderDto>() { new SalesOrderDto { OrderTitle = "" } };
     }
 
 

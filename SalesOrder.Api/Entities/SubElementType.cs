@@ -1,6 +1,6 @@
 ﻿namespace SalesOrder.Api.Entities
 {
-    public class SubElement
+    public class SubElementType
     {
         public int Id { get; set; }
         public string Name { get; set; }
