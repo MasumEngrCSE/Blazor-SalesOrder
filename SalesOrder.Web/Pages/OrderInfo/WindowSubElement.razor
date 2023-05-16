@@ -1,12 +1,11 @@
 ﻿@using SalesOrder.Models.Dtos
-<h3>Window</h3>
-
+<h3>Window Sub-Element</h3>
 
 @if (!AddEditShowed)
 {
     @*State List*@
     <div class="row">
-        <button type="button" onclick="@showAdd" class="btn btn-primary" style="width:fit-content;text-align:right">Add Window</button>
+        <button type="button" onclick="@showAdd" class="btn btn-primary" style="width:fit-content;text-align:right">Add Window Sub-Element</button>
     </div>
 
 
@@ -16,9 +15,8 @@
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Window</th>
-                    <th scope="col">Qty</th>
-                    <th scope="col">Total Sub-Elements</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">State</th>
                     <th></th>
                 </tr>
             </thead>
@@ -31,11 +29,7 @@
                         <td>@itm.Id</td>
                         <td>@itm.OrderTitle</td>
                         <td>
-                            @itm.WindowQty
-                        </td>
-
-                        <td>
-                            @itm.TotalSubElement
+                            @itm.StateName
                         </td>
 
                         <td>
@@ -56,8 +50,7 @@
 
 <BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle" modal_minWidth="600px">
     <Body>
-        @*<Sa selectedId="@selectedId" FromChildCloseAction="@closeAction"></Sa>*@
-        <SalesOrderWindowAddEdit selectedId="@selectedId" FromChildCloseAction="@closeAction"></SalesOrderWindowAddEdit>
+        <WindowSubElementAddEdit selectedId="@selectedId" FromChildCloseAction="@closeAction"></WindowSubElementAddEdit>
     </Body>
 </BlazorModal>
 
@@ -79,7 +72,7 @@
 
     public void showAdd()
     {
-        AddEditTitle = "Add Sales Order Window";
+        AddEditTitle = "Add Window Sub-Element";
         selectedId = 0;
         showModal = true;
 
@@ -87,7 +80,7 @@
 
     public void showEdit(int Id)
     {
-        AddEditTitle = "Edit Sales Order Window";
+        AddEditTitle = "Edit Window Sub-Element";
         selectedId = Id;
         showModal = true;
     }

@@ -6,7 +6,7 @@
 
 <div>
     <fieldset>
-    <legend>Order</legend>
+    @*<legend>Order</legend>*@
     <EditForm Model="@salesOrderModel" OnValidSubmit="@ValidSubmit">
         <DataAnnotationsValidator />
         <fieldset>
@@ -50,7 +50,13 @@
 
 </div>
 
-<div>
-    <SalesOrderWindowInfo></SalesOrderWindowInfo>
+<div class="row">
+    <div class="col-4">
+        <SalesOrderWindowInfo></SalesOrderWindowInfo>
+    </div>
+    <div class="col-8">
+        <WindowSubElement></WindowSubElement>
+    </div>
+    
 </div>
                         
