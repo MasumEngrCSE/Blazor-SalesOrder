@@ -9,15 +9,15 @@ namespace SalesOrder.Web.Pages.OrderInfo
         public IEnumerable<SalesOrderDto> salesOrders { get; set; }
         public bool showModal = false;
         private bool IsAddEditShowed = false;
-        public int selectedId=0;
+        public int selectedId = 0;
         public bool AddEditShowed { get { return IsAddEditShowed; } set { IsAddEditShowed = value; } }
 
-        public string  AddEditTitle { get; set; }
+        public string AddEditTitle { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             //salesOrders = await stateInfoService.GetStates();
-            salesOrders=new List<SalesOrderDto>();
+            salesOrders = new List<SalesOrderDto>();
         }
 
         public void showAdd()
@@ -39,7 +39,8 @@ namespace SalesOrder.Web.Pages.OrderInfo
         {
             AddEditShowed = false;
             selectedId = 0;
-            salesOrders = salesOrdersData;
+            if (salesOrdersData != null)
+                salesOrders = salesOrdersData;
             showModal = false;
 
             StateHasChanged();

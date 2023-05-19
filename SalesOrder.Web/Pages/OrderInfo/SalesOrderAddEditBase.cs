@@ -14,6 +14,7 @@ namespace SalesOrder.Web.Pages.OrderInfo
         public EventCallback ValidSubmit { get; set; } = default!;
 
         public IEnumerable<StateInfoDto> stateInfos { get; set; }
+        public IEnumerable<SalesOrderDto> SalesOrderInfos { get; set; }
 
         [Parameter]
         public int selectedId { get; set; }
@@ -32,5 +33,37 @@ namespace SalesOrder.Web.Pages.OrderInfo
             //if (stateId > 0)
             //    stateInfoModel = await stateInfoService.GetState(stateId);
         }
+
+        public async Task SalesOrderAddEdit()
+        {
+            try
+            {
+                if (selectedId > 0)
+                {
+                    //stateInfoModel = await stateInfoService.UpdateState(stateInfoModel);
+                    await closePage();
+
+                }
+                else
+                {
+                    //stateInfoModel = await stateInfoService.AddState(stateInfoModel);
+                    await closePage();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public async Task closePage()
+        {
+
+            //var stateInfos = await stateInfoService.GetStates();
+            FromChildCloseAction(SalesOrderInfos);
+        }
+
     }
 }
