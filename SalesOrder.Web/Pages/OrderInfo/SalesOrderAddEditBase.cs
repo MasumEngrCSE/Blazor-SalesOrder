@@ -24,7 +24,12 @@ namespace SalesOrder.Web.Pages.OrderInfo
         public Action<IEnumerable<SalesOrderDto>> FromChildCloseAction { get; set; } = default!;
 
         [Inject]
+        public ISaleOrderService saleOrderService { get; set; }
+
+        [Inject]
         public IStateInfoService stateInfoService { get; set; }
+
+
         protected override async Task OnInitializedAsync()
         {
             salesOrderModel=new SalesOrderDto();
@@ -40,13 +45,13 @@ namespace SalesOrder.Web.Pages.OrderInfo
             {
                 if (selectedId > 0)
                 {
-                    //stateInfoModel = await stateInfoService.UpdateState(stateInfoModel);
+                    salesOrderModel = await saleOrderService.UpdateSalesOrder(salesOrderModel);
                     await closePage();
 
                 }
                 else
                 {
-                    //stateInfoModel = await stateInfoService.AddState(stateInfoModel);
+                    salesOrderModel = await saleOrderService.AddSalesOrder(salesOrderModel);
                     await closePage();
                 }
 
