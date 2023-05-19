@@ -54,7 +54,7 @@
 
 <BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle" modal_minWidth="600px">
     <Body>
-        <WindowSubElementAddEdit selectedId="@selectedId" FromChildCloseAction="@closeAction"></WindowSubElementAddEdit>
+        <WindowSubElementAddEdit selectedId="@selectedId" WindowSubElements="@orderWindows" FromChildCloseAction="@closeAction"></WindowSubElementAddEdit>
     </Body>
 </BlazorModal>
 
@@ -65,7 +65,7 @@
     public SalesOrderDto salesOrderModel { get; set; } = default!;
 
 
-    public IEnumerable<SalesOrderDto> orderWindows { get; set; }
+    public List<SalesOrderDto> orderWindows { get; set; }
     public bool showModal = false;
     private bool IsAddEditShowed = false;
     public bool AddEditShowed { get { return IsAddEditShowed; } set { IsAddEditShowed = value; } }
@@ -76,7 +76,7 @@
     protected override async Task OnInitializedAsync()
     {
         orderWindows = new List<SalesOrderDto>() 
-                                    { new SalesOrderDto{OrderTitle="" } };
+                                    { new SalesOrderDto{IsBlank=true } };
 
     }
 
@@ -96,11 +96,12 @@
         showModal = true;
     }
 
-    public void closeAction(IEnumerable<SalesOrderDto> orderWindowData)
+    public void closeAction(List<SalesOrderDto> orderWindowData)
     {
         AddEditShowed = false;
         selectedId = 0;
         orderWindows = orderWindowData;
+        salesOrderModel.WindowSubElementList = orderWindowData;
         showModal = false;
 
         StateHasChanged();

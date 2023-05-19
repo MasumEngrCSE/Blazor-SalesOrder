@@ -93,7 +93,7 @@
             if (OrderWindows.Count > 1)
             {
 
-                var objBlankEntry = OrderWindows.FirstOrDefault(p => p.WindowTitle == "");
+                var objBlankEntry = OrderWindows.FirstOrDefault(p => p.IsBlank == true);
                 if (objBlankEntry != null)
                     OrderWindows.Remove(objBlankEntry);
             }

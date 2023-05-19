@@ -29,6 +29,7 @@ namespace SalesOrder.Models.Dtos
         public int? CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public int? UpdatedBy { get; set; }
+        public bool? IsBlank { get; set; }
 
         public List<SalesOrderDto> SalesOrderWindowList { get; set; }
         public List<SalesOrderDto> WindowSubElementList { get; set; }

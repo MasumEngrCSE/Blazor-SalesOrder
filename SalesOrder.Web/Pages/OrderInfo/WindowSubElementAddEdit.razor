@@ -1,4 +1,18 @@
 ﻿@using SalesOrder.Models.Dtos
+
+
+<div>
+
+    <button type="button" onclick="@closePage" class="btn btn-primary" style="width:fit-content;text-align:right">
+        Close
+    </button>
+
+    <button type="button" onclick="@SubElementAddEdit" class="btn btn-primary" style="width:fit-content;text-align:right">
+        @(selectedId > 0 ? "Update Window" : "Add Window")
+    </button>
+
+</div>
+
 <div>
     <fieldset>
         @*<legend>Window SubElement</legend>*@
@@ -38,9 +52,10 @@
 
 
     [Parameter]
-    public Action<IEnumerable<SalesOrderDto>> FromChildCloseAction { get; set; } = default!;
+    public Action<List<SalesOrderDto>> FromChildCloseAction { get; set; } = default!;
 
-    public IEnumerable<SalesOrderDto> orderWindows { get; set; }
+    [Parameter]
+    public List<SalesOrderDto> WindowSubElements { get; set; }
     public SalesOrderDto orderWindowModel { get; set; } = default!;
 
     //[Parameter]
@@ -49,7 +64,54 @@
 
     protected override async Task OnInitializedAsync()
     {
-        orderWindows = new List<SalesOrderDto>();
+        //WindowSubElements = new List<SalesOrderDto>();
         orderWindowModel = new SalesOrderDto();
+    }
+
+
+
+    public async Task SubElementAddEdit()
+    {
+        try
+        {
+            if (selectedId > 0)
+            {
+                //orderWindowModel = await stateInfoService.UpdateState(orderWindowModel);
+                WindowSubElements.Add(orderWindowModel);
+            }
+            else
+            {
+                WindowSubElements.Add(orderWindowModel);
+                //orderWindowModel = await stateInfoService.AddState(orderWindowModel);
+                //await closePage();
+            }
+
+            if (WindowSubElements.Count > 1)
+            {
+
+                var objBlankEntry = WindowSubElements.FirstOrDefault(p => p.IsBlank == true);
+                if (objBlankEntry != null)
+                    WindowSubElements.Remove(objBlankEntry);
+            }
+
+
+            await closePage();
+        }
+        catch (Exception ex)
+        {
+
+            throw ex;
+        }
+    }
+
+
+
+
+    public async Task closePage()
+    {
+
+        // var stateInfos = await stateInfoService.GetStates();
+
+        FromChildCloseAction(WindowSubElements);
     }
 }
