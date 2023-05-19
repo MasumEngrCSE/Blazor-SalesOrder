@@ -60,6 +60,11 @@
 
 
 @code {
+
+    [Parameter]
+    public SalesOrderDto salesOrderModel { get; set; } = default!;
+
+
     public IEnumerable<SalesOrderDto> orderWindows { get; set; }
     public bool showModal = false;
     private bool IsAddEditShowed = false;

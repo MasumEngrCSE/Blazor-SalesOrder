@@ -7,7 +7,7 @@ namespace SalesOrder.Web.Pages.OrderInfo
 {
     public class SalesOrderAddEditBase : ComponentBase
     {
-        [Parameter]
+        //[Parameter]
         public SalesOrderDto salesOrderModel { get; set; } = default!;
 
         [Parameter]
@@ -33,6 +33,10 @@ namespace SalesOrder.Web.Pages.OrderInfo
         protected override async Task OnInitializedAsync()
         {
             salesOrderModel=new SalesOrderDto();
+            salesOrderModel.SalesOrderWindowList = new List<SalesOrderDto>();
+            salesOrderModel.WindowSubElementList = new List<SalesOrderDto>();
+
+
             //stateInfos=new List<StateInfoDto>();
             stateInfos = await stateInfoService.GetStates();
             //if (stateId > 0)

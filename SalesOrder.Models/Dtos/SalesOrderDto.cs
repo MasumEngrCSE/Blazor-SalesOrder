@@ -30,5 +30,8 @@ namespace SalesOrder.Models.Dtos
         public DateTime? UpdatedDate { get; set; }
         public int? UpdatedBy { get; set; }
 
+        public List<SalesOrderDto> SalesOrderWindowList { get; set; }
+        public List<SalesOrderDto> WindowSubElementList { get; set; }
+
     }
 }

@@ -56,13 +56,17 @@
 
 <BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle" modal_minWidth="600px">
     <Body>
-        @*<Sa selectedId="@selectedId" FromChildCloseAction="@closeAction"></Sa>*@
         <SalesOrderWindowAddEdit selectedId="@selectedId" FromChildCloseAction="@closeAction"></SalesOrderWindowAddEdit>
     </Body>
 </BlazorModal>
 
 
 @code {
+    [Parameter]
+    public SalesOrderDto salesOrderModel { get; set; } = default!;
+
+
+
     public IEnumerable<SalesOrderDto> orderWindows { get; set; }
     public bool showModal = false;
     private bool IsAddEditShowed = false;
@@ -97,6 +101,10 @@
         AddEditShowed = false;
         selectedId = 0;
         orderWindows = orderWindowData;
+
+        salesOrderModel.SalesOrderWindowList = orderWindows.ToList();
+
+
         showModal = false;
 
         StateHasChanged();
