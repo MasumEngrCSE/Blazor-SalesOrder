@@ -29,7 +29,7 @@
                 {
                     <tr>
                         <td>@itm.Id</td>
-                        <td>@itm.OrderTitle</td>
+                        <td>@itm.WindowTitle</td>
                         <td>
                             @itm.WindowQty
                         </td>
@@ -56,7 +56,7 @@
 
 <BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle" modal_minWidth="600px">
     <Body>
-        <SalesOrderWindowAddEdit selectedId="@selectedId" FromChildCloseAction="@closeAction"></SalesOrderWindowAddEdit>
+        <SalesOrderWindowAddEdit selectedId="@selectedId" OrderWindows="@orderWindows" FromChildCloseAction="@closeAction"></SalesOrderWindowAddEdit>
     </Body>
 </BlazorModal>
 
@@ -67,7 +67,7 @@
 
 
 
-    public IEnumerable<SalesOrderDto> orderWindows { get; set; }
+    public List<SalesOrderDto> orderWindows { get; set; }
     public bool showModal = false;
     private bool IsAddEditShowed = false;
     public bool AddEditShowed { get { return IsAddEditShowed; } set { IsAddEditShowed = value; } }
@@ -96,7 +96,7 @@
         showModal = true;
     }
 
-    public void closeAction(IEnumerable<SalesOrderDto> orderWindowData)
+    public void closeAction(List<SalesOrderDto> orderWindowData)
     {
         AddEditShowed = false;
         selectedId = 0;
