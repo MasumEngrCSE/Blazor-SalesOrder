@@ -1,33 +1,87 @@
 ﻿using SalesOrder.Models.Dtos;
 using SalesOrder.Web.Services.Interface;
+using System.Collections.Generic;
 
 namespace SalesOrder.Web.Services.Implementation
 {
     public class SaleOrderService : ISaleOrderService
     {
-        public Task<SalesOrderDto> AddSalesOrder(SalesOrderDto stateInfo)
+        public async Task<SalesOrderDto> AddSalesOrder(SalesOrderDto salesOrder)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //var ret = new SalesOrderDto();
+
+                return salesOrder;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            //throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteSalesOrder(int Id)
+        public async Task<bool> DeleteSalesOrder(int Id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return  true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
-        public Task<SalesOrderDto> GetSalesOrder(int Id)
+        public async Task<SalesOrderDto> GetSalesOrder(int Id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var ret = new SalesOrderDto();
+                ret.Id = Id;
+
+
+                return ret;
+            }
+            catch (Exception wx)
+            {
+
+                throw wx;
+            }
         }
 
-        public Task<IEnumerable<SalesOrderDto>> GetSalesOrders()
+        public async Task<IEnumerable<SalesOrderDto>> GetSalesOrders()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var dataList =new List<SalesOrderDto>();
+
+
+                return dataList;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            //throw new NotImplementedException();
         }
 
-        public Task<SalesOrderDto> UpdateSalesOrder(SalesOrderDto stateInfo)
+        public async Task<SalesOrderDto> UpdateSalesOrder(SalesOrderDto salesOrder)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //var ret = new SalesOrderDto();
+
+                return salesOrder;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }

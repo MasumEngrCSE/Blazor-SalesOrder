@@ -6,8 +6,8 @@ namespace SalesOrder.Web.Services.Interface
     {
         Task<IEnumerable<SalesOrderDto>> GetSalesOrders();
         Task<SalesOrderDto> GetSalesOrder(int Id);
-        Task<SalesOrderDto> AddSalesOrder(SalesOrderDto stateInfo);
-        Task<SalesOrderDto> UpdateSalesOrder(SalesOrderDto stateInfo);
+        Task<SalesOrderDto> AddSalesOrder(SalesOrderDto salesOrder);
+        Task<SalesOrderDto> UpdateSalesOrder(SalesOrderDto salesOrder);
         Task<bool> DeleteSalesOrder(int Id);
     }
 }
