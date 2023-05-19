@@ -75,24 +75,31 @@
     {
         try
         {
-            //if (OrderWindows == null)
+            //if (orderWindowModel != null)
             //    OrderWindows = new List<SalesOrderDto>();
 
             if (selectedId > 0)
             {
                 //orderWindowModel = await stateInfoService.UpdateState(orderWindowModel);
-
                 OrderWindows.Add(orderWindowModel);
-
-                await closePage();
             }
             else
             {
                 OrderWindows.Add(orderWindowModel);
                 //orderWindowModel = await stateInfoService.AddState(orderWindowModel);
-                await closePage();
+                //await closePage();
             }
 
+            if (OrderWindows.Count > 1)
+            {
+
+                var objBlankEntry = OrderWindows.FirstOrDefault(p => p.WindowTitle == "");
+                if (objBlankEntry != null)
+                    OrderWindows.Remove(objBlankEntry);
+            }
+
+
+            await closePage();
         }
         catch (Exception ex)
         {
