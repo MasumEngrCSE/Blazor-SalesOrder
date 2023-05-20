@@ -1,16 +1,26 @@
 ﻿using SalesOrder.Models.Dtos;
 using SalesOrder.Web.Services.Interface;
-using System.Collections.Generic;
+using System.Net.Http.Json;
 
 namespace SalesOrder.Web.Services.Implementation
 {
+    
     public class SaleOrderService : ISaleOrderService
     {
+        private readonly HttpClient httpClient;
+        public SaleOrderService(HttpClient httpClient)
+        {
+            this.httpClient = httpClient;
+        }
         public async Task<SalesOrderDto> AddSalesOrder(SalesOrderDto salesOrder)
         {
             try
             {
                 //var ret = new SalesOrderDto();
+
+                var stateData = await this.httpClient.PostAsJsonAsync<SalesOrderDto>("api/SalesOrder/addSalesOrder", salesOrder);
+
+                var retdata = await stateData.Content.ReadFromJsonAsync<SalesOrderDto>();
 
                 return salesOrder;
             }
