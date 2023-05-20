@@ -15,13 +15,25 @@ namespace SalesOrder.Models.Dtos
         public DateTime OrderDate { get; set; }
         public int? StateId { get; set; }
         public string? StateName { get; set; }
+
+
+        #region Window
+        public int? OrderWindowId { get; set; }       
         public string WindowTitle { get; set; }
         public int WindowQty { get; set; }
         public int TotalSubElement { get; set; }
+        #endregion
+
+
+
+        #region SubElement
         public int SubElement { get; set; }
         public string SubElementType { get; set; }
         public int SubElementWidth { get; set; }
         public int SubElementHeight { get; set; }
+        #endregion
+
+
 
         public string Remarks { get; set; }
 

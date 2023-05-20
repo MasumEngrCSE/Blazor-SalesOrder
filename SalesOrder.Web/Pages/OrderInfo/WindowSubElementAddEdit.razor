@@ -20,6 +20,29 @@
             <DataAnnotationsValidator />
             <fieldset>
 
+
+                <div class="row mb-2">
+                    <label class="col-4" for="name">Window:</label>
+                    <InputSelect class="form-select" @bind-Value="orderWindowModel.OrderWindowId">
+                        @if (orderWindowModel.OrderWindowId is null)
+                        {
+                            <option selected value="">None</option>
+                        }
+
+                        @if (orderWindowModel == null)
+                        {
+                            <option value="">Loading ...</option>
+                        }
+                        else
+                        {
+                            @foreach (var stateInfo in OrderWindowList)
+                            {
+                                <option value="@stateInfo.Id">@stateInfo.WindowTitle (ID: @stateInfo.OrderWindowId)</option>
+                            }
+                        }
+                    </InputSelect>
+                </div>
+
                 <div class="row mb-2">
                     <label class="col-4" for="name">Sub-Element</label>
                     <InputNumber class="form-control col-6" @bind-Value="@orderWindowModel.SubElement" />
@@ -56,7 +79,11 @@
 
     [Parameter]
     public List<SalesOrderDto> WindowSubElements { get; set; }
+
     public SalesOrderDto orderWindowModel { get; set; } = default!;
+    
+    [Parameter]
+    public List<SalesOrderDto> OrderWindowList { get; set; } = default!;
 
     //[Parameter]
     public EventCallback ValidSubmit { get; set; } = default!;
@@ -81,6 +108,8 @@
             }
             else
             {
+                orderWindowModel.Id = WindowSubElements.Max(p => p.Id) + 1;
+
                 WindowSubElements.Add(orderWindowModel);
                 //orderWindowModel = await stateInfoService.AddState(orderWindowModel);
                 //await closePage();

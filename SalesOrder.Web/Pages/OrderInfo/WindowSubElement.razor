@@ -9,7 +9,7 @@
     </div>
 
 
-    if (orderWindows.Count() > 0)
+    if (windowSubElements.Count() > 0)
     {
         <table class="table table-striped">
             <thead class="thead-light">
@@ -24,7 +24,7 @@
 
 
             <tbody>
-                @foreach (var itm in orderWindows)
+                @foreach (var itm in windowSubElements)
                 {
                     <tr>
                         <td>@itm.SubElement</td>
@@ -54,7 +54,10 @@
 
 <BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle" modal_minWidth="600px">
     <Body>
-        <WindowSubElementAddEdit selectedId="@selectedId" WindowSubElements="@orderWindows" FromChildCloseAction="@closeAction"></WindowSubElementAddEdit>
+        <WindowSubElementAddEdit selectedId="@selectedId"
+                                 WindowSubElements="@windowSubElements"
+                                 OrderWindowList="@orderWindowList"
+                                 FromChildCloseAction="@closeAction"></WindowSubElementAddEdit>
     </Body>
 </BlazorModal>
 
@@ -64,8 +67,10 @@
     [Parameter]
     public SalesOrderDto salesOrderModel { get; set; } = default!;
 
+    public List<SalesOrderDto> orderWindowList { get; set; }
 
-    public List<SalesOrderDto> orderWindows { get; set; }
+
+    public List<SalesOrderDto> windowSubElements { get; set; }
     public bool showModal = false;
     private bool IsAddEditShowed = false;
     public bool AddEditShowed { get { return IsAddEditShowed; } set { IsAddEditShowed = value; } }
@@ -75,8 +80,10 @@
 
     protected override async Task OnInitializedAsync()
     {
-        orderWindows = new List<SalesOrderDto>() 
+        windowSubElements = new List<SalesOrderDto>()
                                     { new SalesOrderDto{IsBlank=true } };
+
+        //orderWindowList = salesOrderModel.SalesOrderWindowList;
 
     }
 
@@ -85,6 +92,7 @@
     {
         AddEditTitle = "Add Window Sub-Element";
         selectedId = 0;
+        orderWindowList = salesOrderModel.SalesOrderWindowList;
         showModal = true;
 
     }
@@ -96,12 +104,12 @@
         showModal = true;
     }
 
-    public void closeAction(List<SalesOrderDto> orderWindowData)
+    public void closeAction(List<SalesOrderDto> windowSubElementsData)
     {
         AddEditShowed = false;
         selectedId = 0;
-        orderWindows = orderWindowData;
-        salesOrderModel.WindowSubElementList = orderWindowData;
+        windowSubElements = windowSubElementsData;
+        salesOrderModel.WindowSubElementList = windowSubElementsData;
         showModal = false;
 
         StateHasChanged();
