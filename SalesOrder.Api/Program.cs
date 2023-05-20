@@ -17,6 +17,7 @@ builder.Services.AddDbContextPool<SalesOrderDBContext>
     .GetConnectionString("SDDbCon")));
 
 builder.Services.AddScoped<IStateInfoRepository, StateInfoRepository>();
+builder.Services.AddScoped<ISaleOrderRepository, SaleOrderRepository>();
 
 
 var app = builder.Build();
