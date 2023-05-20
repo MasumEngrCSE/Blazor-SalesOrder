@@ -33,8 +33,8 @@ namespace SalesOrder.Web.Pages.OrderInfo
         protected override async Task OnInitializedAsync()
         {
             salesOrderModel=new SalesOrderDto();
-            salesOrderModel.SalesOrderWindowList = new List<SalesOrderDto>();
-            salesOrderModel.WindowSubElementList = new List<SalesOrderDto>();
+            salesOrderModel.SalesOrderWindowList = new List<SalesOrderWindowDto>();
+            salesOrderModel.WindowSubElementList = new List<WindowSubElementDto>();
 
 
             //stateInfos=new List<StateInfoDto>();

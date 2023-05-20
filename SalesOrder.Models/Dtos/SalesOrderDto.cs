@@ -18,19 +18,19 @@ namespace SalesOrder.Models.Dtos
 
 
         #region Window
-        public int? OrderWindowId { get; set; }       
-        public string WindowTitle { get; set; }
-        public int WindowQty { get; set; }
-        public int TotalSubElement { get; set; }
+        //public int? OrderWindowId { get; set; }       
+        //public string WindowTitle { get; set; }
+        //public int? WindowQty { get; set; }
+        //public int? TotalSubElement { get; set; }
         #endregion
 
 
 
         #region SubElement
-        public int SubElement { get; set; }
-        public string SubElementType { get; set; }
-        public int SubElementWidth { get; set; }
-        public int SubElementHeight { get; set; }
+        //public int? SubElement { get; set; }
+        //public string SubElementType { get; set; }
+        //public int? SubElementWidth { get; set; }
+        //public int? SubElementHeight { get; set; }
         #endregion
 
 
@@ -43,8 +43,10 @@ namespace SalesOrder.Models.Dtos
         public int? UpdatedBy { get; set; }
         public bool? IsBlank { get; set; }
 
-        public List<SalesOrderDto> SalesOrderWindowList { get; set; }
-        public List<SalesOrderDto> WindowSubElementList { get; set; }
+        public List<SalesOrderWindowDto>? SalesOrderWindowList { get; set; } = default;
+        //public List<SalesOrderDto>? SalesOrderWindowList { get; set; } = default;
+        public List<WindowSubElementDto>? WindowSubElementList { get; set; }= default;
+        //public List<SalesOrderDto>? WindowSubElementList { get; set; }= default;
 
     }
 }

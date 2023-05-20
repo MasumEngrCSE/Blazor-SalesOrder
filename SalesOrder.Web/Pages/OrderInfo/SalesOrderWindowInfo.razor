@@ -39,7 +39,7 @@
                         </td>
 
                         <td>
-                            <button class="btn btn-outline-dark" @onclick="@(() => showEdit(@itm.Id))">Edit</button>
+                            <button class="btn btn-outline-dark" @onclick="@(() => showEdit(@itm.Id??0))">Edit</button>
 
                         </td>
 
@@ -56,7 +56,9 @@
 
 <BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle" modal_minWidth="600px">
     <Body>
-        <SalesOrderWindowAddEdit selectedId="@selectedId" OrderWindows="@orderWindows" FromChildCloseAction="@closeAction"></SalesOrderWindowAddEdit>
+        <SalesOrderWindowAddEdit selectedId="@selectedId"
+                                 OrderWindows="@orderWindows"
+                                 FromChildCloseAction="@closeAction"></SalesOrderWindowAddEdit>
     </Body>
 </BlazorModal>
 
@@ -67,7 +69,7 @@
 
 
 
-    public List<SalesOrderDto> orderWindows { get; set; }
+    public List<SalesOrderWindowDto> orderWindows { get; set; }
     public bool showModal = false;
     private bool IsAddEditShowed = false;
     public bool AddEditShowed { get { return IsAddEditShowed; } set { IsAddEditShowed = value; } }
@@ -77,7 +79,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        orderWindows = new List<SalesOrderDto>() { new SalesOrderDto { IsBlank = true} };
+        orderWindows = new List<SalesOrderWindowDto>() { new SalesOrderWindowDto { IsBlank = true } };
     }
 
 
@@ -96,7 +98,7 @@
         showModal = true;
     }
 
-    public void closeAction(List<SalesOrderDto> orderWindowData)
+    public void closeAction(List<SalesOrderWindowDto> orderWindowData)
     {
         AddEditShowed = false;
         selectedId = 0;

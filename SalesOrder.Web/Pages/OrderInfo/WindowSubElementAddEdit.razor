@@ -16,20 +16,20 @@
 <div>
     <fieldset>
         @*<legend>Window SubElement</legend>*@
-        <EditForm Model="@orderWindowModel" OnValidSubmit="@ValidSubmit">
+        <EditForm Model="@WindowSubElementModel" OnValidSubmit="@ValidSubmit">
             <DataAnnotationsValidator />
             <fieldset>
 
 
                 <div class="row mb-2">
                     <label class="col-4" for="name">Window:</label>
-                    <InputSelect class="form-select" @bind-Value="orderWindowModel.OrderWindowId">
-                        @if (orderWindowModel.OrderWindowId is null)
+                    <InputSelect class="form-select" @bind-Value="WindowSubElementModel.OrderWindowId">
+                        @if (WindowSubElementModel.OrderWindowId is null)
                         {
                             <option selected value="">None</option>
                         }
 
-                        @if (orderWindowModel == null)
+                        @if (WindowSubElementModel == null)
                         {
                             <option value="">Loading ...</option>
                         }
@@ -45,22 +45,22 @@
 
                 <div class="row mb-2">
                     <label class="col-4" for="name">Sub-Element</label>
-                    <InputNumber class="form-control col-6" @bind-Value="@orderWindowModel.SubElement" />
+                    <InputNumber class="form-control col-6" @bind-Value="@WindowSubElementModel.SubElement" />
                 </div>
 
                 <div class="row mb-2">
                     <label class="col-4" for="name">Type</label>
-                    <InputText class="form-control col-6" @bind-Value="@orderWindowModel.SubElementType" />
+                    <InputText class="form-control col-6" @bind-Value="@WindowSubElementModel.SubElementType" />
                 </div>
 
                 <div class="row mb-2">
                     <label class="col-4" for="name">Width</label>
-                    <InputNumber class="form-control col-6" @bind-Value="@orderWindowModel.SubElementWidth" />
+                    <InputNumber class="form-control col-6" @bind-Value="@WindowSubElementModel.SubElementWidth" />
                 </div>
 
                 <div class="row mb-2">
                     <label class="col-4" for="name">Height</label>
-                    <InputNumber class="form-control col-6" @bind-Value="@orderWindowModel.SubElementHeight" />
+                    <InputNumber class="form-control col-6" @bind-Value="@WindowSubElementModel.SubElementHeight" />
                 </div>
             </fieldset>
 
@@ -75,15 +75,15 @@
 
 
     [Parameter]
-    public Action<List<SalesOrderDto>> FromChildCloseAction { get; set; } = default!;
+    public Action<List<WindowSubElementDto>> FromChildCloseAction { get; set; } = default!;
 
     [Parameter]
-    public List<SalesOrderDto> WindowSubElements { get; set; }
+    public List<WindowSubElementDto> WindowSubElements { get; set; }
 
-    public SalesOrderDto orderWindowModel { get; set; } = default!;
+    public WindowSubElementDto WindowSubElementModel { get; set; } = default!;
     
     [Parameter]
-    public List<SalesOrderDto> OrderWindowList { get; set; } = default!;
+    public List<SalesOrderWindowDto> OrderWindowList { get; set; } = default!;
 
     //[Parameter]
     public EventCallback ValidSubmit { get; set; } = default!;
@@ -92,7 +92,7 @@
     protected override async Task OnInitializedAsync()
     {
         //WindowSubElements = new List<SalesOrderDto>();
-        orderWindowModel = new SalesOrderDto();
+        WindowSubElementModel = new WindowSubElementDto();
     }
 
 
@@ -104,13 +104,13 @@
             if (selectedId > 0)
             {
                 //orderWindowModel = await stateInfoService.UpdateState(orderWindowModel);
-                WindowSubElements.Add(orderWindowModel);
+                WindowSubElements.Add(WindowSubElementModel);
             }
             else
             {
-                orderWindowModel.Id = WindowSubElements.Max(p => p.Id) + 1;
+                WindowSubElementModel.Id = WindowSubElements.Max(p => p.Id) + 1;
 
-                WindowSubElements.Add(orderWindowModel);
+                WindowSubElements.Add(WindowSubElementModel);
                 //orderWindowModel = await stateInfoService.AddState(orderWindowModel);
                 //await closePage();
             }

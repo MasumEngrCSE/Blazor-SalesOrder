@@ -40,9 +40,9 @@ namespace SalesOrder.Api.Repositories.Implementations
                 {
                     var objSW = new OrderWindow();
                     objSW.OrderId = salesOrder.Id;
-                    objSW.WindowTitle = salesOrder.WindowTitle;
-                    objSW.Qty = salesOrder.WindowQty;
-                    objSW.TotalSubElement = salesOrder.TotalSubElement;
+                    objSW.WindowTitle = item.WindowTitle;
+                    objSW.Qty = item.WindowQty??0;
+                    objSW.TotalSubElement = item.TotalSubElement??0;
                     objSW.CreatedDate = DateTime.Now;
                     objSW.CreatedBy = salesOrder.CreatedBy;
 
@@ -61,11 +61,11 @@ namespace SalesOrder.Api.Repositories.Implementations
                 foreach (var item in salesOrder.WindowSubElementList)
                 {
                     var objSE = new OrderWindowSubElement();
-                    objSE.OrderWindowId = salesOrder.SalesOrderWindowList.FirstOrDefault(p=>p.OrderWindowId==item.OrderWindowId).Id;
-                    objSE.SubElement = item.SubElement;
+                    objSE.OrderWindowId = salesOrder.SalesOrderWindowList.FirstOrDefault(p=>p.OrderWindowId==item.OrderWindowId).Id??0;
+                    objSE.SubElement = item.SubElement??0;
                     objSE.SubElementType = item.SubElementType;
-                    objSE.Width = item.SubElementWidth;
-                    objSE.Height = item.SubElementHeight;
+                    objSE.Width = item.SubElementWidth ?? 0;
+                    objSE.Height = item.SubElementHeight ?? 0;
 
                     objSE.CreatedDate = DateTime.Now;
                     objSE.CreatedBy = salesOrder.CreatedBy;

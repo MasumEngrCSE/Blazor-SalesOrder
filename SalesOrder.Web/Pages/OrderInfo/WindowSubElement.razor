@@ -37,7 +37,7 @@
                         </td>
 
                         <td>
-                            <button class="btn btn-outline-dark" @onclick="@(() => showEdit(@itm.Id))">Edit</button>
+                            <button class="btn btn-outline-dark" @onclick="@(() => showEdit(@itm.Id??0))">Edit</button>
 
                         </td>
 
@@ -67,10 +67,10 @@
     [Parameter]
     public SalesOrderDto salesOrderModel { get; set; } = default!;
 
-    public List<SalesOrderDto> orderWindowList { get; set; }
+    public List<SalesOrderWindowDto> orderWindowList { get; set; }
 
 
-    public List<SalesOrderDto> windowSubElements { get; set; }
+    public List<WindowSubElementDto> windowSubElements { get; set; }
     public bool showModal = false;
     private bool IsAddEditShowed = false;
     public bool AddEditShowed { get { return IsAddEditShowed; } set { IsAddEditShowed = value; } }
@@ -80,8 +80,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        windowSubElements = new List<SalesOrderDto>()
-                                    { new SalesOrderDto{IsBlank=true } };
+        windowSubElements = new List<WindowSubElementDto>()
+                                    { new WindowSubElementDto{IsBlank=true } };
 
         //orderWindowList = salesOrderModel.SalesOrderWindowList;
 
@@ -104,7 +104,7 @@
         showModal = true;
     }
 
-    public void closeAction(List<SalesOrderDto> windowSubElementsData)
+    public void closeAction(List<WindowSubElementDto> windowSubElementsData)
     {
         AddEditShowed = false;
         selectedId = 0;

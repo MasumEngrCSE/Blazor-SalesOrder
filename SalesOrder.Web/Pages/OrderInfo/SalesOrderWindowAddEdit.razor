@@ -49,13 +49,13 @@
 
 
     [Parameter]
-    public Action<List<SalesOrderDto>> FromChildCloseAction { get; set; } = default!;
+    public Action<List<SalesOrderWindowDto>> FromChildCloseAction { get; set; } = default!;
 
     [Parameter]
-    public List<SalesOrderDto> OrderWindows { get; set; }
+    public List<SalesOrderWindowDto> OrderWindows { get; set; }
 
 
-    public SalesOrderDto orderWindowModel { get; set; } = default!;
+    public SalesOrderWindowDto orderWindowModel { get; set; } = default!;
 
     //[Parameter]
     public EventCallback ValidSubmit { get; set; } = default!;
@@ -64,7 +64,7 @@
     protected override async Task OnInitializedAsync()
     {
         //orderWindows = new List<SalesOrderDto>();
-        orderWindowModel = new SalesOrderDto();
+        orderWindowModel = new SalesOrderWindowDto();
         //if (selectedId > 0)
         //orderWindowModel = await stateInfoService.GetState(selectedId);
     }
