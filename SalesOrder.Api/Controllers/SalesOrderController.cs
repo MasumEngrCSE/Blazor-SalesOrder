@@ -22,7 +22,8 @@ namespace SalesOrder.Api.Controllers
         {
             try
             {
-                SalesOrderDto objSalesOrder = await this.saleOrderRepository.AddSalesOrder(salesOrder);
+                SalesOrderDto objSalesOrder =  this.saleOrderRepository.AddSalesOrder(salesOrder);
+                //SalesOrderDto objSalesOrder = await this.saleOrderRepository.AddSalesOrder(salesOrder);
                 if (objSalesOrder == null)
                     return NotFound();
                 else

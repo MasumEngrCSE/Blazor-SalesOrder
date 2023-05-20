@@ -13,7 +13,7 @@ namespace SalesOrder.Api.Repositories.Implementations
             _DBContext = salesOrderDBContext;
         }
 
-        public async Task<SalesOrderDto> AddSalesOrder(SalesOrderDto salesOrder)
+        public SalesOrderDto AddSalesOrder(SalesOrderDto salesOrder)
         {
             try
             {
@@ -28,8 +28,8 @@ namespace SalesOrder.Api.Repositories.Implementations
                 obj.CreatedDate = DateTime.Now;
                 obj.CreatedBy = salesOrder.CreatedBy;
 
-                this._DBContext.orderMasters.AddAsync(obj);
-                this._DBContext.SaveChangesAsync();
+                this._DBContext.orderMasters.Add(obj);
+                this._DBContext.SaveChanges();
 
                 salesOrder.Id = obj.Id;
                 salesOrder.CreatedDate = obj.CreatedDate;
@@ -37,43 +37,43 @@ namespace SalesOrder.Api.Repositories.Implementations
 
 
                 #region OrderWindow
-                //foreach (var item in salesOrder.SalesOrderWindowList)
-                //{
-                //    var objSW = new OrderWindow();
-                //    objSW.OrderId = salesOrder.Id;
-                //    objSW.WindowTitle = item.WindowTitle;
-                //    objSW.Qty = item.WindowQty??0;
-                //    objSW.TotalSubElement = item.TotalSubElement??0;
-                //    objSW.CreatedDate = DateTime.Now;
-                //    objSW.CreatedBy = salesOrder.CreatedBy;
+                foreach (var item in salesOrder.SalesOrderWindowList)
+                {
+                    var objSW = new OrderWindow();
+                    objSW.OrderId = salesOrder.Id;
+                    objSW.WindowTitle = item.WindowTitle;
+                    objSW.Qty = item.WindowQty ?? 0;
+                    objSW.TotalSubElement = item.TotalSubElement ?? 0;
+                    objSW.CreatedDate = DateTime.Now;
+                    objSW.CreatedBy = salesOrder.CreatedBy;
 
-                //    this._DBContext.orderWindows.AddAsync(objSW);
-                //    this._DBContext.SaveChangesAsync();
+                    this._DBContext.orderWindows.Add(objSW);
+                    this._DBContext.SaveChanges();
 
-                //    item.Id = objSW.Id;
+                    item.Id = objSW.Id;
 
-                //}
+                }
 
                 #endregion
 
 
 
                 #region MyRegion
-                //foreach (var item in salesOrder.WindowSubElementList)
-                //{
-                //    var objSE = new OrderWindowSubElement();
-                //    objSE.OrderWindowId = salesOrder.SalesOrderWindowList.FirstOrDefault(p=>p.OrderWindowId==item.OrderWindowId).Id??0;
-                //    objSE.SubElement = item.SubElement??0;
-                //    objSE.SubElementType = item.SubElementType;
-                //    objSE.Width = item.SubElementWidth ?? 0;
-                //    objSE.Height = item.SubElementHeight ?? 0;
+                foreach (var item in salesOrder.WindowSubElementList)
+                {
+                    var objSE = new OrderWindowSubElement();
+                    objSE.OrderWindowId = salesOrder.SalesOrderWindowList.FirstOrDefault(p => p.OrderWindowId == item.OrderWindowId).Id ?? 0;
+                    objSE.SubElement = item.SubElement ?? 0;
+                    objSE.SubElementType = item.SubElementType;
+                    objSE.Width = item.SubElementWidth ?? 0;
+                    objSE.Height = item.SubElementHeight ?? 0;
 
-                //    objSE.CreatedDate = DateTime.Now;
-                //    objSE.CreatedBy = salesOrder.CreatedBy;
+                    objSE.CreatedDate = DateTime.Now;
+                    objSE.CreatedBy = salesOrder.CreatedBy;
 
-                //    this._DBContext.orderWindowsSubElements.AddAsync(objSE);
-                //    this._DBContext.SaveChangesAsync();
-                //}
+                    this._DBContext.orderWindowsSubElements.Add(objSE);
+                    this._DBContext.SaveChanges();
+                }
 
                 #endregion
 

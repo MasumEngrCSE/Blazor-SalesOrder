@@ -55,7 +55,7 @@ namespace SalesOrder.Web.Pages.OrderInfo
                 }
                 else
                 {
-                    //salesOrderModel.OrderDate = DateTime.Now;
+                    salesOrderModel.OrderDate = DateTime.Now;
 
                     salesOrderModel = await saleOrderService.AddSalesOrder(salesOrderModel);
                     await closePage();
