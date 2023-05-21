@@ -156,13 +156,14 @@ namespace SalesOrder.Api.Repositories.Implementations
             try
             {
                 var data = await (from p in this._DBContext.orderMasters
+                                  join s in this._DBContext.stateInfo on p.StateId equals s.Id
                                   select new SalesOrderDto
                                   {
                                       Id = p.Id,
                                       OrderTitle = p.OrderTitle,
                                       OrderDate = p.OrderDate,
                                       StateId = p.StateId,
-                                      StateName = p.StateInfo.Name,
+                                      StateName = s.Name,
                                       Remarks = p.Remarks,
                                       CreatedBy = p.CreatedBy,
                                       CreatedDate = p.CreatedDate,

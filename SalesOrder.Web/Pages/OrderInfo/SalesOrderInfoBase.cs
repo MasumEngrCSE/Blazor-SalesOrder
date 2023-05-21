@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SalesOrder.Models.Dtos;
 using SalesOrder.Web.Services.Implementation;
+using SalesOrder.Web.Services.Interface;
 
 namespace SalesOrder.Web.Pages.OrderInfo
 {
@@ -14,10 +15,15 @@ namespace SalesOrder.Web.Pages.OrderInfo
 
         public string AddEditTitle { get; set; }
 
+        [Inject]
+        public ISaleOrderService saleOrderService { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
             //salesOrders = await stateInfoService.GetStates();
             salesOrders = new List<SalesOrderDto>();
+
+            salesOrders = await saleOrderService.GetSalesOrders();
         }
 
         public void showAdd()

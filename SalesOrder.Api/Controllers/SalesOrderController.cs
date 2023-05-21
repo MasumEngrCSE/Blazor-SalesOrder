@@ -16,6 +16,50 @@ namespace SalesOrder.Api.Controllers
         }
 
 
+        [HttpGet]
+        [Route("getSalesOrders")]
+        public async Task<ActionResult<IEnumerable<SalesOrderDto>>> GetSalesOrders()
+        {
+            try
+            {
+                var dataList = await this.saleOrderRepository.GetSalesOrders();
+
+                if (dataList == null || dataList.Count() == 0)
+                    return NotFound();
+                else
+                    return Ok(dataList);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error Retrive data");
+                //throw;
+            }
+        }
+
+
+        [HttpGet]
+        [Route("getSalesOrder/{Id}")]
+        public async Task<ActionResult<SalesOrderDto>> GetSalesOrder(int Id)
+        {
+            try
+            {
+                var data = await this.saleOrderRepository.GetSalesOrder(Id);
+
+                if (data == null)
+                    return NotFound();
+                else
+                    return Ok(data);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error Retrive data");
+                //throw;
+            }
+        }
+
+
+
+
         [HttpPost]
         [Route("addSalesOrder")]
         public async Task<ActionResult<SalesOrderDto>> AddSalesOrder(SalesOrderDto salesOrder)
@@ -34,6 +78,8 @@ namespace SalesOrder.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error Add Sales Order");
             }
         }
+
+
 
     }
 }

@@ -49,11 +49,13 @@ namespace SalesOrder.Web.Services.Implementation
         {
             try
             {
-                var ret = new SalesOrderDto();
-                ret.Id = Id;
+                var stateDataList = await this.httpClient.GetFromJsonAsync<SalesOrderDto>($"api/SalesOrder/getSalesOrder/{Id}");
+                //var ret = new SalesOrderDto();
+
+               // ret.Id = Id;
 
 
-                return ret;
+                return stateDataList;
             }
             catch (Exception wx)
             {
@@ -66,7 +68,9 @@ namespace SalesOrder.Web.Services.Implementation
         {
             try
             {
-                var dataList =new List<SalesOrderDto>();
+                var dataList = await this.httpClient.GetFromJsonAsync<IEnumerable<SalesOrderDto>>("api/SalesOrder/getSalesOrders");
+
+                //var dataList =new List<SalesOrderDto>();
 
 
                 return dataList;
