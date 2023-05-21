@@ -89,10 +89,10 @@ namespace SalesOrder.Api.Repositories.Implementations
 
                 return data;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
 

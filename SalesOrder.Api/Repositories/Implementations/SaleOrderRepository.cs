@@ -1,4 +1,5 @@
-﻿using SalesOrder.Api.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SalesOrder.Api.Data;
 using SalesOrder.Api.Entities;
 using SalesOrder.Api.Repositories.Interfaces;
 using SalesOrder.Models.Dtos;
@@ -20,11 +21,11 @@ namespace SalesOrder.Api.Repositories.Implementations
 
                 #region OrderMaster
                 var obj = new OrderMaster();
-                obj.CustomCode = salesOrder.CustomCode??"";
+                obj.CustomCode = salesOrder.CustomCode ?? "";
                 obj.OrderTitle = salesOrder.OrderTitle;
-                obj.OrderDate = salesOrder.OrderDate??DateTime.Now;
+                obj.OrderDate = salesOrder.OrderDate ?? DateTime.Now;
                 obj.StateId = salesOrder.StateId;
-                obj.Remarks = salesOrder.Remarks??"";
+                obj.Remarks = salesOrder.Remarks ?? "";
                 obj.CreatedDate = DateTime.Now;
                 obj.CreatedBy = salesOrder.CreatedBy;
 
@@ -94,14 +95,89 @@ namespace SalesOrder.Api.Repositories.Implementations
             throw new NotImplementedException();
         }
 
-        public Task<SalesOrderDto> GetSalesOrder(int Id)
+        public async Task<SalesOrderDto> GetSalesOrder(int Id)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                var data = await (from p in this._DBContext.orderMasters.Where(p => p.Id == Id)
+                                  select new SalesOrderDto
+                                  {
+                                      Id = p.Id,
+                                      OrderTitle = p.OrderTitle,
+                                      OrderDate = p.OrderDate,
+                                      StateId = p.StateId,
+                                      StateName = p.StateInfo.Name,
+                                      Remarks = p.Remarks,
+                                      CreatedBy = p.CreatedBy,
+                                      CreatedDate = p.CreatedDate,
+                                      UpdatedBy = p.UpdatedBy,
+                                      UpdatedDate = p.UpdatedDate,
+                                      // SalesOrderWindowList=p.
+                                  }).FirstOrDefaultAsync();
+
+
+                data.SalesOrderWindowList = await (from p in this._DBContext.orderWindows.Where(p => p.OrderId == Id)
+                                                   select new SalesOrderWindowDto
+                                                   {
+                                                       Id = p.Id,
+                                                       OrderId = p.OrderId,
+                                                       WindowTitle = p.WindowTitle,
+                                                       WindowQty = p.Qty,
+                                                       TotalSubElement = p.TotalSubElement,
+                                                   }).ToListAsync();
+
+
+                data.WindowSubElementList = await (from p in this._DBContext.orderWindows.Where(p => p.OrderId == Id)
+                                                   join s in this._DBContext.orderWindowsSubElements on p.Id equals s.OrderWindowId
+                                                   select new WindowSubElementDto
+                                                   {
+                                                       Id = s.Id,
+                                                       OrderId = p.OrderId,
+                                                       OrderWindowId = s.OrderWindowId,
+                                                       SubElement = s.SubElement,
+                                                       SubElementType = s.SubElementType,
+                                                       SubElementWidth = s.Width,
+                                                       SubElementHeight = s.Height,
+                                                   }).ToListAsync();
+
+
+                return data;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
-        public Task<IEnumerable<SalesOrderDto>> GetSalesOrders()
+        public async Task<IEnumerable<SalesOrderDto>> GetSalesOrders()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var data = await (from p in this._DBContext.orderMasters
+                                  select new SalesOrderDto
+                                  {
+                                      Id = p.Id,
+                                      OrderTitle = p.OrderTitle,
+                                      OrderDate = p.OrderDate,
+                                      StateId = p.StateId,
+                                      StateName = p.StateInfo.Name,
+                                      Remarks = p.Remarks,
+                                      CreatedBy = p.CreatedBy,
+                                      CreatedDate = p.CreatedDate,
+                                      UpdatedBy = p.UpdatedBy,
+                                      UpdatedDate = p.UpdatedDate,
+                                  }).ToListAsync();
+
+
+                return data;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         public Task<SalesOrderDto> UpdateSalesOrder(SalesOrderDto salesOrder)
