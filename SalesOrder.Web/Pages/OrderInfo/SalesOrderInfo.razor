@@ -7,12 +7,11 @@
     <h3 class="mb-5">Sales Order</h3>
 }*@
 
-
-@*@if (salesOrders == null)
+@*@if (salesOrders.Count() ==0)
 {
-    <h3>Loading State ...</h3>
+    <h3>Loading ...</h3>
 }*@
-
+@*<h3>Loading ...</h3>*@
 
 @if (!AddEditShowed)
 {
@@ -21,6 +20,11 @@
         <button type="button" onclick="@showAdd" class="btn btn-primary" style="width:fit-content;text-align:right">Add Order</button>
     </div>
 
+
+    @if (salesOrders.Count() == 0)
+    {
+        <h3>Loading ...</h3>
+    }
 
     if (salesOrders.Count() > 0)
     {

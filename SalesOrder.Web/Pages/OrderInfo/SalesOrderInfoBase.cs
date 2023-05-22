@@ -8,6 +8,7 @@ namespace SalesOrder.Web.Pages.OrderInfo
     public partial class SalesOrderInfoBase : ComponentBase
     {
         public IEnumerable<SalesOrderDto> salesOrders { get; set; }
+        //public SalesOrderDto salesOrderModel { get; set; } = default!;
         public bool showModal = false;
         private bool IsAddEditShowed = false;
         public int selectedId = 0;
@@ -34,10 +35,11 @@ namespace SalesOrder.Web.Pages.OrderInfo
 
         }
 
-        public void showEdit(int Id)
+        public async void showEdit(int Id)
         {
             AddEditTitle = "Edit Sales Order";
             selectedId = Id;
+            //salesOrderModel= await saleOrderService.GetSalesOrder(Id);
             showModal = true;
         }
 
