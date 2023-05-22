@@ -93,6 +93,9 @@
     {
         //WindowSubElements = new List<SalesOrderDto>();
         WindowSubElementModel = new WindowSubElementDto();
+
+        if (selectedId > 0)
+            WindowSubElementModel = WindowSubElements.FirstOrDefault(p => p.Id == selectedId);
     }
 
 
