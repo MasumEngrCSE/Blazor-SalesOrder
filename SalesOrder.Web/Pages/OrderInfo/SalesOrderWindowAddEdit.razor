@@ -65,8 +65,10 @@
     {
         //orderWindows = new List<SalesOrderDto>();
         orderWindowModel = new SalesOrderWindowDto();
-        //if (selectedId > 0)
-        //orderWindowModel = await stateInfoService.GetState(selectedId);
+        if (selectedId > 0)
+            orderWindowModel = OrderWindows.FirstOrDefault(p => p.Id == selectedId);
+
+        //await stateInfoService.GetState(selectedId);
     }
 
 

@@ -88,6 +88,12 @@
     }
 
 
+    protected override async Task OnParametersSetAsync()
+    {
+        windowSubElements = salesOrderModel.WindowSubElementList;
+    }
+
+
     public void showAdd()
     {
         AddEditTitle = "Add Window Sub-Element";

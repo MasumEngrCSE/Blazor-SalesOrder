@@ -80,7 +80,19 @@
     protected override async Task OnInitializedAsync()
     {
         orderWindows = new List<SalesOrderWindowDto>() { new SalesOrderWindowDto { IsBlank = true } };
+
+        orderWindows = salesOrderModel.SalesOrderWindowList;
+
+        //salesOrderModel.SalesOrderWindowList = orderWindows.ToList();
+
     }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        orderWindows = salesOrderModel.SalesOrderWindowList;
+    }
+
+
 
 
     public void showAdd()
