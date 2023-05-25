@@ -72,7 +72,9 @@ namespace SalesOrder.Web.Pages.OrderInfo
         public async Task closePage()
         {
 
-            //var stateInfos = await stateInfoService.GetStates();
+            SalesOrderInfos = await saleOrderService.GetSalesOrders();
+
+
             FromChildCloseAction(SalesOrderInfos);
         }
 
