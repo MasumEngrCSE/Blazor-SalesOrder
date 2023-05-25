@@ -81,7 +81,7 @@
     public List<WindowSubElementDto> WindowSubElements { get; set; }
 
     public WindowSubElementDto WindowSubElementModel { get; set; } = default!;
-    
+
     [Parameter]
     public List<SalesOrderWindowDto> OrderWindowList { get; set; } = default!;
 
@@ -106,8 +106,19 @@
         {
             if (selectedId > 0)
             {
+                var objSE = WindowSubElements.FirstOrDefault(p => p.Id == selectedId);
+                if (objSE != null)
+                {
+                    objSE.OrderWindowId = WindowSubElementModel.OrderWindowId;
+                    objSE.SubElement = WindowSubElementModel.SubElement;
+                    objSE.SubElementWidth = WindowSubElementModel.SubElementWidth;
+                    objSE.SubElementHeight = WindowSubElementModel.SubElementHeight;
+                    objSE.SubElementType = WindowSubElementModel.SubElementType;
+                }
+                //objSE. = WindowSubElementModel.SubElementType;
+
                 //orderWindowModel = await stateInfoService.UpdateState(orderWindowModel);
-                WindowSubElements.Add(WindowSubElementModel);
+                //WindowSubElements.Add(WindowSubElementModel);
             }
             else
             {
