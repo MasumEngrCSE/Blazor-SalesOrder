@@ -81,5 +81,25 @@ namespace SalesOrder.Api.Controllers
 
 
 
+        [HttpPost]
+        [Route("updateSalesOrder")]
+        public async Task<ActionResult<SalesOrderDto>> UpdateSalesOrder(SalesOrderDto salesOrder)
+        {
+            try
+            {
+                SalesOrderDto objSalesOrder = this.saleOrderRepository.UpdateSalesOrder(salesOrder);
+                if (objSalesOrder == null)
+                    return NotFound();
+                else
+                    return Ok(objSalesOrder);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error Add Sales Order");
+            }
+        }
+
+
+
     }
 }
