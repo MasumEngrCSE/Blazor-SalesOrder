@@ -83,7 +83,17 @@
             if (selectedId > 0)
             {
                 //orderWindowModel = await stateInfoService.UpdateState(orderWindowModel);
-                OrderWindows.Add(orderWindowModel);
+                //OrderWindows.Add(orderWindowModel);
+
+                var objWD = OrderWindows.FirstOrDefault(p => p.Id == selectedId);
+
+                if (objWD!=null){
+                    objWD.WindowTitle = orderWindowModel.WindowTitle;
+                    objWD.WindowQty = orderWindowModel.WindowQty;
+                    objWD.TotalSubElement = orderWindowModel.TotalSubElement;
+                }
+
+
             }
             else
             {
