@@ -89,6 +89,10 @@ namespace SalesOrder.Web.Services.Implementation
             {
                 //var ret = new SalesOrderDto();
 
+                var stateData = await this.httpClient.PostAsJsonAsync<SalesOrderDto>("api/SalesOrder/updateSalesOrder", salesOrder);
+
+                var retdata = await stateData.Content.ReadFromJsonAsync<SalesOrderDto>();
+
                 return salesOrder;
             }
             catch (Exception ex)
