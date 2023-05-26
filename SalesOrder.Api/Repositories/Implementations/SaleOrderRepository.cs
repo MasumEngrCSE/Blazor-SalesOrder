@@ -125,6 +125,7 @@ namespace SalesOrder.Api.Repositories.Implementations
                                                        WindowTitle = p.WindowTitle,
                                                        WindowQty = p.Qty,
                                                        TotalSubElement = p.TotalSubElement,
+                                                       OrderWindowId= p.Id,
                                                    }).ToListAsync();
 
 

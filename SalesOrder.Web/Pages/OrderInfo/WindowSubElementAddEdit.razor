@@ -116,19 +116,15 @@
                     objSE.SubElementHeight = WindowSubElementModel.SubElementHeight;
                     objSE.SubElementType = WindowSubElementModel.SubElementType;
                 }
-                //objSE. = WindowSubElementModel.SubElementType;
-
-                //orderWindowModel = await stateInfoService.UpdateState(orderWindowModel);
-                //WindowSubElements.Add(WindowSubElementModel);
             }
             else
             {
                 WindowSubElementModel.Id = WindowSubElements.Max(p => p.Id) + 1;
-
                 WindowSubElementModel.WindowTitle = OrderWindowList.FirstOrDefault(p => p.Id == WindowSubElementModel.OrderWindowId).WindowTitle;
+                var objWD=OrderWindowList.FirstOrDefault(p => p.Id == WindowSubElementModel.OrderWindowId);
+                WindowSubElementModel.WindowTitle = objWD?.WindowTitle;
                 WindowSubElements.Add(WindowSubElementModel);
-                //orderWindowModel = await stateInfoService.AddState(orderWindowModel);
-                //await closePage();
+                objWD.TotalSubElement = WindowSubElements.Count(p => p.OrderWindowId == WindowSubElementModel.OrderWindowId);
             }
 
             if (WindowSubElements.Count > 1)
@@ -154,9 +150,6 @@
 
     public async Task closePage()
     {
-
-        // var stateInfos = await stateInfoService.GetStates();
-
         FromChildCloseAction(WindowSubElements);
     }
 }
