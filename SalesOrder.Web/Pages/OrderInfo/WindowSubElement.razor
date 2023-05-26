@@ -1,5 +1,5 @@
 ﻿@using SalesOrder.Models.Dtos
-<h3>Window Sub-Element</h3>
+<h3>Window Sub Element</h3>
 
 @if (!AddEditShowed)
 {
@@ -14,6 +14,7 @@
         <table class="table table-striped">
             <thead class="thead-light">
                 <tr>
+                    <th scope="col">Window</th>
                     <th scope="col">Element</th>
                     <th scope="col">Type</th>
                     <th scope="col">Width</th>
@@ -27,6 +28,7 @@
                 @foreach (var itm in windowSubElements)
                 {
                     <tr>
+                        <td>@itm.WindowTitle</td>
                         <td>@itm.SubElement</td>
                         <td>@itm.SubElementType</td>
                         <td>
