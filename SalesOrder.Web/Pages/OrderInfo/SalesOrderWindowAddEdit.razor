@@ -97,8 +97,8 @@
             }
             else
             {
-                orderWindowModel.Id = OrderWindows.Max(p => p.Id)+1;
-
+                orderWindowModel.Id = (OrderWindows.Max(p => p.Id)??0)+1;
+                orderWindowModel.OrderWindowId = orderWindowModel.Id;
                 OrderWindows.Add(orderWindowModel);
                 //orderWindowModel = await stateInfoService.AddState(orderWindowModel);
                 //await closePage();
