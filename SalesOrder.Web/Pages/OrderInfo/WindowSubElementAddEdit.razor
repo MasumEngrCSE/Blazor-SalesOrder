@@ -35,9 +35,9 @@
                         }
                         else
                         {
-                            @foreach (var stateInfo in OrderWindowList)
+                            @foreach (var itm in OrderWindowList)
                             {
-                                <option value="@stateInfo.Id">@stateInfo.WindowTitle (ID: @stateInfo.OrderWindowId)</option>
+                                <option value="@itm.Id">@itm.WindowTitle (ID: @itm.Id)</option>
                             }
                         }
                     </InputSelect>
@@ -110,6 +110,7 @@
                 if (objSE != null)
                 {
                     objSE.OrderWindowId = WindowSubElementModel.OrderWindowId;
+                    objSE.WindowTitle = OrderWindowList.FirstOrDefault(p => p.Id == objSE.OrderWindowId).WindowTitle;
                     objSE.SubElement = WindowSubElementModel.SubElement;
                     objSE.SubElementWidth = WindowSubElementModel.SubElementWidth;
                     objSE.SubElementHeight = WindowSubElementModel.SubElementHeight;
@@ -124,6 +125,7 @@
             {
                 WindowSubElementModel.Id = WindowSubElements.Max(p => p.Id) + 1;
 
+                WindowSubElementModel.WindowTitle = OrderWindowList.FirstOrDefault(p => p.Id == WindowSubElementModel.OrderWindowId).WindowTitle;
                 WindowSubElements.Add(WindowSubElementModel);
                 //orderWindowModel = await stateInfoService.AddState(orderWindowModel);
                 //await closePage();
