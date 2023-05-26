@@ -135,6 +135,7 @@ namespace SalesOrder.Api.Repositories.Implementations
                                                        Id = s.Id,
                                                        OrderId = p.OrderId,
                                                        OrderWindowId = s.OrderWindowId,
+                                                       WindowTitle=p.WindowTitle,
                                                        SubElement = s.SubElement,
                                                        SubElementType = s.SubElementType,
                                                        SubElementWidth = s.Width,
