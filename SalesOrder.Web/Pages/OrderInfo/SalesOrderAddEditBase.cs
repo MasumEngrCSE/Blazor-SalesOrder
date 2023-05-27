@@ -78,5 +78,12 @@ namespace SalesOrder.Web.Pages.OrderInfo
             FromChildCloseAction(SalesOrderInfos);
         }
 
+
+        //private void rebindSubWindowList()
+        //{
+        //    //logString3 = "Com 3 Button Press on" + DateTime.Now;
+        //    StateHasChanged();
+        //}
+
     }
 }
