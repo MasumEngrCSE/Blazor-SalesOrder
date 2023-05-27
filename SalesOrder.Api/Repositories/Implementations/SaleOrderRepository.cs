@@ -125,7 +125,7 @@ namespace SalesOrder.Api.Repositories.Implementations
                                                        WindowTitle = p.WindowTitle,
                                                        WindowQty = p.Qty,
                                                        TotalSubElement = p.TotalSubElement,
-                                                       OrderWindowId= p.Id,
+                                                       OrderWindowId = p.Id,
                                                    }).ToListAsync();
 
 
@@ -136,7 +136,7 @@ namespace SalesOrder.Api.Repositories.Implementations
                                                        Id = s.Id,
                                                        OrderId = p.OrderId,
                                                        OrderWindowId = s.OrderWindowId,
-                                                       WindowTitle=p.WindowTitle,
+                                                       WindowTitle = p.WindowTitle,
                                                        SubElement = s.SubElement,
                                                        SubElementType = s.SubElementType,
                                                        SubElementWidth = s.Width,
@@ -189,7 +189,7 @@ namespace SalesOrder.Api.Repositories.Implementations
             {
 
                 #region OrderMaster
-                var obj = this._DBContext.orderMasters.FirstOrDefault(p=>p.Id==salesOrder.Id);
+                var obj = this._DBContext.orderMasters.FirstOrDefault(p => p.Id == salesOrder.Id);
                 obj.CustomCode = salesOrder.CustomCode ?? "";
                 obj.OrderTitle = salesOrder.OrderTitle;
                 obj.OrderDate = salesOrder.OrderDate ?? DateTime.Now;
@@ -204,67 +204,98 @@ namespace SalesOrder.Api.Repositories.Implementations
 
 
                 #region OrderWindow
-                foreach (var item in salesOrder.SalesOrderWindowList)
+                if (salesOrder.SalesOrderWindowList != null)
                 {
-                    
-                   // var objSW = new OrderWindow();
-                    var objSW = this._DBContext.orderWindows.FirstOrDefault(p => p.Id == item.Id);
-                    if (objSW == null)
+                    foreach (var item in salesOrder.SalesOrderWindowList)
                     {
-                        objSW = new OrderWindow();
-                        objSW.CreatedDate = DateTime.Now;
-                        objSW.CreatedBy = salesOrder.CreatedBy;
 
-                        this._DBContext.orderWindows.Add(objSW);
+                        // var objSW = new OrderWindow();
+                        var objSW = this._DBContext.orderWindows.FirstOrDefault(p => p.Id == item.Id);
+                        if (objSW == null)
+                        {
+                            objSW = new OrderWindow();
+                            objSW.CreatedDate = DateTime.Now;
+                            objSW.CreatedBy = salesOrder.CreatedBy;
+
+                            this._DBContext.orderWindows.Add(objSW);
+                        }
+                        else
+                        {
+                            objSW.UpdatedDate = DateTime.Now;
+                            objSW.UpdatedBy = salesOrder.UpdatedBy;
+                        }
+                        objSW.OrderId = salesOrder.Id;
+                        objSW.WindowTitle = item.WindowTitle;
+                        objSW.Qty = item.WindowQty ?? 0;
+                        objSW.TotalSubElement = item.TotalSubElement ?? 0;
+
+                        this._DBContext.SaveChanges();
+
+                        item.Id = objSW.Id;
+
                     }
-                    else
-                    {
-                        objSW.UpdatedDate = DateTime.Now;
-                        objSW.UpdatedBy = salesOrder.UpdatedBy;
-                    }
-                    objSW.OrderId = salesOrder.Id;
-                    objSW.WindowTitle = item.WindowTitle;
-                    objSW.Qty = item.WindowQty ?? 0;
-                    objSW.TotalSubElement = item.TotalSubElement ?? 0;
-
-                    this._DBContext.SaveChanges();
-
-                    item.Id = objSW.Id;
-
                 }
-
                 #endregion
 
 
 
-                #region MyRegion
-                foreach (var item in salesOrder.WindowSubElementList)
+                #region SubElementList
+
+                if (salesOrder.WindowSubElementList != null)
                 {
-                    //var objSE = new OrderWindowSubElement();
-                    var objSE = this._DBContext.orderWindowsSubElements.FirstOrDefault(p => p.Id == item.Id);
-                    if (objSE == null)
+
+                    foreach (var item in salesOrder.WindowSubElementList)
                     {
-                        objSE = new OrderWindowSubElement();
-                        objSE.OrderWindowId = salesOrder.SalesOrderWindowList.FirstOrDefault(p => p.OrderWindowId == item.OrderWindowId).Id ?? 0;
-                        objSE.CreatedDate = DateTime.Now;
-                        objSE.CreatedBy = salesOrder.CreatedBy;
+                        //var objSE = new OrderWindowSubElement();
+                        var objSE = this._DBContext.orderWindowsSubElements.FirstOrDefault(p => p.Id == item.Id);
+                        if (objSE == null)
+                        {
+                            objSE = new OrderWindowSubElement();
+                            objSE.OrderWindowId = salesOrder.SalesOrderWindowList.FirstOrDefault(p => p.OrderWindowId == item.OrderWindowId).Id ?? 0;
+                            objSE.CreatedDate = DateTime.Now;
+                            objSE.CreatedBy = salesOrder.CreatedBy;
 
-                        this._DBContext.orderWindowsSubElements.Add(objSE);
+                            this._DBContext.orderWindowsSubElements.Add(objSE);
+                        }
+                        else
+                        {
+                            objSE.UpdatedDate = DateTime.Now;
+                            objSE.UpdatedBy = salesOrder.UpdatedBy;
+                        }
+
+                        objSE.SubElement = item.SubElement ?? 0;
+                        objSE.SubElementType = item.SubElementType;
+                        objSE.Width = item.SubElementWidth ?? 0;
+                        objSE.Height = item.SubElementHeight ?? 0;
+
+
+                        this._DBContext.SaveChanges();
+                        item.Id = objSE.Id;
                     }
-                    else
+                }
+                #endregion
+
+
+                #region Delete Window & Subelement
+
+                if (salesOrder.WindowSubElementDeleteList != null)
+                {
+                    foreach (var item in salesOrder.WindowSubElementDeleteList)
                     {
-                        objSE.UpdatedDate = DateTime.Now;
-                        objSE.UpdatedBy = salesOrder.UpdatedBy;
+                        var objSE = this._DBContext.orderWindowsSubElements.FirstOrDefault(p => p.Id == item.Id);
+                        this._DBContext.orderWindowsSubElements.Remove(objSE);
+                        this._DBContext.SaveChanges();
                     }
-                   
-                    objSE.SubElement = item.SubElement ?? 0;
-                    objSE.SubElementType = item.SubElementType;
-                    objSE.Width = item.SubElementWidth ?? 0;
-                    objSE.Height = item.SubElementHeight ?? 0;
+                }
 
-
-                    this._DBContext.SaveChanges();
-                    item.Id = objSE.Id;
+                if (salesOrder.SalesOrderWindowDeleteList != null)
+                {
+                    foreach (var item in salesOrder.SalesOrderWindowDeleteList)
+                    {
+                        var objSW = this._DBContext.orderWindows.FirstOrDefault(p => p.Id == item.Id);
+                        this._DBContext.orderWindows.Remove(objSW);
+                        this._DBContext.SaveChanges();
+                    }
                 }
 
                 #endregion

@@ -123,7 +123,10 @@
                 WindowSubElementModel.WindowTitle = OrderWindowList.FirstOrDefault(p => p.Id == WindowSubElementModel.OrderWindowId).WindowTitle;
                 var objWD=OrderWindowList.FirstOrDefault(p => p.Id == WindowSubElementModel.OrderWindowId);
                 WindowSubElementModel.WindowTitle = objWD?.WindowTitle;
+                WindowSubElementModel.IsNew = true;
+
                 WindowSubElements.Add(WindowSubElementModel);
+                ////-----------------
                 objWD.TotalSubElement = WindowSubElements.Count(p => p.OrderWindowId == WindowSubElementModel.OrderWindowId);
             }
 

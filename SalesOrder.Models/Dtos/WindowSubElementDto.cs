@@ -17,5 +17,6 @@ namespace SalesOrder.Models.Dtos
         public int? SubElementWidth { get; set; }
         public int? SubElementHeight { get; set; }
         public bool? IsBlank { get; set; }
+        public bool? IsNew { get; set; }
     }
 }

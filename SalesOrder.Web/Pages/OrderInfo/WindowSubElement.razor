@@ -40,7 +40,7 @@
 
                         <td>
                             <button class="btn btn-outline-dark" @onclick="@(() => showEdit(@itm.Id??0))">Edit</button>
-
+                            <button class="btn btn-outline-danger" @onclick="@(() => delete(@itm))">Delete</button>
                         </td>
 
                     </tr>
@@ -95,6 +95,10 @@
         windowSubElements = salesOrderModel.WindowSubElementList;
     }
 
+    private async void HandleValidSubmit()
+    {
+
+    }
 
     public void showAdd()
     {
@@ -111,6 +115,23 @@
         selectedId = Id;
         orderWindowList = salesOrderModel.SalesOrderWindowList;
         showModal = true;
+    }
+
+
+    public void delete(WindowSubElementDto row)
+    {
+        selectedId = row.Id ?? 0;
+
+
+        if (!(row.IsNew ?? false))
+        {
+            if (salesOrderModel.WindowSubElementDeleteList == null)
+                salesOrderModel.WindowSubElementDeleteList = new List<WindowSubElementDto>();
+            salesOrderModel.WindowSubElementDeleteList.Add(row);
+        }
+
+        windowSubElements.Remove(row);
+
     }
 
     public void closeAction(List<WindowSubElementDto> windowSubElementsData)

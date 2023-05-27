@@ -17,5 +17,6 @@ namespace SalesOrder.Models.Dtos
 
 
         public bool? IsBlank { get; set; }
+        public bool? IsDelete { get; set; }
     }
 }

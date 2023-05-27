@@ -25,9 +25,11 @@ namespace SalesOrder.Models.Dtos
         public bool? IsBlank { get; set; }
 
         public List<SalesOrderWindowDto>? SalesOrderWindowList { get; set; } = default;
-        //public List<SalesOrderDto>? SalesOrderWindowList { get; set; } = default;
+        public List<SalesOrderWindowDto>? SalesOrderWindowDeleteList { get; set; } = default;
+
         public List<WindowSubElementDto>? WindowSubElementList { get; set; }= default;
-        //public List<SalesOrderDto>? WindowSubElementList { get; set; }= default;
+        public List<WindowSubElementDto>? WindowSubElementDeleteList { get; set; }= default;
+        
 
     }
 }
