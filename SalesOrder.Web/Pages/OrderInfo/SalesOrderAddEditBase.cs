@@ -79,11 +79,11 @@ namespace SalesOrder.Web.Pages.OrderInfo
         }
 
 
-        //private void rebindSubWindowList()
-        //{
-        //    //logString3 = "Com 3 Button Press on" + DateTime.Now;
-        //    StateHasChanged();
-        //}
+        public void receiveFromWindow(SalesOrderDto salesOrderModel)
+        {
+            //logString3 = "Com 3 Button Press on" + DateTime.Now;
+            StateHasChanged();
+        }
 
     }
 }

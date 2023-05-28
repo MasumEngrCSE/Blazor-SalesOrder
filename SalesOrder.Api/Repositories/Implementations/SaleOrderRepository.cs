@@ -90,9 +90,57 @@ namespace SalesOrder.Api.Repositories.Implementations
             //throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteSalesOrder(int Id)
+        public async Task<bool> DeleteSalesOrder(int Id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                
+
+                var salesOrder = await GetSalesOrder(Id);
+
+
+                #region SubElementList
+
+                if (salesOrder.WindowSubElementList != null)
+                {
+
+                    foreach (var item in salesOrder.WindowSubElementList)
+                    {
+                        var objSE = this._DBContext.orderWindowsSubElements.FirstOrDefault(p => p.Id == item.Id);
+
+                        this._DBContext.orderWindowsSubElements.Remove(objSE);
+                        this._DBContext.SaveChanges();
+                    }
+                }
+                #endregion
+
+
+                #region Delete Window
+
+                if (salesOrder.SalesOrderWindowList != null)
+                {
+                    foreach (var item in salesOrder.SalesOrderWindowList)
+                    {
+                        var objSW = this._DBContext.orderWindows.FirstOrDefault(p => p.Id == item.Id);
+                        this._DBContext.orderWindows.Remove(objSW);
+                        this._DBContext.SaveChanges();
+                    }
+                }
+
+                #endregion
+
+                var obj = this._DBContext.orderMasters.FirstOrDefault(p => p.Id == Id);
+                _DBContext.orderMasters.Remove(obj);
+                this._DBContext.SaveChanges();
+
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         public async Task<SalesOrderDto> GetSalesOrder(int Id)

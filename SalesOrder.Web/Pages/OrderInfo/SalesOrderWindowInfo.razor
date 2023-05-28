@@ -67,7 +67,8 @@
     [Parameter]
     public SalesOrderDto salesOrderModel { get; set; } = default!;
 
-
+    [Parameter]
+    public Action<SalesOrderDto> FromWindowAction { get; set; }
 
     public List<SalesOrderWindowDto> orderWindows { get; set; }
     public bool showModal = false;
@@ -153,7 +154,8 @@
 
 
         orderWindows.Remove(row);
-
+        passToParent();
+        //StateHasChanged();
     }
 
 
@@ -169,6 +171,12 @@
         showModal = false;
 
         StateHasChanged();
+    }
+
+
+    private void passToParent()
+    {
+        FromWindowAction(salesOrderModel);
     }
 
 }

@@ -36,14 +36,22 @@ namespace SalesOrder.Web.Services.Implementation
         {
             try
             {
-                return  true;
+                HttpResponseMessage response = await this.httpClient.DeleteAsync($"api/SalesOrder/deleteSalesOrder/{Id}");
+
+                response.EnsureSuccessStatusCode(); 
+                // Throws an exception if the response is not successful (e.g., 4xx or 5xx status code)
+
+                bool isDeleted = response.Content.ReadFromJsonAsync<bool>().Result;
+
+                return isDeleted;
             }
             catch (Exception ex)
             {
 
-                throw ex;
+                throw;
             }
         }
+
 
         public async Task<SalesOrderDto> GetSalesOrder(int Id)
         {

@@ -43,6 +43,18 @@ namespace SalesOrder.Web.Pages.OrderInfo
             showModal = true;
         }
 
+        public async void delete(SalesOrderDto row)
+        {
+            bool isDeleted = await saleOrderService.DeleteSalesOrder(row.Id);
+            if (isDeleted)
+            {
+                salesOrders = await saleOrderService.GetSalesOrders();
+                StateHasChanged();
+            }
+            //salesOrders.Remove(row);
+        }
+
+
         public void closeAction(IEnumerable<SalesOrderDto> salesOrdersData)
         {
             AddEditShowed = false;

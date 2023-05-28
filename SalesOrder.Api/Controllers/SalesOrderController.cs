@@ -99,6 +99,26 @@ namespace SalesOrder.Api.Controllers
             }
         }
 
+        //deleteSalesOrder
+
+
+        [HttpDelete]
+        [Route("deleteSalesOrder/{Id}")]
+        public async Task<ActionResult<bool>> DeleteSalesOrder(int Id)
+        {
+            try
+            {
+                bool isDeleted = await this.saleOrderRepository.DeleteSalesOrder(Id);
+                if (isDeleted == null)
+                    return NotFound();
+                else
+                    return Ok(isDeleted);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error Delete Sales Order");
+            }
+        }
 
 
     }
