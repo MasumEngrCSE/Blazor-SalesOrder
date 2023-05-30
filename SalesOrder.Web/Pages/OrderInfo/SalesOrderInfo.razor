@@ -2,17 +2,6 @@
 @inherits SalesOrderInfoBase
 <h3>Sales Order</h3>
 
-@*@if (!AddEditShowed)
-{
-    <h3 class="mb-5">Sales Order</h3>
-}*@
-
-@*@if (salesOrders.Count() ==0)
-{
-    <h3>Loading ...</h3>
-}*@
-@*<h3>Loading ...</h3>*@
-
 @if (!AddEditShowed)
 {
     @*State List*@
@@ -35,6 +24,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">State</th>
                     <th></th>
+                   
                 </tr>
             </thead>
 
@@ -50,9 +40,10 @@
                         </td>
 
                         <td>
-                         <button class="btn btn-outline-dark" @onclick="@(() => showEdit(@itm.Id))">Edit</button>
+                            <button class="btn btn-outline-dark" @onclick="@(() => showEdit(@itm.Id))">Edit</button>
                             <button class="btn btn-outline-danger" @onclick="@(() => delete(@itm))">Delete</button>
                         </td>
+
 
                     </tr>
                 }
@@ -64,10 +55,10 @@
 }
 
 
-<BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle" modal_minWidth="900px" modal_minHeight="700px" >
-    <Body >
-        <SalesOrderAddEdit  selectedId="@selectedId" FromChildCloseAction="@closeAction"></SalesOrderAddEdit>
-       
+<BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle" modal_minWidth="900px" modal_minHeight="700px">
+    <Body>
+        <SalesOrderAddEdit selectedId="@selectedId" FromChildCloseAction="@closeAction"></SalesOrderAddEdit>
+
     </Body>
 </BlazorModal>
 
