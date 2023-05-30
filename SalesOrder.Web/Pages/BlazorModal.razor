@@ -38,7 +38,7 @@
     </div>
 }
 <hr />
-
+@*https://getblazorbootstrap.com/docs/components/confirm-dialog*@
 @code {
     [Parameter]
     public string? PageTitle { get; set; } = default;
@@ -64,7 +64,14 @@
     //bool showModal = false;
 
     void ModalShow() => ShowModal = true;
-    void ModalCancel() => ShowModal = false;
+    //void ModalCancel() => ShowModal = false;
+
+    void ModalCancel()
+    {
+        //Console.WriteLine("Modal ok");
+        ShowModal = false;
+    }
+
     void ModalOk()
     {
         //Console.WriteLine("Modal ok");
