@@ -41,16 +41,20 @@ namespace SalesOrder.Web.Pages.OrderInfo
             selectedId = Id;
             //salesOrderModel= await saleOrderService.GetSalesOrder(Id);
             showModal = true;
+            StateHasChanged();
         }
 
         public async void delete(SalesOrderDto row)
         {
+            //selectedId = 0;
             bool isDeleted = await saleOrderService.DeleteSalesOrder(row.Id);
-            if (isDeleted)
-            {
-                salesOrders = await saleOrderService.GetSalesOrders();
-                StateHasChanged();
-            }
+            //if (isDeleted)
+            //{
+            //    salesOrders = await saleOrderService.GetSalesOrders();
+            //    StateHasChanged();
+                
+            //}
+            //showModal = false;
             //salesOrders.Remove(row);
         }
 
@@ -59,8 +63,10 @@ namespace SalesOrder.Web.Pages.OrderInfo
         {
             AddEditShowed = false;
             selectedId = 0;
+
             if (salesOrdersData != null)
                 salesOrders = salesOrdersData;
+
             showModal = false;
 
             StateHasChanged();
