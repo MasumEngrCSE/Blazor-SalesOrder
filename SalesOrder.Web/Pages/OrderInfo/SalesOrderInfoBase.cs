@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorBootstrap;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using SalesOrder.Models.Dtos;
 using SalesOrder.Web.Services.Implementation;
 using SalesOrder.Web.Services.Interface;
@@ -65,8 +67,61 @@ namespace SalesOrder.Web.Pages.OrderInfo
                 salesOrders = salesOrdersData;
 
             showModal = false;
-
+            modal.HideAsync();
             StateHasChanged();
         }
+
+
+
+        #region New Modal
+
+        public Modal modal = default!;
+        private string? message;
+        public async Task OnAddClick()
+        {
+
+            //var parameters = new Dictionary<string, object>();
+            //parameters.Add("selectedId", 0);
+            //parameters.Add("FromChildCloseAction", EventCallback.Factory.Create<IEnumerable<SalesOrderDto>>(this, closeAction));
+            ////parameters.Add("FromChildCloseAction", EventCallback.Factory.Create<MouseEventArgs>(this, ShowDTMessage));
+            //await modal.ShowAsync<SalesOrderAddEdit>(title: "Add Sales Order", parameters: parameters);
+
+
+
+
+
+            AddEditTitle = "Add Sales Order";
+            selectedId = 0;
+
+            await modal.ShowAsync();
+        }
+
+        public async void OnShowEdit(int Id)
+        {
+            AddEditTitle = "Edit Sales Order";
+            selectedId = Id;
+
+            await modal.ShowAsync();
+            //salesOrderModel= await saleOrderService.GetSalesOrder(Id);
+            //showModal = true;
+            //StateHasChanged();
+        }
+
+        private void ShowDTMessage(MouseEventArgs e) => message = $"The current DT is: {DateTime.Now}.";
+
+
+ 
+
+
+        public void OnModalHiding()
+        {
+
+            //ToastService.Notify(new(ToastType.Danger, $"Event: Hiding called. DateTime: {DateTime.Now}"));
+        }
+
+
+
+
+        #endregion
     }
 }

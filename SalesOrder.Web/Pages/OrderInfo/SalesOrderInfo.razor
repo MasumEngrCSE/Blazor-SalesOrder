@@ -6,8 +6,20 @@
 {
     @*State List*@
     <div class="row">
-        <button type="button" onclick="@showAdd" class="btn btn-primary" style="width:fit-content;text-align:right">Add Order</button>
+        <div class="col-5">
+            <button type="button" onclick="@showAdd" class="btn btn-primary" >Add Order</button>
+
+        </div>
+
+        <div class="col-5">
+            <Button Color="ButtonColor.Primary"  @onclick="OnAddClick">Show Modal</Button>
+
+        </div>
+
+
     </div>
+
+
 
 
     @if (salesOrders.Count() == 0)
@@ -41,6 +53,10 @@
 
                         <td>
                             <button class="btn btn-outline-dark" @onclick="@(() => showEdit(@itm.Id))">Edit</button>
+
+                            <button class="btn btn-outline-dark" @onclick="@(() => OnShowEdit(@itm.Id))">Edit Modal</button>
+
+
                             <button class="btn btn-outline-danger" @onclick="@(() => delete(@itm))">Delete</button>
                         </td>
 
@@ -61,6 +77,31 @@
 
     </Body>
 </BlazorModal>
+
+
+@*<Modal @ref="modal" />*@
+
+
+<Modal @ref="modal"
+       title="@AddEditTitle"
+       OnHiding="OnModalHiding"
+       Size="ModalSize.Large"
+>
+
+    <BodyTemplate>
+        <SalesOrderAddEdit selectedId="@selectedId" FromChildCloseAction="@closeAction"></SalesOrderAddEdit>
+    </BodyTemplate>
+
+
+</Modal>
+
+
+@*<Modal @ref="modal" >
+    <BodyTemplate>
+        <SalesOrderAddEdit FromChildCloseAction="@closeAction"></SalesOrderAddEdit>
+    </BodyTemplate>
+
+</Modal>*@
 
 
 
