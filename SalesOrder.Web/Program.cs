@@ -1,3 +1,4 @@
+using BlazorBootstrap;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using SalesOrder.Web;
@@ -9,7 +10,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7147/") });
-
+builder.Services.AddBlazorBootstrap();
 //https://localhost:7147/
 //builder.HostEnvironment.BaseAddress
 

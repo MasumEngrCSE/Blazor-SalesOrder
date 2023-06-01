@@ -10,7 +10,55 @@
 
 <button class="btn btn-primary" @onclick="ShowAlert">Show Alert</button>
 
+<Toasts class="p-3" Messages="messages" Placement="ToastsPlacement.TopRight" />
+<Button Color="ButtonColor.Primary" @onclick="() => ShowMessage(ToastType.Primary)">Primary Toast</Button>
+
+
+
+<Modal @ref="modal" Title="Modal title">
+    <BodyTemplate>
+        Modal body text goes here.
+    </BodyTemplate>
+    <FooterTemplate>
+        <Button Color="ButtonColor.Secondary" @onclick="OnHideModalClick">Close</Button>
+        <Button Color="ButtonColor.Primary">Save changes</Button>
+    </FooterTemplate>
+</Modal>
+
+<Button Color="ButtonColor.Primary" @onclick="OnShowModalClick">Show Modal</Button>
+
+
 @code {
+    List<ToastMessage> messages = new List<ToastMessage>();
+    private void ShowMessage(ToastType toastType) => messages.Add(CreateToastMessage(toastType));
+
+    private ToastMessage CreateToastMessage(ToastType toastType)
+    => new ToastMessage
+        {
+            Type = toastType,
+            Title = "Blazor Bootstrap",
+            HelpText = $"{DateTime.Now}",
+            Message = $"Hello, world! This is a toast message. DateTime: {DateTime.Now}",
+        };
+
+
+
+    #region modal
+
+    private Modal modal = default!;
+
+    private async Task OnShowModalClick()
+    {
+        await modal.ShowAsync();
+    }
+
+    private async Task OnHideModalClick()
+    {
+        await modal.HideAsync();
+    }
+
+    #endregion
+
     private int currentCount = 0;
 
     private void IncrementCount()
