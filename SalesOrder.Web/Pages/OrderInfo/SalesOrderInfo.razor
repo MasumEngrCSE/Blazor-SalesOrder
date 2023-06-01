@@ -56,9 +56,9 @@
                             @*<button class="btn btn-outline-dark" @onclick="@(() => showEdit(@itm.Id))">Edit</button>*@
 
                             <button class="btn btn-outline-dark" @onclick="@(() => OnShowEdit(@itm.Id))">Edit</button>
+                            <button class="btn btn-outline-danger" @onclick="@(() => deleteConfirm(@itm))">Delete</button>
 
-
-                            <button class="btn btn-outline-danger" @onclick="@(() => delete(@itm))">Delete</button>
+                            @*<button class="btn btn-outline-danger" @onclick="@(() => delete(@itm))">Delete</button>*@
                         </td>
 
 
@@ -81,6 +81,9 @@
 
 
 <Modal @ref="modal" Size="ModalSize.Large" />
+
+<ConfirmDialog @ref="dialog" />
+
 
 
 @*<Modal @ref="modal"

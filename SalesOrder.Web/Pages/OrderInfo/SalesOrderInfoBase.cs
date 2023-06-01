@@ -48,7 +48,8 @@ namespace SalesOrder.Web.Pages.OrderInfo
 
         public async void delete(SalesOrderDto row)
         {
-            //selectedId = 0;
+
+
             bool isDeleted = await saleOrderService.DeleteSalesOrder(row.Id);
             if (isDeleted)
             {
@@ -123,8 +124,38 @@ namespace SalesOrder.Web.Pages.OrderInfo
 
             //ToastService.Notify(new(ToastType.Danger, $"Event: Hiding called. DateTime: {DateTime.Now}"));
         }
+        public ConfirmDialog dialog;
+        public async Task deleteConfirm(SalesOrderDto row)
+        {
+            var options = new ConfirmDialogOptions
+            {
+                YesButtonText = "OK",
+                YesButtonColor = ButtonColor.Success,
+                NoButtonText = "CANCEL",
+                NoButtonColor = ButtonColor.Danger
+            };
 
+            var confirmation = await dialog.ShowAsync(
+                title: "Sales Order delete",
+                message1: $"Do you want delete Sales Order No:{row.OrderTitle}?",
+                confirmDialogOptions: options);
 
+            if (confirmation)
+            {
+                bool isDeleted = await saleOrderService.DeleteSalesOrder(row.Id);
+                if (isDeleted)
+                {
+                    salesOrders = await saleOrderService.GetSalesOrders();
+                    StateHasChanged();
+                }
+
+                // do whatever
+            }
+            else
+            {
+                // do whatever
+            }
+        }
 
 
         #endregion
