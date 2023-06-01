@@ -32,16 +32,29 @@ namespace SalesOrder.Web.Pages.OrderInfo
 
         protected override async Task OnInitializedAsync()
         {
-            salesOrderModel=new SalesOrderDto();
-            salesOrderModel.SalesOrderWindowList = new List<SalesOrderWindowDto>();
-            salesOrderModel.WindowSubElementList = new List<WindowSubElementDto>();
+            //salesOrderModel=new SalesOrderDto();
+            //salesOrderModel.SalesOrderWindowList = new List<SalesOrderWindowDto>();
+            //salesOrderModel.WindowSubElementList = new List<WindowSubElementDto>();
 
 
             //stateInfos=new List<StateInfoDto>();
             stateInfos = await stateInfoService.GetStates();
+            //if (selectedId > 0)
+            //    salesOrderModel = await saleOrderService.GetSalesOrder(selectedId);
+        }
+        protected override async Task OnParametersSetAsync()
+        {
+            salesOrderModel = new SalesOrderDto();
+            salesOrderModel.SalesOrderWindowList = new List<SalesOrderWindowDto>();
+            salesOrderModel.WindowSubElementList = new List<WindowSubElementDto>();
+            //stateInfos = await stateInfoService.GetStates();
             if (selectedId > 0)
                 salesOrderModel = await saleOrderService.GetSalesOrder(selectedId);
+
+            //return base.OnParametersSetAsync();
         }
+
+
 
         public async Task SalesOrderAddEdit()
         {

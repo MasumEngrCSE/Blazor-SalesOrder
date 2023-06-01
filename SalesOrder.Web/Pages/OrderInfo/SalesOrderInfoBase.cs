@@ -79,21 +79,21 @@ namespace SalesOrder.Web.Pages.OrderInfo
         private string? message;
         public async Task OnAddClick()
         {
-
-            //var parameters = new Dictionary<string, object>();
-            //parameters.Add("selectedId", 0);
-            //parameters.Add("FromChildCloseAction", EventCallback.Factory.Create<IEnumerable<SalesOrderDto>>(this, closeAction));
-            ////parameters.Add("FromChildCloseAction", EventCallback.Factory.Create<MouseEventArgs>(this, ShowDTMessage));
-            //await modal.ShowAsync<SalesOrderAddEdit>(title: "Add Sales Order", parameters: parameters);
-
-
-
-
-
             AddEditTitle = "Add Sales Order";
             selectedId = 0;
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("selectedId", selectedId);
+            parameters.Add("FromChildCloseAction", closeAction);
+            await modal.ShowAsync<SalesOrderAddEdit>(title: AddEditTitle, parameters: parameters);
 
-            await modal.ShowAsync();
+
+
+
+
+
+
+            //await modal.ShowAsync();
+
         }
 
         public async void OnShowEdit(int Id)
@@ -101,7 +101,12 @@ namespace SalesOrder.Web.Pages.OrderInfo
             AddEditTitle = "Edit Sales Order";
             selectedId = Id;
 
-            await modal.ShowAsync();
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("selectedId", selectedId);
+            parameters.Add("FromChildCloseAction", closeAction);
+            await modal.ShowAsync<SalesOrderAddEdit>(title: AddEditTitle, parameters: parameters);
+
+            //await modal.ShowAsync();
             //salesOrderModel= await saleOrderService.GetSalesOrder(Id);
             //showModal = true;
             //StateHasChanged();

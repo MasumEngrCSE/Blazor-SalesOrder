@@ -6,15 +6,16 @@
 {
     @*State List*@
     <div class="row">
-        <div class="col-5">
-            <button type="button" onclick="@showAdd" class="btn btn-primary" >Add Order</button>
 
+        <div class="col-4">
+            @*<button type="button" onclick="@showAdd" class="btn btn-primary" >Add Order</button>*@
+            <Button Color="ButtonColor.Primary" @onclick="OnAddClick">Add Order</Button>
         </div>
 
-        <div class="col-5">
-            <Button Color="ButtonColor.Primary"  @onclick="OnAddClick">Show Modal</Button>
+@*        <div class="col-5">
+            <Button Color="ButtonColor.Primary" @onclick="OnAddClick">Add Order By Blazor Modal</Button>
 
-        </div>
+        </div>*@
 
 
     </div>
@@ -52,9 +53,9 @@
                         </td>
 
                         <td>
-                            <button class="btn btn-outline-dark" @onclick="@(() => showEdit(@itm.Id))">Edit</button>
+                            @*<button class="btn btn-outline-dark" @onclick="@(() => showEdit(@itm.Id))">Edit</button>*@
 
-                            <button class="btn btn-outline-dark" @onclick="@(() => OnShowEdit(@itm.Id))">Edit Modal</button>
+                            <button class="btn btn-outline-dark" @onclick="@(() => OnShowEdit(@itm.Id))">Edit</button>
 
 
                             <button class="btn btn-outline-danger" @onclick="@(() => delete(@itm))">Delete</button>
@@ -71,29 +72,31 @@
 }
 
 
-<BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle" modal_minWidth="900px" modal_minHeight="700px">
+@*<BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle" modal_minWidth="900px" modal_minHeight="700px">
     <Body>
         <SalesOrderAddEdit selectedId="@selectedId" FromChildCloseAction="@closeAction"></SalesOrderAddEdit>
 
     </Body>
-</BlazorModal>
+</BlazorModal>*@
 
 
-@*<Modal @ref="modal" />*@
+<Modal @ref="modal" Size="ModalSize.Large" />
 
 
-<Modal @ref="modal"
+@*<Modal @ref="modal"
        title="@AddEditTitle"
        OnHiding="OnModalHiding"
        Size="ModalSize.Large"
 >
+
+
 
     <BodyTemplate>
         <SalesOrderAddEdit selectedId="@selectedId" FromChildCloseAction="@closeAction"></SalesOrderAddEdit>
     </BodyTemplate>
 
 
-</Modal>
+</Modal>*@
 
 
 @*<Modal @ref="modal" >
