@@ -62,6 +62,13 @@ namespace SalesOrder.Web.Pages.OrderInfo
         public void closeAction(IEnumerable<SalesOrderDto> salesOrdersData)
         {
             AddEditShowed = false;
+
+            if(selectedId==0)
+                ShowMessage(ToastType.Info, "Successfully Added.");
+            else
+                ShowMessage(ToastType.Info, "Successfully Updated.");
+
+
             selectedId = 0;
 
             if (salesOrdersData != null)
@@ -88,7 +95,7 @@ namespace SalesOrder.Web.Pages.OrderInfo
             await modal.ShowAsync<SalesOrderAddEdit>(title: AddEditTitle, parameters: parameters);
 
 
-
+            //ShowMessage(ToastType.Info, "Successfully Added.");
 
 
 
@@ -107,6 +114,7 @@ namespace SalesOrder.Web.Pages.OrderInfo
             parameters.Add("FromChildCloseAction", closeAction);
             await modal.ShowAsync<SalesOrderAddEdit>(title: AddEditTitle, parameters: parameters);
 
+            //ShowMessage(ToastType.Info, "Successfully Updated.");
             //await modal.ShowAsync();
             //salesOrderModel= await saleOrderService.GetSalesOrder(Id);
             //showModal = true;
@@ -147,6 +155,7 @@ namespace SalesOrder.Web.Pages.OrderInfo
                 {
                     salesOrders = await saleOrderService.GetSalesOrders();
                     StateHasChanged();
+                    ShowMessage(ToastType.Danger,"Successfully Deleted.");
                 }
 
                 // do whatever
@@ -157,6 +166,20 @@ namespace SalesOrder.Web.Pages.OrderInfo
             }
         }
 
+
+
+
+      public  List<ToastMessage> messages = new List<ToastMessage>();
+        public void ShowMessage(ToastType toastType, string message) => messages.Add(CreateToastMessage(toastType, message));
+
+        public ToastMessage CreateToastMessage(ToastType toastType,string message)
+        => new ToastMessage
+        {
+            Type = toastType,
+            Title = "Blazor Bootstrap",
+            HelpText = $"{DateTime.Now}",
+            Message = message,
+        };
 
         #endregion
     }
