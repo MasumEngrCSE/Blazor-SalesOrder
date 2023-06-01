@@ -48,14 +48,11 @@ namespace SalesOrder.Web.Pages.OrderInfo
         {
             //selectedId = 0;
             bool isDeleted = await saleOrderService.DeleteSalesOrder(row.Id);
-            //if (isDeleted)
-            //{
-            //    salesOrders = await saleOrderService.GetSalesOrders();
-            //    StateHasChanged();
-                
-            //}
-            //showModal = false;
-            //salesOrders.Remove(row);
+            if (isDeleted)
+            {
+                salesOrders = await saleOrderService.GetSalesOrders();
+                StateHasChanged();
+            }
         }
 
 

@@ -3,8 +3,8 @@
 <div class="bb-page">
 
     <Sidebar @ref="sidebar"
-             IconName="IconName.BootstrapFill"
-             Title="Blazor Bootstrap"
+             IconName="IconName.Gem"
+             Title="Sales Order"
              DataProvider="SidebarDataProvider" />
 
     <main>
@@ -39,8 +39,8 @@
         navItems = new List<NavItem>
         {
             new NavItem { Id = "1", Href = "/", IconName = IconName.HouseDoorFill, Text = "Home", Match=NavLinkMatch.All},
-            new NavItem { Id = "2", Href = "StateInfo/StateInfo", IconName = IconName.PlusSquareFill, Text = "State"},
-            new NavItem { Id = "3", Href = "Order/SalesOrder", IconName = IconName.PlusSquareFill, Text = "Sales Order"},
+            new NavItem { Id = "2", Href = "StateInfo/StateInfo", IconName = IconName.PlusSquareFill, Text = "State Info"},
+            new NavItem { Id = "3", Href = "Order/SalesOrder", IconName = IconName.PlusSquareFill, Text = "Sales Order Info"},
             new NavItem { Id = "4", Href = "/counter", IconName = IconName.PlusSquareFill, Text = "Counter"},
             new NavItem { Id = "5", Href = "/fetchdata", IconName = IconName.Table, Text = "Fetch Data"},
         };
