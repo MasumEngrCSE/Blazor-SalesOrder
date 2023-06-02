@@ -58,15 +58,16 @@ namespace SalesOrder.Web.Pages.OrderInfo
         }
 
 
-        public void closeAction(IEnumerable<SalesOrderDto> salesOrdersData)
+        public void closeAction(IEnumerable<SalesOrderDto> salesOrdersData,string Status)
         {
             AddEditShowed = false;
 
-            if(selectedId==0)
+            if (Status == "I")
                 ShowMessage(ToastType.Info, "Successfully Added.");
-            else
+            else if (Status == "U")
                 ShowMessage(ToastType.Info, "Successfully Updated.");
-
+            else if (Status == "E")
+                ShowMessage(ToastType.Danger, "Error Raised");
 
             selectedId = 0;
 
@@ -123,7 +124,7 @@ namespace SalesOrder.Web.Pages.OrderInfo
         private void ShowDTMessage(MouseEventArgs e) => message = $"The current DT is: {DateTime.Now}.";
 
 
- 
+
 
 
         public void OnModalHiding()
@@ -154,7 +155,7 @@ namespace SalesOrder.Web.Pages.OrderInfo
                 {
                     salesOrders = await saleOrderService.GetSalesOrders();
                     StateHasChanged();
-                    ShowMessage(ToastType.Danger,"Successfully Deleted.");
+                    ShowMessage(ToastType.Danger, "Successfully Deleted.");
                 }
 
                 // do whatever
@@ -168,10 +169,10 @@ namespace SalesOrder.Web.Pages.OrderInfo
 
 
 
-      public  List<ToastMessage> messages = new List<ToastMessage>();
+        public List<ToastMessage> messages = new List<ToastMessage>();
         public void ShowMessage(ToastType toastType, string message) => messages.Add(CreateToastMessage(toastType, message));
 
-        public ToastMessage CreateToastMessage(ToastType toastType,string message)
+        public ToastMessage CreateToastMessage(ToastType toastType, string message)
         => new ToastMessage
         {
             Type = toastType,

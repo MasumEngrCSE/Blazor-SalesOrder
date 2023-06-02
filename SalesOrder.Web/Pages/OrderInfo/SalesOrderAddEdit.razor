@@ -5,9 +5,10 @@
 
 <div>
 
-    <button type="button" onclick="@closePage" class="btn btn-primary" style="width:fit-content;text-align:right">
+    <button type="button" @onclick="@(() => closePage())" class="btn btn-primary" style="width:fit-content;text-align:right">
         Close
     </button>
+
 
     <button type="button" onclick="@SalesOrderAddEdit" class="btn btn-primary" style="width:fit-content;text-align:right">
         @(selectedId > 0 ? "Update Order" : "Save Order")
@@ -73,3 +74,6 @@
     </div>
 
 </div>
+
+
+<Toasts class="p-3" Messages="messages" Placement="ToastsPlacement.TopRight" />

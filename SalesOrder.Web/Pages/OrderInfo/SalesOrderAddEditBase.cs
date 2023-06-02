@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorBootstrap;
+using Microsoft.AspNetCore.Components;
 using SalesOrder.Models.Dtos;
 using SalesOrder.Web.Services.Implementation;
 using SalesOrder.Web.Services.Interface;
@@ -11,7 +12,8 @@ namespace SalesOrder.Web.Pages.OrderInfo
         public int selectedId { get; set; }
 
         [Parameter]
-        public Action<IEnumerable<SalesOrderDto>> FromChildCloseAction { get; set; } = default!;
+        public Action<IEnumerable<SalesOrderDto>,string> FromChildCloseAction { get; set; } = default!;
+        //public Action<IEnumerable<SalesOrderDto>> FromChildCloseAction { get; set; } = default!;
 
 
         [Inject]
@@ -23,7 +25,7 @@ namespace SalesOrder.Web.Pages.OrderInfo
         /// <summary>
         /// /end paramiter & Inject
         /// </summary>
-
+ 
 
         //[Parameter]
         public SalesOrderDto salesOrderModel { get; set; } = default!;
@@ -60,7 +62,9 @@ namespace SalesOrder.Web.Pages.OrderInfo
                 if (selectedId > 0)
                 {
                     salesOrderModel = await saleOrderService.UpdateSalesOrder(salesOrderModel);
-                    await closePage();
+                    //ShowMessage(ToastType.Info, "Successfully Updated.");
+
+                    await closePage("U");
 
                 }
                 else
@@ -68,24 +72,27 @@ namespace SalesOrder.Web.Pages.OrderInfo
                     salesOrderModel.OrderDate = DateTime.Now;
 
                     salesOrderModel = await saleOrderService.AddSalesOrder(salesOrderModel);
-                    await closePage();
+                    
+                    //ShowMessage(ToastType.Info, "Successfully Added.");
+                    await closePage("I");
                 }
 
             }
             catch (Exception ex)
             {
-
+                await closePage("E");
                 throw ex;
             }
         }
 
-        public async Task closePage()
+        public async Task closePage(string tStatus = "")
         {
 
             SalesOrderInfos = await saleOrderService.GetSalesOrders();
 
+            ////SalesOrderInfos.tst
 
-            FromChildCloseAction(SalesOrderInfos);
+            FromChildCloseAction(SalesOrderInfos, tStatus);
         }
 
 
@@ -94,6 +101,20 @@ namespace SalesOrder.Web.Pages.OrderInfo
             //logString3 = "Com 3 Button Press on" + DateTime.Now;
             StateHasChanged();
         }
+
+
+        public List<ToastMessage> messages = new List<ToastMessage>();
+        public void ShowMessage(ToastType toastType, string message) => messages.Add(CreateToastMessage(toastType, message));
+
+        public ToastMessage CreateToastMessage(ToastType toastType, string message)
+        => new ToastMessage
+        {
+            Type = toastType,
+            Title = "Blazor Bootstrap",
+            HelpText = $"{DateTime.Now}",
+            Message = message,
+        };
+
 
     }
 }
