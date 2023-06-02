@@ -77,7 +77,8 @@
     [Parameter]
     public SalesOrderDto salesOrderModel { get; set; } = default!;
 
-
+    [Parameter]
+    public Action<SalesOrderDto> FromWindowAction { get; set; }
 
 
     public List<SalesOrderWindowDto> orderWindowList { get; set; }
@@ -156,6 +157,7 @@
         modal.HideAsync();
 
         StateHasChanged();
+        passToParent();
     }
 
 
@@ -189,7 +191,7 @@
         orderWindowList = salesOrderModel.SalesOrderWindowList;
 
         var parameters = new Dictionary<string, object>();
-        parameters.Add("selectedId", selectedId);    
+        parameters.Add("selectedId", selectedId);
         parameters.Add("WindowSubElements", windowSubElements);
         parameters.Add("OrderWindowList", orderWindowList);
         parameters.Add("FromChildCloseAction", closeAction);
@@ -231,8 +233,13 @@
 
             windowSubElements.Remove(row);
 
-            ShowMessage(ToastType.Danger, "Successfully Deleted.");
+            var objwind = salesOrderModel.SalesOrderWindowList.FirstOrDefault(p => p.OrderWindowId == row.OrderWindowId);
 
+            if (objwind != null)
+                objwind.TotalSubElement = windowSubElements.Count(p => p.OrderWindowId == row.OrderWindowId);
+
+            ShowMessage(ToastType.Danger, "Successfully Deleted.");
+            passToParent();
             // do whatever
         }
         else
@@ -253,7 +260,10 @@
               Message = message,
           };
 
-
+    private void passToParent()
+    {
+        FromWindowAction(salesOrderModel);
+    }
 
     #endregion
 
