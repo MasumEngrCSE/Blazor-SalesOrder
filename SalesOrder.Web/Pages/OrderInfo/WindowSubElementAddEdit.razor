@@ -73,20 +73,23 @@
     [Parameter]
     public int selectedId { get; set; }
 
-
     [Parameter]
     public Action<List<WindowSubElementDto>> FromChildCloseAction { get; set; } = default!;
 
     [Parameter]
     public List<WindowSubElementDto> WindowSubElements { get; set; }
 
-    public WindowSubElementDto WindowSubElementModel { get; set; } = default!;
-
     [Parameter]
     public List<SalesOrderWindowDto> OrderWindowList { get; set; } = default!;
 
+
+    //////
+
+
     //[Parameter]
     public EventCallback ValidSubmit { get; set; } = default!;
+
+    public WindowSubElementDto WindowSubElementModel { get; set; } = default!;
 
 
     protected override async Task OnInitializedAsync()
@@ -94,8 +97,19 @@
         //WindowSubElements = new List<SalesOrderDto>();
         WindowSubElementModel = new WindowSubElementDto();
 
+
+
+        //if (selectedId > 0)
+        //    WindowSubElementModel = WindowSubElements.FirstOrDefault(p => p.Id == selectedId);
+    }
+
+
+    protected override async Task OnParametersSetAsync()
+    {
+        WindowSubElementModel = new WindowSubElementDto();
         if (selectedId > 0)
             WindowSubElementModel = WindowSubElements.FirstOrDefault(p => p.Id == selectedId);
+
     }
 
 

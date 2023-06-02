@@ -6,7 +6,7 @@
 {
     @*State List*@
     <div>
-        <button type="button" onclick="@showAdd" class="btn btn-primary" style="width:fit-content;text-align:right">Add Window</button>
+        @*<button type="button" onclick="@showAdd" class="btn btn-primary" style="width:fit-content;text-align:right">Add Window</button>*@
 
         <Button Color="ButtonColor.Primary" @onclick="OnAddClick">Add Window</Button>
     </div>
@@ -41,7 +41,7 @@
                         </td>
 
                         <td>
-                            <button class="btn btn-outline-dark" @onclick="@(() => showEdit(@itm.Id??0))">Edit</button>
+                            @*<button class="btn btn-outline-dark" @onclick="@(() => showEdit(@itm.Id??0))">Edit</button>*@
                             <button class="btn btn-outline-dark" @onclick="@(() => OnShowEdit(@itm.Id??0))">Edit</button>
                             <button class="btn btn-outline-danger" @onclick="@(() => deleteConfirm(@itm))">Delete</button>
                         </td>
@@ -57,13 +57,13 @@
 
 }
 
-<BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle" modal_minWidth="600px">
+@*<BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle" modal_minWidth="600px">
     <Body>
         <SalesOrderWindowAddEdit selectedId="@selectedId"
                                  OrderWindows="@orderWindows"
                                  FromChildCloseAction="@closeAction"></SalesOrderWindowAddEdit>
     </Body>
-</BlazorModal>
+</BlazorModal>*@
 
 
 
@@ -180,6 +180,7 @@
 
 
         showModal = false;
+        modal.HideAsync();
 
         StateHasChanged();
     }
@@ -204,6 +205,7 @@
         var parameters = new Dictionary<string, object>();
         parameters.Add("selectedId", selectedId);
         parameters.Add("FromChildCloseAction", closeAction);
+        parameters.Add("OrderWindows", orderWindows);
         await modal.ShowAsync<SalesOrderWindowAddEdit>(title: AddEditTitle, parameters: parameters);
     }
 

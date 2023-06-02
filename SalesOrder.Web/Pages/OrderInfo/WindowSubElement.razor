@@ -5,7 +5,8 @@
 {
     @*State List*@
     <div>
-        <button type="button" onclick="@showAdd" class="btn btn-primary" style="width:fit-content;text-align:right">Add Window SubElement</button>
+        @*<button type="button" onclick="@showAdd" class="btn btn-primary" style="width:fit-content;text-align:right">Add Window SubElement</button>*@
+        <Button Color="ButtonColor.Primary" @onclick="OnAddClick">Add Window SubElement</Button>
     </div>
 
 
@@ -39,8 +40,9 @@
                         </td>
 
                         <td>
-                            <button class="btn btn-outline-dark" @onclick="@(() => showEdit(@itm.Id??0))">Edit</button>
-                            <button class="btn btn-outline-danger" @onclick="@(() => delete(@itm))">Delete</button>
+                            @*<button class="btn btn-outline-dark" @onclick="@(() => showEdit(@itm.Id??0))">Edit</button>*@
+                            <button class="btn btn-outline-dark" @onclick="@(() => OnShowEdit(@itm.Id??0))">Edit</button>
+                            <button class="btn btn-outline-danger" @onclick="@(() => deleteConfirm(@itm))">Delete</button>
                         </td>
 
                     </tr>
@@ -54,15 +56,21 @@
 
 }
 
-<BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle" modal_minWidth="600px">
+@*<BlazorModal ShowModal=@showModal PageTitle="@AddEditTitle" modal_minWidth="600px">
     <Body>
         <WindowSubElementAddEdit selectedId="@selectedId"
                                  WindowSubElements="@windowSubElements"
                                  OrderWindowList="@orderWindowList"
                                  FromChildCloseAction="@closeAction"></WindowSubElementAddEdit>
     </Body>
-</BlazorModal>
+</BlazorModal>*@
 
+
+
+<Modal @ref="modal" Size="ModalSize.Regular" />
+
+<ConfirmDialog @ref="dialog" />
+<Toasts class="p-3" Messages="messages" Placement="ToastsPlacement.TopRight" />
 
 @code {
 
@@ -145,7 +153,109 @@
         salesOrderModel.WindowSubElementList = windowSubElementsData;
         showModal = false;
 
+        modal.HideAsync();
+
         StateHasChanged();
     }
+
+
+
+    #region bb Modal
+
+    public Modal modal = default!;
+
+
+    public async Task OnAddClick()
+    {
+        AddEditTitle = "Add Window Sub-Element";
+        selectedId = 0;
+        orderWindowList = salesOrderModel.SalesOrderWindowList;
+        var parameters = new Dictionary<string, object>();
+        parameters.Add("selectedId", selectedId);
+        parameters.Add("WindowSubElements", windowSubElements);
+        parameters.Add("OrderWindowList", orderWindowList);
+        parameters.Add("FromChildCloseAction", closeAction);
+
+
+
+        await modal.ShowAsync<WindowSubElementAddEdit>(title: AddEditTitle, parameters: parameters);
+    }
+
+
+    public async void OnShowEdit(int Id)
+    {
+        AddEditTitle = "Edit Window Sub-Element";
+        selectedId = Id;
+        orderWindowList = salesOrderModel.SalesOrderWindowList;
+
+        var parameters = new Dictionary<string, object>();
+        parameters.Add("selectedId", selectedId);    
+        parameters.Add("WindowSubElements", windowSubElements);
+        parameters.Add("OrderWindowList", orderWindowList);
+        parameters.Add("FromChildCloseAction", closeAction);
+
+        //OrderWindows="@orderWindows"
+
+        await modal.ShowAsync<WindowSubElementAddEdit>(title: AddEditTitle, parameters: parameters);
+    }
+
+
+
+    public ConfirmDialog dialog;
+    public async Task deleteConfirm(WindowSubElementDto row)
+    {
+        var options = new ConfirmDialogOptions
+            {
+                YesButtonText = "OK",
+                YesButtonColor = ButtonColor.Success,
+                NoButtonText = "CANCEL",
+                NoButtonColor = ButtonColor.Danger
+            };
+
+        var confirmation = await dialog.ShowAsync(
+            title: "Window SubElement delete",
+            message1: $"Do you want delete SubElement:{row.SubElement}?",
+            confirmDialogOptions: options);
+
+        if (confirmation)
+        {
+            selectedId = row.Id ?? 0;
+
+
+            if (!(row.IsNew ?? false))
+            {
+                if (salesOrderModel.WindowSubElementDeleteList == null)
+                    salesOrderModel.WindowSubElementDeleteList = new List<WindowSubElementDto>();
+                salesOrderModel.WindowSubElementDeleteList.Add(row);
+            }
+
+            windowSubElements.Remove(row);
+
+            ShowMessage(ToastType.Danger, "Successfully Deleted.");
+
+            // do whatever
+        }
+        else
+        {
+            // do whatever
+        }
+    }
+
+
+    public List<ToastMessage> messages = new List<ToastMessage>();
+    public void ShowMessage(ToastType toastType, string message) => messages.Add(CreateToastMessage(toastType, message));
+    public ToastMessage CreateToastMessage(ToastType toastType, string message)
+      => new ToastMessage
+          {
+              Type = toastType,
+              Title = "Blazor Bootstrap",
+              HelpText = $"{DateTime.Now}",
+              Message = message,
+          };
+
+
+
+    #endregion
+
 
 }

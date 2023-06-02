@@ -63,6 +63,10 @@
 
     protected override async Task OnInitializedAsync()
     {
+        //if (OrderWindows == null)
+        //{
+        //    OrderWindows = new List<SalesOrderWindowDto>();
+        //}
         //orderWindowModel = new SalesOrderWindowDto();
         //if (selectedId > 0)
         //    orderWindowModel = OrderWindows.FirstOrDefault(p => p.Id == selectedId);
@@ -89,9 +93,6 @@
 
             if (selectedId > 0)
             {
-                //orderWindowModel = await stateInfoService.UpdateState(orderWindowModel);
-                //OrderWindows.Add(orderWindowModel);
-
                 var objWD = OrderWindows.FirstOrDefault(p => p.Id == selectedId);
 
                 if (objWD!=null){
@@ -99,12 +100,10 @@
                     objWD.WindowQty = orderWindowModel.WindowQty;
                     objWD.TotalSubElement = orderWindowModel.TotalSubElement;
                 }
-
-
             }
             else
             {
-                orderWindowModel.Id = (OrderWindows.Max(p => p.Id)??0)+1;
+                orderWindowModel.Id = (OrderWindows==null?0: (OrderWindows.Max(p => p.Id) ?? 0)) + 1;
                 orderWindowModel.OrderWindowId = orderWindowModel.Id;
                 orderWindowModel.IsNew = true;
                 OrderWindows.Add(orderWindowModel);
