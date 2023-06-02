@@ -7,14 +7,11 @@ namespace SalesOrder.Web.Pages.OrderInfo
 {
     public class SalesOrderAddEditBase : ComponentBase
     {
-        [Parameter]
+        //[Parameter]
         public SalesOrderDto salesOrderModel { get; set; } = default!;
 
-        [Parameter]
+        //[Parameter]
         public EventCallback ValidSubmit { get; set; } = default!;
-
-        public IEnumerable<StateInfoDto> stateInfos { get; set; }
-        public IEnumerable<SalesOrderDto> SalesOrderInfos { get; set; }
 
         [Parameter]
         public int selectedId { get; set; }
@@ -23,11 +20,16 @@ namespace SalesOrder.Web.Pages.OrderInfo
         [Parameter]
         public Action<IEnumerable<SalesOrderDto>> FromChildCloseAction { get; set; } = default!;
 
+
         [Inject]
         public ISaleOrderService saleOrderService { get; set; }
 
         [Inject]
         public IStateInfoService stateInfoService { get; set; }
+
+
+        public IEnumerable<StateInfoDto> stateInfos { get; set; }
+        public IEnumerable<SalesOrderDto> SalesOrderInfos { get; set; }
 
 
         protected override async Task OnInitializedAsync()

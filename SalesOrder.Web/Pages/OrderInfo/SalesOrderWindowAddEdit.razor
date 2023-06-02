@@ -63,12 +63,19 @@
 
     protected override async Task OnInitializedAsync()
     {
-        //orderWindows = new List<SalesOrderDto>();
+        //orderWindowModel = new SalesOrderWindowDto();
+        //if (selectedId > 0)
+        //    orderWindowModel = OrderWindows.FirstOrDefault(p => p.Id == selectedId);
+
+    }
+
+
+    protected override async Task OnParametersSetAsync()
+    {
         orderWindowModel = new SalesOrderWindowDto();
         if (selectedId > 0)
             orderWindowModel = OrderWindows.FirstOrDefault(p => p.Id == selectedId);
 
-        //await stateInfoService.GetState(selectedId);
     }
 
 

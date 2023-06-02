@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using SalesOrder.Models.Dtos;
-using SalesOrder.Web.Services.Implementation;
 using SalesOrder.Web.Services.Interface;
 
 namespace SalesOrder.Web.Pages.OrderInfo
