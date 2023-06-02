@@ -7,15 +7,8 @@ namespace SalesOrder.Web.Pages.OrderInfo
 {
     public class SalesOrderAddEditBase : ComponentBase
     {
-        //[Parameter]
-        public SalesOrderDto salesOrderModel { get; set; } = default!;
-
-        //[Parameter]
-        public EventCallback ValidSubmit { get; set; } = default!;
-
         [Parameter]
         public int selectedId { get; set; }
-
 
         [Parameter]
         public Action<IEnumerable<SalesOrderDto>> FromChildCloseAction { get; set; } = default!;
@@ -27,6 +20,16 @@ namespace SalesOrder.Web.Pages.OrderInfo
         [Inject]
         public IStateInfoService stateInfoService { get; set; }
 
+        /// <summary>
+        /// /end paramiter & Inject
+        /// </summary>
+
+
+        //[Parameter]
+        public SalesOrderDto salesOrderModel { get; set; } = default!;
+
+        //[Parameter]
+        public EventCallback ValidSubmit { get; set; } = default!;
 
         public IEnumerable<StateInfoDto> stateInfos { get; set; }
         public IEnumerable<SalesOrderDto> SalesOrderInfos { get; set; }
@@ -34,22 +37,14 @@ namespace SalesOrder.Web.Pages.OrderInfo
 
         protected override async Task OnInitializedAsync()
         {
-            //salesOrderModel=new SalesOrderDto();
-            //salesOrderModel.SalesOrderWindowList = new List<SalesOrderWindowDto>();
-            //salesOrderModel.WindowSubElementList = new List<WindowSubElementDto>();
-
-
-            //stateInfos=new List<StateInfoDto>();
-            stateInfos = await stateInfoService.GetStates();
-            //if (selectedId > 0)
-            //    salesOrderModel = await saleOrderService.GetSalesOrder(selectedId);
-        }
-        protected override async Task OnParametersSetAsync()
-        {
             salesOrderModel = new SalesOrderDto();
             salesOrderModel.SalesOrderWindowList = new List<SalesOrderWindowDto>();
             salesOrderModel.WindowSubElementList = new List<WindowSubElementDto>();
-            //stateInfos = await stateInfoService.GetStates();
+
+            stateInfos = await stateInfoService.GetStates();
+        }
+        protected override async Task OnParametersSetAsync()
+        {
             if (selectedId > 0)
                 salesOrderModel = await saleOrderService.GetSalesOrder(selectedId);
 
