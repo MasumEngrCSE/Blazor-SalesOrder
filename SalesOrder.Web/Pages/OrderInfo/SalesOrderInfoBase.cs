@@ -187,40 +187,14 @@ namespace SalesOrder.Web.Pages.OrderInfo
 
         #region bb grid
 
-        public BlazorBootstrap.Grid<SalesOrderDto> grid;
-        public IEnumerable<Employee1> employees;
+        //public BlazorBootstrap.Grid<SalesOrderDto> grid;
+        //public IEnumerable<Employee1> employees;
 
-        //public override async Task OnAfterRenderAsync(bool firstRender)
+
+        //public async Task<GridDataProviderResult<SalesOrderDto>> EmployeesDataProvider(GridDataProviderRequest<SalesOrderDto> request)
         //{
-        //    await base.OnAfterRenderAsync(firstRender);
+        //    return await Task.FromResult(request.ApplyTo(salesOrders));
         //}
-
-        public async Task<GridDataProviderResult<SalesOrderDto>> EmployeesDataProvider(GridDataProviderRequest<SalesOrderDto> request)
-        {
-            //if (employees is null) // pull employees only one time for client-side filtering, sorting, and paging
-            //    employees = GetEmployees(); // call a service or an API to pull the employees
-
-
-
-            return await Task.FromResult(request.ApplyTo(salesOrders));
-            //return await Task.FromResult(request.ApplyTo(employees));
-        }
-
-        private IEnumerable<Employee1> GetEmployees()
-        {
-            return new List<Employee1>
-        {
-            new Employee1 { Id = 107, Name = "Alice", Designation = "AI Engineer", DOJ = new DateOnly(1998, 11, 17), IsActive = true },
-            new Employee1 { Id = 103, Name = "Bob", Designation = "Senior DevOps Engineer", DOJ = new DateOnly(1985, 1, 5), IsActive = true },
-            new Employee1 { Id = 106, Name = "John", Designation = "Data Engineer", DOJ = new DateOnly(1995, 4, 17), IsActive = true },
-            new Employee1 { Id = 104, Name = "Pop", Designation = "Associate Architect", DOJ = new DateOnly(1985, 6, 8), IsActive = false },
-            new Employee1 { Id = 105, Name = "Ronald", Designation = "Senior Data Engineer", DOJ = new DateOnly(1991, 8, 23), IsActive = true },
-            new Employee1 { Id = 102, Name = "Line", Designation = "Architect", DOJ = new DateOnly(1977, 1, 12), IsActive = true },
-            new Employee1 { Id = 101, Name = "Daniel", Designation = "Architect", DOJ = new DateOnly(1977, 1, 12), IsActive = true },
-            new Employee1 { Id = 108, Name = "Zayne", Designation = "Data Analyst", DOJ = new DateOnly(1991, 1, 1), IsActive = true },
-            new Employee1 { Id = 109, Name = "Isha", Designation = "App Maker", DOJ = new DateOnly(1996, 7, 1), IsActive = true },
-        };
-        }
 
         #endregion
 
