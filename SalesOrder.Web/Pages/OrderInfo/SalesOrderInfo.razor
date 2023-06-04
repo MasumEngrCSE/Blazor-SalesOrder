@@ -35,10 +35,11 @@
 
     if (salesOrders.Count() > 0)
     {
-        <table class="table table-striped" hidden="hidden">
+        <table class="table table-striped">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Id</th>
+                    <th scope="col">Order Date</th>
                     <th scope="col">Name</th>
                     <th scope="col">State</th>
                     <th></th>
@@ -52,6 +53,7 @@
                 {
                     <tr>
                         <td>@itm.Id</td>
+                        <td>@itm.OrderDate</td>
                         <td>@itm.OrderTitle</td>
                         <td>
                             @itm.StateName
@@ -74,12 +76,12 @@
         </table>
 
 
-        <div class="row" style="margin-top:10px">
+@*        <div class="row" style="margin-top:10px">
 
             <Grid @ref="grid" TItem="SalesOrderDto" class="table table-hover table-bordered table-striped"
-          DataProvider="EmployeesDataProvider" AllowFiltering="true" Responsive="true">
+          DataProvider="EmployeesDataProvider" AllowFiltering="true" Responsive="true"  >
 
-                <GridColumn TItem="SalesOrderDto" HeaderText="Id" PropertyName="Id" >
+                <GridColumn TItem="SalesOrderDto" HeaderText="Id" PropertyName="Id"   >
                     @context.Id
                 </GridColumn>
 
@@ -111,6 +113,9 @@
             </Grid>
 
         </div>
+    *@
+    
+    
     }
 
 
