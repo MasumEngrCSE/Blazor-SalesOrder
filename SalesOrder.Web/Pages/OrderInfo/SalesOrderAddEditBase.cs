@@ -35,7 +35,7 @@ namespace SalesOrder.Web.Pages.OrderInfo
 
         public IEnumerable<StateInfoDto> stateInfos { get; set; }
         public IEnumerable<SalesOrderDto> SalesOrderInfos { get; set; }
-
+        public DateTime OrderDate { get; set; }= DateTime.Now;
 
         protected override async Task OnInitializedAsync()
         {
@@ -44,12 +44,17 @@ namespace SalesOrder.Web.Pages.OrderInfo
             salesOrderModel.WindowSubElementList = new List<WindowSubElementDto>();
 
             stateInfos = await stateInfoService.GetStates();
+            //OrderDate = DateTime.Now;
+
+            //salesOrderModel.OrderDate=DateTime.Now;
         }
         protected override async Task OnParametersSetAsync()
         {
             if (selectedId > 0)
+            {
                 salesOrderModel = await saleOrderService.GetSalesOrder(selectedId);
-
+                OrderDate = salesOrderModel.OrderDate??DateTime.Now;
+            }
             //return base.OnParametersSetAsync();
         }
 
@@ -59,6 +64,7 @@ namespace SalesOrder.Web.Pages.OrderInfo
         {
             try
             {
+                salesOrderModel.OrderDate = OrderDate;
                 if (selectedId > 0)
                 {
                     salesOrderModel = await saleOrderService.UpdateSalesOrder(salesOrderModel);
@@ -69,7 +75,7 @@ namespace SalesOrder.Web.Pages.OrderInfo
                 }
                 else
                 {
-                    salesOrderModel.OrderDate = DateTime.Now;
+                    
 
                     salesOrderModel = await saleOrderService.AddSalesOrder(salesOrderModel);
                     

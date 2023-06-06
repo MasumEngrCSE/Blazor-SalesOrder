@@ -39,8 +39,9 @@
             <thead class="thead-light">
                 <tr>
                     <th scope="col">Id</th>
+                    <th scope="col">Order</th>
                     <th scope="col">Order Date</th>
-                    <th scope="col">Name</th>
+                    
                     <th scope="col">State</th>
                     <th></th>
 
@@ -53,8 +54,9 @@
                 {
                     <tr>
                         <td>@itm.Id</td>
-                        <td>@itm.OrderDate</td>
                         <td>@itm.OrderTitle</td>
+                        <td>@itm.OrderDate?.ToString("dd-MMM-yyyy")</td>
+                        
                         <td>
                             @itm.StateName
                         </td>
