@@ -121,5 +121,32 @@ namespace SalesOrder.Api.Controllers
         }
 
 
+
+        #region Dashboard
+
+
+        [HttpGet]
+        [Route("getSalesOrderSateWiseMonthlyBarChart")]
+        public async Task<ActionResult<IEnumerable<SalesOrderDto>>> getSalesOrderSateWiseMonthlyBarChart()
+        {
+            try
+            {
+                var dataList = await this.saleOrderRepository.getSalesOrderSateWiseMonthlyBarChart();
+
+                if (dataList == null || dataList.Count() == 0)
+                    return NotFound();
+                else
+                    return Ok(dataList);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error Retrive data");
+                //throw;
+            }
+        }
+
+
+        #endregion
+
     }
 }
