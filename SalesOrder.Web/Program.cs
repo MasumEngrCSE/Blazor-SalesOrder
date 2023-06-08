@@ -16,5 +16,6 @@ builder.Services.AddBlazorBootstrap();
 
 builder.Services.AddScoped<IStateInfoService, StateInfoService>();
 builder.Services.AddScoped<ISaleOrderService, SaleOrderService>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
 
 await builder.Build().RunAsync();

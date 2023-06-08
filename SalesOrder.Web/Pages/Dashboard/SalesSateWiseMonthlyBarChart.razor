@@ -1,6 +1,8 @@
 ﻿@*<h3>SalesSateWiseMonthlyBarChart</h3>*@
 @using BlazorBootstrap.Extensions
 @using Color = System.Drawing.Color
+@using SalesOrder.Models.Dtos
+@using SalesOrder.Web.Services.Interface
 
 <BarChart @ref="barChart" Width="700" Class="mb-4" />
 
@@ -11,6 +13,11 @@
 
 @code {
 
+    [Inject]
+    public IDashboardService dashboardService { get; set; }
+
+
+
     private BarChart barChart;
 
     private ChartData chartData;
@@ -18,13 +25,37 @@
 
     Random random = new Random();
 
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {
         chartData = new ChartData
             {
-                Labels = new List<string> { "January", "February", "March", "April", "May", "June", "July" },
+                Labels = new List<string> { "January", "February", "March", "April", "May", "June" },
                 Datasets = new List<IChartDataset>()
             };
+
+        SOBarChartDataset BarChartData = await dashboardService.GetSOMonthlyBarChart();
+
+        //chartData = new ChartData
+        //    {
+        //        Labels = BarChartData.Label,
+        //        Datasets = new List<IChartDataset>()
+        //    };
+
+        var c = Color.FromArgb(random.Next(256), random.Next(256), random.Next(256));
+        var BarChartDataset = new BarChartDataset()
+            {
+                Label = $"Bar chart dataset {BarChartData.Data.Count + 1}",
+                Data = BarChartData.Data,
+                BackgroundColor = new List<string> { c.ToRgbString() },
+                BorderColor = new List<string> { c.ToRgbString() },
+                BorderWidth = new List<double> { 0 },
+            };
+        //chartData.Datasets.Add(BarChartDataset);
+
+
+
+
+
 
         chartData.Datasets.Add(GetRandomBarChartDataset());
         //chartData.Datasets.Add(GetRandomBarChartDataset());
@@ -77,7 +108,7 @@
         return new BarChartDataset()
             {
                 Label = $"Bar chart dataset {chartData.Datasets.Count + 1}",
-                Data = new List<double> { 
+                Data = new List<double> {
                     random.Next(120)
                     , random.Next(120)
                     , random.Next(120)
