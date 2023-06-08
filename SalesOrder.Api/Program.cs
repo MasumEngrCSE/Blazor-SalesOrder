@@ -18,6 +18,7 @@ builder.Services.AddDbContextPool<SalesOrderDBContext>
 
 builder.Services.AddScoped<IStateInfoRepository, StateInfoRepository>();
 builder.Services.AddScoped<ISaleOrderRepository, SaleOrderRepository>();
+builder.Services.AddScoped<IDashboardRepository, DashboardRepository>();
 
 
 var app = builder.Build();
