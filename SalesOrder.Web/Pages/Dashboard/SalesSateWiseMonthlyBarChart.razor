@@ -27,8 +27,8 @@
             };
 
         chartData.Datasets.Add(GetRandomBarChartDataset());
-        chartData.Datasets.Add(GetRandomBarChartDataset());
-        chartData.Datasets.Add(GetRandomBarChartDataset());
+        //chartData.Datasets.Add(GetRandomBarChartDataset());
+        //chartData.Datasets.Add(GetRandomBarChartDataset());
 
         chartOptions = new BarChartOptions
             {
@@ -77,7 +77,14 @@
         return new BarChartDataset()
             {
                 Label = $"Bar chart dataset {chartData.Datasets.Count + 1}",
-                Data = new List<double> { random.Next(120), random.Next(120), random.Next(120), random.Next(120), random.Next(120), random.Next(120), random.Next(120) },
+                Data = new List<double> { 
+                    random.Next(120)
+                    , random.Next(120)
+                    , random.Next(120)
+                    , random.Next(120)
+                    , random.Next(120)
+                    , random.Next(120)
+                    , random.Next(120) },
                 BackgroundColor = new List<string> { c.ToRgbString() },
                 BorderColor = new List<string> { c.ToRgbString() },
                 BorderWidth = new List<double> { 0 },
