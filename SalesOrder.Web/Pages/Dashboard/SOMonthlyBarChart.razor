@@ -1,6 +1,6 @@
 ﻿@using SalesOrder.Models.Dtos
 @using SalesOrder.Web.Services.Interface
-<BarChart @ref="barChart" Class="mb-4" />
+<BarChart @ref="barChart" Class="mb-4"  />
 
 
 @code {
@@ -27,7 +27,7 @@
                 {
                     new BarChartDataset()
                     {
-                        Label = "Sum of SO",
+                        Label = "No Of SO",
                         Data = BarChartData.Data ,
                         BackgroundColor = new List<string>{ "rgb(88, 80, 141)" },
                         CategoryPercentage = 0.8,
@@ -41,7 +41,6 @@
         //        Labels = new List<string> { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" },
         //        Datasets = new List<IChartDataset>()
         //        {
-
         //            new BarChartDataset()
         //            {
         //                Label = "India",
@@ -65,16 +64,16 @@
 
         options.Interaction.Mode = InteractionMode.Index;
 
-        options.Plugins.Title.Text = "Month Wise Sales Order";
+        options.Plugins.Title.Text = "Sate Wise Last 12 Month  Sales Order";
         options.Plugins.Title.Display = true;
         options.Plugins.Title.Font.Size = 20;
 
         options.Responsive = true;
 
-        options.Scales.X.Title.Text = "Month";
+        options.Scales.X.Title.Text = "State";
         options.Scales.X.Title.Display = true;
 
-        options.Scales.Y.Title.Text = "Amount";
+        options.Scales.Y.Title.Text = "No of SO";
         options.Scales.Y.Title.Display = true;
 
         await barChart.UpdateAsync(data, options);
