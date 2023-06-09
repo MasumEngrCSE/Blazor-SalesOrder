@@ -2,20 +2,10 @@
 @page "/StateInfo/StateAddEdit/{stateId:int}"
 @inherits StateAddEditBase
 
-@*@inject HttpClient http
-@inject NavigationManager uriHelper
-@inject IJSRuntime js*@
 
-@*@if (stateId > 0)
-{
-    <h3 class="mb-5">State update</h3>
-}
-else{
-    <h3 class="mb-5">State Add</h3>
-}*@
-<div>
+@*<div>
     <h3 class="mb-5">@(stateId > 0 ? "State Update" : "State Add")</h3>
-</div>
+</div>*@
 
 
 <div>

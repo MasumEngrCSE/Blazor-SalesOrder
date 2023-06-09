@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 //using Microsoft.JSInterop;
 using SalesOrder.Models.Dtos;
+using SalesOrder.Web.Services.Implementation;
 using SalesOrder.Web.Services.Interface;
 
 namespace SalesOrder.Web.Pages.StateInfo
@@ -32,15 +33,18 @@ namespace SalesOrder.Web.Pages.StateInfo
 
         protected override async Task OnInitializedAsync()
         {
-            //stateInfos = await stateInfoService.GetStates();
-            //return base.OnInitializedAsync();
+            //stateInfoModel = new StateInfoDto();
+            //if (stateId > 0)
+            //    stateInfoModel = await stateInfoService.GetState(stateId);
+        }
+
+
+        protected override async Task OnParametersSetAsync()
+        {
             stateInfoModel = new StateInfoDto();
             if (stateId > 0)
                 stateInfoModel = await stateInfoService.GetState(stateId);
         }
-
-
-
 
 
 

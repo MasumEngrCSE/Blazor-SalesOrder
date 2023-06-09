@@ -18,7 +18,7 @@
 {
     @*State List*@
     <div class="row">
-        <button type="button" onclick="@showAddEdit" class="btn btn-primary" style="width:fit-content;text-align:right">Add State</button>
+        <button type="button" onclick="@OnAddClick" class="btn btn-primary" style="width:fit-content;text-align:right">Add State</button>
     </div>
     
     if (stateInfos.Count() > 0)
@@ -45,11 +45,7 @@
                 </td>
 
                         <td>
-@*                            <a href='/StateInfo/StateAddEdit/@itm.Id' class="btn btn-outline-dark" role="button">
-                                Edit
-                            </a>*@
-                            <button class="btn btn-outline-dark" @onclick="@(() => showStateEdit(@itm.Id))">Edit</button>
-                            @*<button type="button" onclick="@showAddEdit" class="btn btn-outline-dark" role="button">Edit</button>*@
+                            <button class="btn btn-outline-dark" @onclick="@(() => OnShowEdit(@itm.Id))">Edit</button>
                         </td>
 
             </tr>
@@ -77,3 +73,8 @@
     </Body>
 </BlazorModal>
 
+
+<Modal @ref="modal" Size="ModalSize.Large" />
+
+
+<Toasts class="p-3" Messages="messages" Placement="ToastsPlacement.TopRight" />
