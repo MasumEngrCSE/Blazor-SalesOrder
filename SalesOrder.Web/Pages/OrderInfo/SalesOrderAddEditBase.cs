@@ -1,5 +1,6 @@
 ﻿using BlazorBootstrap;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Logging;
 using SalesOrder.Models.Dtos;
 using SalesOrder.Web.Services.Implementation;
 using SalesOrder.Web.Services.Interface;
@@ -31,7 +32,15 @@ namespace SalesOrder.Web.Pages.OrderInfo
         public SalesOrderDto salesOrderModel { get; set; } = default!;
 
         //[Parameter]
-        public EventCallback ValidSubmit { get; set; } = default!;
+        //public EventCallback ValidSubmit { get; set; } = default!;
+
+
+        public void ValidSubmit()
+        {
+           // Logger.LogInformation("HandleValidSubmit called");
+
+            // Process the valid form
+        }
 
         public IEnumerable<StateInfoDto> stateInfos { get; set; }
         public IEnumerable<SalesOrderDto> SalesOrderInfos { get; set; }
@@ -90,6 +99,17 @@ namespace SalesOrder.Web.Pages.OrderInfo
                 throw ex;
             }
         }
+
+        //public void FieldChanged(string fieldName)
+        //{
+        //    //CustomerChanged.InvokeAsync(Customer);
+        //    isInvalid = !inputWatcher.Validate();
+        //}
+
+        //public InputWatcher inputWatcher = default!;
+        //public bool isInvalid = true;
+
+
 
         public async Task closePage(string tStatus = "")
         {

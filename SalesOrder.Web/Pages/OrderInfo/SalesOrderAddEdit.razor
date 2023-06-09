@@ -3,7 +3,7 @@
 @*<h3>SalesOrderAddEdit</h3>*@
 @inherits SalesOrderAddEditBase
 
-<div>
+@*<div>
 
     <button type="button" @onclick="@(() => closePage())" class="btn btn-primary" style="width:fit-content;text-align:right">
         Close
@@ -14,19 +14,44 @@
         @(selectedId > 0 ? "Update Order" : "Save Order")
     </button>
 
-</div>
+</div>*@
 
 
 <div>
     <fieldset>
         @*<legend>Order</legend>*@
-        <EditForm Model="@salesOrderModel" OnValidSubmit="@ValidSubmit">
+        <EditForm Model="@salesOrderModel" OnValidSubmit="@SalesOrderAddEdit">
             <DataAnnotationsValidator />
+            @*<ValidationSummary />*@
+
+            @*<InputWatcher FieldChanged="@FieldChanged" @ref="@inputWatcher" />*@
+
             <fieldset>
+
+                <div>
+
+                    <button type="button" @onclick="@(() => closePage())" class="btn btn-primary" style="width:fit-content;text-align:right;">
+                        Close
+                    </button>
+
+
+                    <button type="submit" class="btn btn-primary" style="width:fit-content;text-align:right">
+                        @(selectedId > 0 ? "Update Order" : "Save Order")
+                    </button>
+
+                </div>
+
+
                 <div class="row">
                     <div class="col-4">
                         <label class="col-12" for="name">Order Name:</label>
-                        <InputText class="form-control col-6" @bind-Value="@salesOrderModel.OrderTitle" />
+                        <InputText class="form-control col-6 modified valid" @bind-Value="@salesOrderModel.OrderTitle" />
+
+                        <div class="row mb-2">
+                            <div class="col-12 offset-2 text-danger">
+                                <ValidationMessage For="@(() => salesOrderModel.OrderTitle)" />
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-4">
@@ -53,6 +78,13 @@
                                 <option value="">None</option>
                             }
                         </InputSelect>
+
+                        <div class="row mb-2">
+                            <div class="col-12 offset-2 text-danger">
+                                <ValidationMessage For="@(() => salesOrderModel.StateId)" />
+                            </div>
+                        </div>
+                    
                     </div>
 
 
@@ -62,6 +94,7 @@
                     </div>
 
                 </div>
+
 
             </fieldset>
 
