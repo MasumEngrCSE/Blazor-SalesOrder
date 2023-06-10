@@ -8,7 +8,7 @@
 </div>*@
 
 
-<div>
+@*<div>
 
     <button type="button" onclick="@closePage" class="btn btn-primary" style="width:fit-content;text-align:right">
         Close
@@ -18,28 +18,51 @@
         @(stateId > 0 ? "Update" : "Add State")
     </button>
 
-</div>
+</div>*@
 
-<div>
 
-    <EditForm Model="@stateInfoModel" OnValidSubmit="@ValidSubmit">
-        <DataAnnotationsValidator />
-        <fieldset>
+
+
+
+<EditForm Model="@stateInfoModel" OnValidSubmit="@SateAddEdit">
+    <DataAnnotationsValidator />
+    <fieldset>
+
+        <div>
+
+            <button type="button" onclick="@closePage" class="btn btn-primary" style="width:fit-content;text-align:right">
+                Close
+            </button>
+
+            <button type="submit" class="btn btn-primary" style="width:fit-content;text-align:right">
+                @(stateId > 0 ? "Update" : "Add State")
+            </button>
+
+        </div>
+
+
+
+        <div class="row mb-2">
+            <label class="col-2" for="name">Sate Name:</label>
+            <InputText class="form-control col-6" @bind-Value="@stateInfoModel.Name" />
+
             <div class="row mb-2">
-                <label class="col-2" for="name">Name:</label>
-                <InputText class="form-control col-6" @bind-Value="@stateInfoModel.Name" />
+                <div class="col-12 text-danger">
+                    <ValidationMessage For="@(() => stateInfoModel.Name)" />
+                </div>
             </div>
+        </div>
 
-            <div class="row mb-2">
-                <label class="col-2" for="name">Description:</label>
-                <InputText class="form-control col-6" @bind-Value="@stateInfoModel.Description" />
-            </div>
+        <div class="row mb-2">
+            <label class="col-2" for="name">Description:</label>
+            <InputText class="form-control col-6" @bind-Value="@stateInfoModel.Description" />
+        </div>
 
-        </fieldset>
+    </fieldset>
 
-    </EditForm>
+</EditForm>
 
-</div>
+
 
 
 
