@@ -164,6 +164,8 @@ namespace SalesOrder.Api.Repositories.Implementations
                                       // SalesOrderWindowList=p.
                                   }).FirstOrDefaultAsync();
 
+                if(data != null)
+                    return data;
 
                 data.SalesOrderWindowList = await (from p in this._DBContext.orderWindows.Where(p => p.OrderId == Id)
                                                    select new SalesOrderWindowDto

@@ -95,7 +95,7 @@
     protected override async Task OnInitializedAsync()
     {
         //WindowSubElements = new List<SalesOrderDto>();
-        WindowSubElementModel = new WindowSubElementDto();
+        //WindowSubElementModel = new WindowSubElementDto();
 
 
 
@@ -133,7 +133,8 @@
             }
             else
             {
-                WindowSubElementModel.Id = WindowSubElements.Max(p => p.Id) + 1;
+                WindowSubElementModel.Id = (WindowSubElements == null ? 0 : (WindowSubElements.Max(p => p.Id) ?? 0)) + 1;
+                //WindowSubElementModel.Id = WindowSubElements.Max(p => p.Id) + 1;
                 WindowSubElementModel.WindowTitle = OrderWindowList.FirstOrDefault(p => p.Id == WindowSubElementModel.OrderWindowId).WindowTitle;
                 var objWD=OrderWindowList.FirstOrDefault(p => p.Id == WindowSubElementModel.OrderWindowId);
                 WindowSubElementModel.WindowTitle = objWD?.WindowTitle;

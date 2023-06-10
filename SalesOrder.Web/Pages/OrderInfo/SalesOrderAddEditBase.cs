@@ -64,6 +64,12 @@ namespace SalesOrder.Web.Pages.OrderInfo
                 salesOrderModel = await saleOrderService.GetSalesOrder(selectedId);
                 OrderDate = salesOrderModel.OrderDate??DateTime.Now;
             }
+            else
+            {
+                salesOrderModel = new SalesOrderDto();
+                salesOrderModel.SalesOrderWindowList = new List<SalesOrderWindowDto>();
+                salesOrderModel.WindowSubElementList = new List<WindowSubElementDto>();
+            }
             //return base.OnParametersSetAsync();
         }
 
