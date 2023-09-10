@@ -78,6 +78,8 @@ namespace SalesOrder.Api.Repositories.Implementations
             
             try
             {
+
+
                 var data =await(from p in  this._DBContext.stateInfo
                           select new StateInfoDto
                           {

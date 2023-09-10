@@ -29,9 +29,10 @@ namespace SalesOrder.Api.Controllers
                 else
                     return Ok(dataList);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error Retrive data");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error Retrive data,Error:{ex}");
+                //return StatusCode(StatusCodes.Status500InternalServerError, "Error Retrive data");
                 //throw;
             }
         }

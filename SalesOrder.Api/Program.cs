@@ -14,7 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextPool<SalesOrderDBContext>
     (option=>option.UseSqlServer(builder.Configuration
-    .GetConnectionString("SDDbCon")));
+    .GetConnectionString("SDDbCon"))
+    );
 
 builder.Services.AddScoped<IStateInfoRepository, StateInfoRepository>();
 builder.Services.AddScoped<ISaleOrderRepository, SaleOrderRepository>();
@@ -31,7 +32,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(policy=>policy.WithOrigins
-("http://localhost:7033", "https://localhost:7033")
+("http://localhost:7033", "https://localhost:7033", "https://localhost:444")
 .AllowAnyMethod()
 .WithHeaders(HeaderNames.ContentType)
 );
